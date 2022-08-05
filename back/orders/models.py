@@ -1,4 +1,7 @@
 from django.db import models
+from accounts.models import User
+from locations.models import Location
+from orders.models import Order
 
 class Order(models.Model):
     leader = models.ForeignKey(User, on_delete=models.CASCADE,related_name='orders')
