@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    border: 0;
+    box-sizing:border-box;
+    text-decoration: none;
+    color: inherit;
+}
+nav {
+    background-color: #FF8743;
+    height: 70px;
+    padding: 15px 50px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+nav a:first-child {
+    float: left;
+    line-height: 40px;
+}
+nav a:last-child {
+    float: right;
+    line-height: 40px;
+}
+
+.addressInput {
+    width: 600px;
+    height: 40px;
+    border-radius: 50px;
+    color: black;
+    background-color: #ffffff;
+    opacity: 0.5;
+    box-shadow:  7px 7px 14px #d97339,
+                -7px -7px 14px #ff9b4d;;
+    padding: 5px 20px;
+}
+
+.addressInput:focus-visible {
+    outline: #FF8743;
+}
+
+.imgBtn {
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+form {
+    display: inline-block;
+}
