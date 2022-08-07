@@ -7,12 +7,12 @@ from django.db import models
 
 
 class UserManager(BaseUserManager):
-    def _create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, **kwargs):
         """
         Creates and saves a User with the given email and password.
         """
         if not email:
-            raise ValueError("Users must have an email address")
+            raise ValueError(_("Users must have an email address"))
         email = self.normalize_email(email)
         user = self.model(email = email, **kwargs)
         user.set_password(password)
@@ -20,18 +20,17 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **kwargs):
-        kwargs['is_staff'] = True
-        kwargs['is_superuser'] = True
-        kwargs['is_active'] = True
+        kwargs.setdefault('is_staff', True)
+        kwargs.setdefault('is_superuser', True)
+        kwargs.setdefault('is_active', True)
 
         if kwargs.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+            raise ValueError(_('Superuser must have is_staff=True.'))
         if kwargs.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-        return self._create_user(email, password, **kwargs)
+            raise ValueError(_('Superuser must have is_superuser=True.'))
+        return self.create_user(email, password, **kwargs)
 
 class User(AbstractBaseUser, PermissionsMixin):
-
     email = models.EmailField(unique=True, null=True,
             help_text=_('Required. Letters, digits and ''@/./+/-/_ only.'),
         validators=[RegexValidator(r'^[\w.@+-]+$', _('Enter a valid email address.'), 'invalid')
@@ -57,10 +56,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'auth_user'
-        verbose_name_plural = 'Usuarios en la plataforma'
+        verbose_name_plural = '플랫폼 사용자'
 
     def __str__(self):
-        return "@{}".format(self.email)
+        return self.email
     
 # https://groups.google.com/g/django-users/c/HiJPduCJE7s?pli=1
 # https://velog.io/@martinalee94/Regex-input-invalid체크-정규표현식
