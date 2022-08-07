@@ -1,18 +1,21 @@
 import React, {useRef, useEffect, useState} from "react";
+import useGeolocation from "./useGeolocation";
 
 const Map = () => {
-
+    const location = useGeolocation();
+    
     const {kakao} = window;
     const [map, setMap] = useState();
     const container = useRef();
+
     const options = {
-        center: new kakao.maps.LatLng(37.537183, 127.005454),
-		level: 3
+        center: new kakao.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
+		level: 4
     };
 
     useEffect(()=>{
         setMap(new kakao.maps.Map(container.current, options));
-    },[]);
+    },[location]);
     
 
     return (
