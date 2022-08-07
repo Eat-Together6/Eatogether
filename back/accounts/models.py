@@ -1,63 +1,65 @@
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.base_user import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.utils.translation import gettext_lazy as _
+from django.core.validators import RegexValidator
+from django.db import models
+
 
 class UserManager(BaseUserManager):
-    use_in_migrations = True
-    
-    def _create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, **kwargs):
+        """
+        Creates and saves a User with the given email and password.
+        """
         if not email:
-            raise ValueError('Email required')
+            raise ValueError(_("Users must have an email address"))
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email = email, **kwargs)
         user.set_password(password)
-        user.save(using=self._db)
+        user.save()
         return user
-    
-    def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, password, **extra_fields)
-    
-    def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError(
-                'Superuser must be a staff'
-            )
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError(
-                'Superuser must be a superuser'
-            )
-        return self._create_user(email, password, **extra_fields)
-    
+
+    def create_superuser(self, email, password, **kwargs):
+        kwargs.setdefault('is_staff', True)
+        kwargs.setdefault('is_superuser', True)
+        kwargs.setdefault('is_active', True)
+
+        if kwargs.get('is_staff') is not True:
+            raise ValueError(_('Superuser must have is_staff=True.'))
+        if kwargs.get('is_superuser') is not True:
+            raise ValueError(_('Superuser must have is_superuser=True.'))
+        return self.create_user(email, password, **kwargs)
+
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True,max_length=255,blank=False)
-    first_name = models.CharField('first name',max_length=150,blank=True)
-    last_name = models.CharField('last name',max_length=150,blank=True)
-    mobile= models.PositiveBigIntegerField('mobile',null=True,blank=True)
-    is_staff = models.BooleanField('staff status',default=False)
-    is_active = models.BooleanField('active',default=False)
-    is_superuser = models.BooleanField('superuser',default=False)
-    date_joined = models.DateTimeField('date joined',default=timezone.now)
-  
-    USERNAME_FIELD = 'email'
-    
+    email = models.EmailField(unique=True, null=True,
+            help_text=_('Required. Letters, digits and ''@/./+/-/_ only.'),
+        validators=[RegexValidator(r'^[\w.@+-]+$', _('Enter a valid email address.'), 'invalid')
+        ])
+
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_('Designates whether the user can log into this site.'),
+    )
+
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_(
+            'Designates whether this user should be treated as active. '
+            'Unselect this instead of deleting accounts.'
+        ),
+    )
+
     objects = UserManager()
-    
+    USERNAME_FIELD = "email"
+
+    class Meta:
+        db_table = 'auth_user'
+        verbose_name_plural = '플랫폼 사용자'
+
     def __str__(self):
         return self.email
     
-    def full_name(self):
-        return self.first_name+" "+self.last_name
-
-
-# self
-# 자바와 달리 파이썬에서 클래스는 그 자체로도 새로운 객체를 만든다.
-# 따라서 파이썬에서는 클래스 내부에서는 호출한 객체를 찾기 위해 self 키워드를 사용한다.
-
-# __str__()
-# 객체를 문자열로 표현한 것을 반환해주는 함수
+# https://groups.google.com/g/django-users/c/HiJPduCJE7s?pli=1
+# https://velog.io/@martinalee94/Regex-input-invalid체크-정규표현식
