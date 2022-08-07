@@ -1,12 +1,11 @@
 import React from "react";
-import Nav from "../../components/AppBar/Nav";
+import Map from "../../components/Map/Map";
 
 const Home = () => {
-
     return (
-        <div>
-            Home 화면
-        </div>
+        <>
+            <Map />
+        </>
     );
 }
 

@@ -5,22 +5,6 @@
     text-decoration: none;
     color: inherit;
 }
-nav {
-    background-color: #FF8743;
-    height: 70px;
-    padding: 15px 50px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-}
-nav a:first-child {
-    float: left;
-    line-height: 40px;
-}
-nav a:last-child {
-    float: right;
-    line-height: 40px;
-}
 
 .addressInput {
     width: 600px;
