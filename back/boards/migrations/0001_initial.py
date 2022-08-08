@@ -11,17 +11,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('orders', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name='Board',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('location_nickname', models.CharField(max_length=20)),
-                ('latitude', models.FloatField(max_length=40)),
-                ('longitude', models.FloatField(max_length=40)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='locations', to=settings.AUTH_USER_MODEL)),
+                ('order_status', models.CharField(choices=[('ING', 'Progressing'), ('FIN', 'Finish')], default='ING', max_length=3)),
+                ('content', models.TextField()),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

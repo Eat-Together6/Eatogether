@@ -1,24 +1,17 @@
 from django.db import models
 from accounts.models import User
-from locations.models import Location
 
+# Order는 주문정보를 저장하기 위한 목적
+# Order인지 JoinOrder인지 구분하지 않고 Order로 통일
 class Order(models.Model):
-    leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
-    brand = models.CharField(max_length=20, null=False, blank=False, unique=False)
+    leader = models.ForeignKey(User, related_name='order_lead_user', on_delete=models.CASCADE)
+    brand = models.CharField(max_length=40)
     time = models.DateTimeField()
-    description = models.TextField()
-    max_joinOrder = models.PositiveIntegerField(default=0)
-    ORDER_STATUS_CHOICE=(
-    ('ING', 'Progressing'),
-    ('FIN', 'Finish'))
-    order_status=models.CharField(max_length=3, choices=ORDER_STATUS_CHOICE, default='ING')
-    location = models.OneToOneField(Location, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-
-class JoinOrder(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    follower = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    joined_user = models.ManyToManyField(User, related_name='order_joined_user')
+    # 한 명의 follower는 여러 명의 User를 가진다
+    # 한 명의 User는 여러 명의 follower를 가진다
+    latitude = models.CharField(max_length=40)
+    longitude = models.CharField(max_length=40)
+    # 나의 위경도를 기준 150m 이내의 주문정보들을 sideBar에 띄울 orderList를 위한 필드
+    
+    
