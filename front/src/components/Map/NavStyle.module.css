@@ -5,9 +5,18 @@
     text-decoration: none;
     color: inherit;
 }
+.inputWrapper{
+    position: absolute;
+    width: 50vw;
+    margin: auto;
+    z-index: 999;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%, 0);
 
+}
 .addressInput {
-    width: 600px;
+    width: 45vw;
     height: 40px;
     border-radius: 50px;
     color: black;
@@ -23,8 +32,15 @@
 }
 
 .imgBtn {
+    background-color:transparent;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../../public/img/searchIcon.png);
+    background-repeat: no-repeat;
+    background-size: contain;
     vertical-align: middle;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 form {
