@@ -9,10 +9,13 @@ import AppStyle from "./AppStyle.module.css";
 function App() {
   return (
     <div className="App">
-      <nav>
-        <Link to="/">EATOGETHER</Link>
-        <Link to="/login">로그인</Link>
-      </nav>
+      <div className={AppStyle.wrapper}>
+        <nav>
+          <Link to="/">EATOGETHER</Link>
+          <Link to="/login">로그인</Link>
+        </nav>
+      </div>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} /> 
