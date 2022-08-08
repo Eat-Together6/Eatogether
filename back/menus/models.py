@@ -1,8 +1,11 @@
 from django.db import models
-from orders.models import JoinOrder
 
-class Menu:
-    join_order = models.ForeignKey(JoinOrder, on_delete=models.CASCADE, related_name ="menus") # 1:N
+from accounts.models import User
+from orders.models import Order
+
+# Menu는 Order 안에서 추가메뉴를 주문받아 저장하기 위한 목적
+class Menu(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     menu_name = models.CharField(max_length=50)
     menu_price = models.PositiveIntegerField()
     menu_quantity = models.PositiveIntegerField()

@@ -1,12 +1,7 @@
 from rest_framework import serializers
-from .models import Order, JoinOrder
+from orders.models import Order
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = '__all__'
-
-class JoinOrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JoinOrder
-        fields = '__all__'
+        fields = ['id', 'leader', 'brand', 'time', 'max_joined_user', 'order_status', 'latitude', 'longitude']
