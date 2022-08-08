@@ -19,11 +19,18 @@ const Map = () => {
     },[location]);
     
     //주소 검색 후 해당 위치로 지도 중심 옮기기
+
+    const [address, setAddress] = useState();
+
+    const searchAddress = (e) => {
+        setAddress(e.target.value)
+    }
+
     const searchAndMoveByAddress = () => {
         const geocoder = new kakao.maps.services.Geocoder();
         
-
-        geocoder.addressSearch('서울특별시 성북구 솔샘로 44(정릉동)', function(result, status){
+        console.log(address)
+        geocoder.addressSearch(address, function(result, status){
             if(status === kakao.maps.services.Status.OK) {
                 const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                 map.setCenter(coords);
@@ -40,7 +47,8 @@ const Map = () => {
                 <input 
                     type="text" 
                     className={NavStyle.addressInput} 
-                    placeholder="2km 오차가 있을 수 있으니 정확한 주소를 입력해주세요" 
+                    placeholder="주소를 입력해주세요"
+                    onChange={searchAddress}
                 />
                 <input 
                     type="button" 
@@ -49,8 +57,7 @@ const Map = () => {
                 />
             </form>
         </div>
-            
-            <div ref={container} style={{width:'auto', height: '100vh'}}></div>
+            <div ref={container} className={NavStyle.map} style={{}}></div>
         </>
     );
 }
