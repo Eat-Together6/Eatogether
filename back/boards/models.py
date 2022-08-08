@@ -10,3 +10,4 @@ class Board(models.Model):
     ORDER_STATUS_CHOICE=(('ING', 'Progressing'), ('FIN', 'Finish'))
     order_status = models.CharField(max_length=3, choices=ORDER_STATUS_CHOICE, default='ING')
     content = models.TextField()
+    
