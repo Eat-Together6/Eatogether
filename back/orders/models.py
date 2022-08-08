@@ -14,5 +14,3 @@ class Order(models.Model):
     latitude = models.CharField(max_length=40)
     longitude = models.CharField(max_length=40)
     # 나의 위경도를 기준 150m 이내의 주문정보들을 sideBar에 띄울 orderList를 위한 필드
-    
-    
