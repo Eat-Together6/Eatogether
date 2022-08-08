@@ -52,7 +52,7 @@ class OrderDetail(APIView):
 
     def put(self, request, pk): # UPDATE
         order = self.get_object(pk) # pk에 해당하는 Order객체를 반환받고
-        serializer = OrderSerializer(order, data=request.data) # 이를 *요청받은 데이터로* 직렬화
+        serializer = OrderSerializer(order, data=request.data) # 이를 요청받은 데이터로(put이니깐) 직렬화
         if serializer.is_valid(): # 만약 serializer 유효하면
             serializer.save() # 저장하고
             return Response(serializer.data) # serializer data를 반환
