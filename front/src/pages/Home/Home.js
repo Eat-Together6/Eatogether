@@ -1,11 +1,11 @@
 import React from "react";
-import Nav from "../../components/AppBar/Nav";
+import Map from "../../components/Map/Map";
 
 const Home = () => {
     return (
-        <div>
-            <Nav />
-        </div>
+        <>
+            <Map />
+        </>
     );
 }
 
