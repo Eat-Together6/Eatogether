@@ -24,10 +24,10 @@ class MenuView(APIView):
         try: # 다음 코드 실행
             menu = Menu.objects.get(user=self.request.user, order_id=request.data['order_id'], menu_name=request.data['menu_name'],
                                     menu_price=request.data['menu_price'], menu_quantity=request.data['menu_quantity']) # (?)
-            # request객체의 user를 Order객체의 key='user'에 해당하는 value에 저장
-            # requset객체의 key='order_id'에 해당하는 value를 Order객체의 key='order_id'에 해당하는 value에 저장
+            # request객체의 user를 Menu객체의 key='user'에 해당하는 value에 저장
+            # requset객체의 key='order_id'에 해당하는 value를 Menu객체의 key='order_id'에 해당하는 value에 저장
             # ...
-            # requset객체의 key='menu_quantity'에 해당하는 value를 Order객체의 key='menu_quantity'에 해당하는 value에 저장
+            # requset객체의 key='menu_quantity'에 해당하는 value를 Menu객체의 key='menu_quantity'에 해당하는 value에 저장
             # 이 Dictionary를 menu 인스턴스에 대입 및 get
         except Menu.DoesNotExist: # 만약 코드에 예외 발생한다면(menu 인스턴스에 대입 및 get 못한다면)
             menu = Menu.objects.create(user=self.request.user, order_id=request.data['order_id'], menu_name=request.data['menu_name'],
