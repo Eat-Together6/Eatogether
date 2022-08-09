@@ -28,3 +28,15 @@ class BoardView(APIView):
         board = Board.objects.create(order_id=order_id, order_status=order_status, content=content, user=user)
         serializer = BoardSerializer(board)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class BoardDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Board.objects.filter(order_id=pk)
+        except Board.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        boards = self.get_object(pk)
+        serializer = BoardSerializer(boards, many=True)
+        return Response(serializer.data)
