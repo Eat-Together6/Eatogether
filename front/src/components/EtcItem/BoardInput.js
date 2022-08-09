@@ -23,7 +23,7 @@ const Input = styled(InputUnstyled)(
   .${inputUnstyledClasses.input} {
     width: 400px;
     font-size: 0.875rem;
-    font-family: IBM Plex Sans, sans-serif;
+    font-family: 'BMHANNAPro';
     font-weight: 100;
     line-height: 1;
     background: ${theme.palette.mode === "dark" ? grey[900] : grey[50]};
@@ -68,7 +68,7 @@ const Label = styled(({ children, className }) => {
     </p>
   );
 })`
-  font-family: IBM Plex Sans, sans-serif;
+  font-family: "BMHANNAPro";
   font-size: 1.2rem;
   margin-top: 15px;
   font-weight: 550;
@@ -97,7 +97,7 @@ const Label = styled(({ children, className }) => {
 
 //   return showRequiredError ? <p {...props}>This field is required.</p> : null;
 // })`
-//   font-family: IBM Plex Sans, sans-serif;
+//   font-family: 'BMHANNAPro';
 //   font-size: 0.875rem;
 // `;
 
