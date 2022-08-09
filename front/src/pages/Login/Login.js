@@ -3,6 +3,8 @@ import styled from "styled-components";
 import CustomInput from "../../components/EtcItem/CustomInput";
 import GoogleLogo from "../../assets/google.png";
 import KakaoLogo from "../../assets/kakao-talk.png";
+import LoginButton from "../../components/EtcItem/LoginButton";
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -21,11 +23,10 @@ const LoginCard = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
-    border-radius: 25px;
+    border-radius: 0.55rem;
     box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
     border: none;
     background-color: #ffff;
-
 `;
 
 const RegisterText = styled.span`
@@ -38,33 +39,12 @@ const RegisterText = styled.span`
 
 const Title = styled.h1`
     width: 100%;
-    height: 190px;
+    height: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0px;
     font-size: 25px;
-`;
-
-const Label = styled.span`
-    font-size: 18px;
-    font-weight: 800;
-    margin: 10px;
-`;
-
-const BtnStyle = styled.button`
-    margin-top: 10px;
-    background-color: white;
-    font-weight: 800;
-    width: 70%;
-    height: 38px;
-    border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-    border: none;
-    &:hover{
-        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
-    }
-    cursor: pointer;
 `;
 
 const SocialText = styled.span`
@@ -74,6 +54,7 @@ const SocialText = styled.span`
     justify-content: center;
     align-items: center;
     font-size: 15px;
+    margin-top: 40px;
 `;
 
 const SocialBtnWrap = styled.div`
@@ -92,6 +73,7 @@ const SocialBtnStyle = styled.button`
     &:hover{
         box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
     }
+    cursor: pointer;
 `;
 
 const Logo = styled.img`
@@ -107,13 +89,13 @@ const Login = () => {
                         <Title>Eatogether is waiting for you</Title>
                         <CustomInput label={"ID"} placeholderText={"Username"}/>
                         <CustomInput label={"Password"} placeholderText={"Password"}/>
-                        <BtnStyle>Sign In</BtnStyle>
+                        <LoginButton btnlabel={"Sign In"}></LoginButton>
                         <SocialText>or Login with</SocialText>
                         <SocialBtnWrap>
                             <SocialBtnStyle><Logo src={GoogleLogo} /></SocialBtnStyle>
                             <SocialBtnStyle><Logo src={KakaoLogo} /></SocialBtnStyle>
                         </SocialBtnWrap>
-                    <RegisterText>Not Registered?<a>Create Account</a></RegisterText>
+                    <RegisterText>Not Registered?<Link to="/register">Create Account</Link></RegisterText>
                 </LoginCard>
             </Container>
         </div>
