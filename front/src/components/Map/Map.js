@@ -44,7 +44,7 @@ const Map = () => {
                     lat: coords.Ma,
                     lon: coords.La
                 }) // 주소 좌표로 변환하기
-                
+                console.log("주소 검색 완료되었습니다⭕", latLng.lat, latLng.lon)
             } else{
                 console.log("주소가 정확하지 않습니다❌")
             }
@@ -67,6 +67,7 @@ const Map = () => {
         });
         // console.log(markerPosition.latLng)
         marker.setMap(map);
+        console.log("마커가 표시되었습니다✅")
     }
     
     return (
@@ -83,8 +84,8 @@ const Map = () => {
                     type="button" 
                     className={NavStyle.imgBtn} 
                     onClick={() => {
-                        searchAndMoveByAddress()
                         displayMarker()
+                        searchAndMoveByAddress()
                         }
                     }
                 />
