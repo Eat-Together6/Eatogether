@@ -21,7 +21,7 @@ const Input = styled(InputUnstyled)(
   ({ theme }) => `
   
   .${inputUnstyledClasses.input} {
-    width: 400px;
+    width: 150px;
     font-size: 0.875rem;
     font-family: IBM Plex Sans, sans-serif;
     font-weight: 100;
@@ -30,7 +30,7 @@ const Input = styled(InputUnstyled)(
     border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
     border-radius: 8px;
     padding: 12px 12px;
-    margin-left: 100px;
+    margin-left: 0px;
     border-radius:0.55rem;
     box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
     border: none;
@@ -72,34 +72,12 @@ const Label = styled(({ children, className }) => {
   font-size: 1.2rem;
   margin-top: 15px;
   font-weight: 550;
+  width: 30px;
 
   &.invalid {
     color: red;
   }
 `;
-
-// const HelperText = styled((props) => {
-//   const formControlContext = useFormControlUnstyledContext();
-//   const [dirty, setDirty] = React.useState(false);
-
-//   React.useEffect(() => {
-//     if (formControlContext?.filled) {
-//       setDirty(true);
-//     }
-//   }, [formControlContext]);
-
-//   if (formControlContext === undefined) {
-//     return null;
-//   }
-
-//   const { required, filled } = formControlContext;
-//   const showRequiredError = dirty && required && !filled;
-
-//   return showRequiredError ? <p {...props}>This field is required.</p> : null;
-// })`
-//   font-family: IBM Plex Sans, sans-serif;
-//   font-size: 0.875rem;
-// `;
 
 const WrapStyle = {
   display: "flex",
@@ -111,27 +89,8 @@ const LabelStyle = {
   width: "180px",
 };
 
-const LabelStyle2 = {
-  fontSize: "20px",
-  fontWeight: "bold",
-};
-
-const InputStyle = {
-  fontSize: "20px",
-  borderRadius: "5px",
-  marginRight: "10px",
-};
-
-const btnStyle = {
-  marginLeft: "10px",
-  backgroundColor: "#787878",
-  padding: "10px 10px",
-  borderRadius: "5px",
-  color: "white",
-};
-
 export default function UseFormControl({ label, divShow }) {
-  const [open, setOpen] = React.useState("none"); //open: "block", close: "none"
+  const [open, setOpen] = React.useState("none");
 
   const Input_click = () => {
     if (divShow == "block") {
@@ -139,7 +98,7 @@ export default function UseFormControl({ label, divShow }) {
     }
   };
 
-  // ë©”ë‰´ ì¶”ê°€ ë²„íŠ¼
+  // ¸Ş´º Ãß°¡ ¹öÆ°
   const btn_click = (e) => {
     let MenuItem = document.createElement("p");
     MenuItem.style.fontSize = "15px";
@@ -147,24 +106,20 @@ export default function UseFormControl({ label, divShow }) {
     let ChildList = e.target.parentElement.children;
 
     if (ChildList[1].value != "" && ChildList[1].value != "") {
-      MenuItem.innerHTML = e.target.parentElement.children[1].value + ":" + e.target.parentElement.children[2].value + "ì›";
+      MenuItem.innerHTML = e.target.parentElement.children[1].value + ":" + e.target.parentElement.children[2].value + "¿ø";
       e.target.parentElement.appendChild(MenuItem);
     } else {
-      Window.alert("ë©”ë‰´ ì´ë¦„ê³¼ ê°€ê²©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
+      Window.alert("¸Ş´º ÀÌ¸§°ú °¡°İÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
     }
-    //ì´ˆê¸°í™”
+    //ÃÊ±âÈ­
     ChildList[1].value = "";
     ChildList[2].value = "";
   };
   const handlingInput = () => {
-    if (label === "ì£¼ë¬¸ í¬ë§ ì‹œê°„") {
-      return <Input onClick={Input_click} type="time" />;
-    } else if (label === "í”½ì—… ì£¼ì†Œ") {
-      return <Input onClick={Input_click} placeholder="ìë™ìœ¼ë¡œ ì£¼ì†Œ ëœ¨ê²Œ" />;
-    } else if (label === "ì£¼ë¬¸ í¬ë§ ë¸Œëœë“œ") {
-      return <Input onClick={Input_click} placeholder="ë¸Œëœë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”" />;
-    } else if (label === "ì´ ê¸ˆì•¡") {
-      return <Input onClick={Input_click} placeholder="ìë™ìœ¼ë¡œ ê°€ê²© ê³„ì‚°" />;
+    if (label === "ÁÖ¹® Èñ¸Á ¸Ş´º") {
+      return <Input onClick={Input_click} placeholder="¸Ş´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä" />;
+    } else if (label === "¸Ş´º °¡°İ") {
+      return <Input onClick={Input_click} placeholder="¸Ş´ºÀÇ °¡°İÀ» ÀÔ·ÂÇÏ¼¼¿ä" />;
     } else {
       return <Input onClick={Input_click} />;
     }
@@ -175,16 +130,7 @@ export default function UseFormControl({ label, divShow }) {
       <FormControlUnstyled style={WrapStyle} defaultValue="" required>
         <Label style={LabelStyle}>{label}</Label>
         {handlingInput()}
-        {/* <HelperText /> */}
       </FormControlUnstyled>
-      <div style={{ display: `${open}` }}>
-        <p style={LabelStyle2}>ë©”ë‰´ ì¶”ê°€</p>
-        <input style={InputStyle} placeholder="ë©”ë‰´ ì´ë¦„" />
-        <input style={InputStyle} placeholder="ê°€ê²©" />
-        <button style={btnStyle} onClick={btn_click}>
-          ì¶”ê°€
-        </button>
-      </div>
     </>
   );
 }
