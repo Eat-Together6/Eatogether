@@ -30,6 +30,7 @@ const LoginCard = styled.div`
 `;
 
 const RegisterText = styled.span`
+    font-family: 'BMHANNAPro';
     position: absolute;
     bottom: 25px;
     width: 100%;
@@ -38,8 +39,9 @@ const RegisterText = styled.span`
 `;
 
 const Title = styled.h1`
+    font-family: 'BMHANNAPro';
     width: 100%;
-    height: 130px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +50,7 @@ const Title = styled.h1`
 `;
 
 const SocialText = styled.span`
+    font-family: 'BMHANNAPro';
     width: 100%;
     height: 70px;
     display: flex;
@@ -86,16 +89,16 @@ const Login = () => {
         <div>
             <Container>
                 <LoginCard>
-                        <Title>Eatogether is waiting for you</Title>
-                        <CustomInput label={"ID"} placeholderText={"Username"}/>
-                        <CustomInput label={"Password"} placeholderText={"Password"}/>
-                        <LoginButton btnlabel={"Sign In"}></LoginButton>
-                        <SocialText>or Login with</SocialText>
+                        <Title>Eatogether는 당신을 기다려요!</Title>
+                        <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"}/>
+                        <CustomInput label={"비밀 번호"} placeholderText={"비밀번호를 입력하세요"}/>
+                        <LoginButton btnlabel={"로그인"}></LoginButton>
+                        <SocialText>소셜 로그인</SocialText>
                         <SocialBtnWrap>
                             <SocialBtnStyle><Logo src={GoogleLogo} /></SocialBtnStyle>
                             <SocialBtnStyle><Logo src={KakaoLogo} /></SocialBtnStyle>
                         </SocialBtnWrap>
-                    <RegisterText>Not Registered?<Link to="/register">Create Account</Link></RegisterText>
+                    <RegisterText>아직 계정이 없으신가요?<Link to="/register">회원 가입하기</Link></RegisterText>
                 </LoginCard>
             </Container>
         </div>

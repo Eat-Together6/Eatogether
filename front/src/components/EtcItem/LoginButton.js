@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const BtnStyle = styled.button`
+    font-family: 'BMHANNAPro';
     margin-top: 40px;
     background-color: white;
     font-weight: 800;
