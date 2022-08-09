@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState} from "react";
 import useGeolocation from "./useGeolocation";
 import NavStyle from "./NavStyle.module.css";
-
+import NewMarker from '../../assets/newMarker.png'
 
 const Map = () => {
     const location = useGeolocation();
@@ -44,9 +44,6 @@ const Map = () => {
                     lat: coords.Ma,
                     lon: coords.La
                 }) // 주소 좌표로 변환하기
-                (() => {
-                    
-                })
                 
             } else{
                 console.log("주소가 정확하지 않습니다❌")
@@ -57,7 +54,7 @@ const Map = () => {
     // 입력 주소로 마크 표시
     const displayMarker = () => {
         // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
-        const imageSrc = 'https://cdn-user-icons.flaticon.com/76554/76554220/1660026748603.svg?token=exp=1660027650~hmac=3b8ffd882da33c344c651ea22bff73f5';
+        const imageSrc = NewMarker;
         const imageSize = new kakao.maps.Size(50,50);
         const imageOption = {offset: new kakao.maps.Point(20,50)};
 
@@ -94,7 +91,7 @@ const Map = () => {
             </form>
         </div>
         
-        <div ref={container} className={NavStyle.map} style={{}}></div>
+        <div ref={container} className={NavStyle.map}></div>
         </>
     );
 }
