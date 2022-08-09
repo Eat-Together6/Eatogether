@@ -27,8 +27,9 @@ const RegisterCard = styled.div`
 `;
 
 const Title = styled.h1`
+    font-family: 'BMHANNAPro';
     width: 100%;
-    height: 130px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,6 +38,7 @@ const Title = styled.h1`
 `;
 
 const IdentifyText = styled.span`
+    font-family: 'BMHANNAPro';
     width: 100%;
     height: 30px;
     display: flex;
@@ -52,13 +54,13 @@ const Register = () => {
         <div>
             <Container>
                 <RegisterCard>
-                        <Title>Create Account</Title>
-                        <CustomInput label={"ID"} placeholderText={"Username"}/>
-                        <CustomInput label={"Nickname"} placeholderText={"Automatically created"}/>
-                        <CustomInput label={"Email"} placeholderText={"Email"}/>
-                        <CustomInput label={"Password"} placeholderText={"Password"}/>
-                        <IdentifyText>Confirm Password</IdentifyText>
-                        <LoginButton btnlabel={"Sign Up"}></LoginButton>
+                        <Title>회원 가입</Title>
+                        <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"}/>
+                        <CustomInput label={"닉네임"} placeholderText={"자동으로 설정됩니다"}/>
+                        <CustomInput label={"이메일"} placeholderText={"이메일을 입력하세요"}/>
+                        <CustomInput label={"비밀 번호"} placeholderText={"비밀 번호를 입력하세요"}/>
+                        <IdentifyText>비밀번호 확인</IdentifyText>
+                        <LoginButton btnlabel={"회원 가입하기"}></LoginButton>
                 </RegisterCard>
             </Container>
         </div>
