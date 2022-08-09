@@ -31,6 +31,9 @@ const Input = styled(InputUnstyled)(
     border-radius: 8px;
     padding: 12px 12px;
     margin-left: 100px;
+    border-radius:0.55rem;
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    border: none;
 
     &:hover {
       background: ${theme.palette.mode === "dark" ? "" : grey[100]};
