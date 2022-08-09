@@ -5,9 +5,12 @@
     text-decoration: none;
     color: inherit;
 }
+.wrapper{
+    z-index: 998;
+}
 nav {
-    
     background-color: #FF8743;
+    width: 100vw;
     height: 70px;
     padding: 15px 50px;
     text-align: center;

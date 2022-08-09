@@ -35,7 +35,7 @@
     background-color:transparent;
     width: 30px;
     height: 30px;
-    background-image: url(../../../public/img/searchIcon.png);
+    background-image: url(../../assets/searchIcon.png);
     background-repeat: no-repeat;
     background-size: contain;
     vertical-align: middle;
@@ -45,4 +45,9 @@
 
 form {
     display: inline-block;
+}
+
+.map{
+    width: 100vw;
+    height: 100vh;
 }
