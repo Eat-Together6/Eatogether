@@ -67,7 +67,7 @@ const Label = styled(({ children, className }) => {
 })`
   font-family: IBM Plex Sans, sans-serif;
   font-size: 1.2rem;
-  margin-bottom: 4px;
+  margin-top: 15px;
   font-weight: 550;
 
   &.invalid {
@@ -136,7 +136,7 @@ export default function UseFormControl({ label, divShow }) {
     }
   };
 
-  // ∏ﬁ¥∫ √ﬂ∞° πˆ∆∞
+  // Î©îÎâ¥ Ï∂îÍ∞Ä Î≤ÑÌäº
   const btn_click = (e) => {
     let MenuItem = document.createElement("p");
     MenuItem.style.fontSize = "15px";
@@ -144,17 +144,17 @@ export default function UseFormControl({ label, divShow }) {
     let ChildList = e.target.parentElement.children;
 
     if (ChildList[1].value != "" && ChildList[1].value != "") {
-      MenuItem.innerHTML = e.target.parentElement.children[1].value + ":" + e.target.parentElement.children[2].value + "ø¯";
+      MenuItem.innerHTML = e.target.parentElement.children[1].value + ":" + e.target.parentElement.children[2].value + "Ïõê";
       e.target.parentElement.appendChild(MenuItem);
     } else {
-      Window.alert("∏ﬁ¥∫ ¿Ã∏ß∞˙ ∞°∞›¿ª ¿‘∑¬«ÿ¡÷ººø‰");
+      Window.alert("Î©îÎâ¥ Ïù¥Î¶ÑÍ≥º Í∞ÄÍ≤©ÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî");
     }
-    //√ ±‚»≠
+    //Ï¥àÍ∏∞Ìôî
     ChildList[1].value = "";
     ChildList[2].value = "";
   };
   const handlingInput = () => {
-    if (label === "¡÷πÆ »Ò∏¡ Ω√∞£") {
+    if (label === "Ï£ºÎ¨∏ Ìù¨Îßù ÏãúÍ∞Ñ") {
       return <Input onClick={Input_click} type="time" />;
     } else {
       return <Input onClick={Input_click} />;
@@ -169,11 +169,11 @@ export default function UseFormControl({ label, divShow }) {
         {/* <HelperText /> */}
       </FormControlUnstyled>
       <div style={{ display: `${open}` }}>
-        <p style={LabelStyle2}>∏ﬁ¥∫ √ﬂ∞°</p>
-        <input style={InputStyle} placeholder="∏ﬁ¥∫ ¿Ã∏ß" />
-        <input style={InputStyle} placeholder="∞°∞›" />
+        <p style={LabelStyle2}>Î©îÎâ¥ Ï∂îÍ∞Ä</p>
+        <input style={InputStyle} placeholder="Î©îÎâ¥ Ïù¥Î¶Ñ" />
+        <input style={InputStyle} placeholder="Í∞ÄÍ≤©" />
         <button style={btnStyle} onClick={btn_click}>
-          √ﬂ∞°
+          Ï∂îÍ∞Ä
         </button>
       </div>
     </>
