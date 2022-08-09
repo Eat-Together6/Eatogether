@@ -41,6 +41,19 @@ const test = {
   display: "flex",
 };
 
+// 메뉴 추가 버튼
+const btn_click = (e) => {
+  // const element = document.getElementById("list");
+  // const newDiv = document.createElement("div");
+  // const newText = document.createTextNode("AppendChild");
+  // newDiv.appendChild(newText);
+  // element.appendChild(newDiv);
+  const box = document.getElementById("list");
+  const newP = document.createElement("p");
+  newP.innerHTML = "<input type='text'>";
+  box.appendChild(newP);
+};
+
 function CreateMenu() {
   return (
     <>
@@ -54,17 +67,19 @@ function CreateMenu() {
           <BoardInput class="addess" label={"픽업 주소"} name="address" />
           <BoardInput label={"주문 희망 브랜드"} name="barnd" />
           <BoardInput label={"주문 희망 시간"} name="time" />
-          <div style={test}>
+          <div id="orderMenu" style={test}>
             <BoardInput2 label={"주문 희망 메뉴"} name="menu" />
             <BoardInput2 label={"메뉴 가격"} name="menuCost" />
           </div>
+          <button onClick={btn_click}>추가</button>
+          <div id="list"></div>
           <BoardInput label={"총 금액"} name="sum" />
           <BoardInput label={"전달 사항"} name="description" />
           <div id="btnWrap" style={btnWrapper}>
-            <Link style={{ textDecoration: "none", color: "white" }} to="/">
+            <Link style={{ textDecoration: "none", color: "black" }} to="/">
               <UnstyledButtonsSimple label={"작성"} />
             </Link>
-            <Link style={{ textDecoration: "none", color: "white" }} to="/">
+            <Link style={{ textDecoration: "none", color: "black" }} to="/">
               <UnstyledButtonsSimple label={"작성 취소"} />
             </Link>
           </div>

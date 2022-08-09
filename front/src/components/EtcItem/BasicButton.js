@@ -2,40 +2,34 @@ import * as React from "react";
 import ButtonUnstyled from "@mui/base/ButtonUnstyled";
 import { styled } from "@mui/system";
 import Stack from "@mui/material/Stack";
-import { autocompleteClasses } from "@mui/material";
-
-const grey = {
-  500: "#D3D3D3",
-  600: "#C0C0C0",
-  700: "#A9A9A9",
-};
 
 const CustomButton = styled(ButtonUnstyled)`
-  font-family: IBM Plex Sans, sans-serif;
+  font-color: black;
   font-weight: bold;
   font-size: 0.875rem;
-  background-color: ${grey[600]};
-  border-radius: 5px;
-  color: white;
-
+  border-radius: 0.55rem;
+  background-color: white;
+  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+  border: none;
   &:hover {
-    background-color: ${grey[700]};
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
   }
+  cursor: pointer;
 `;
 
 const CustomButtonT = styled(ButtonUnstyled)`
-  font-family: IBM Plex Sans, sans-serif;
+  font-color: black;
   font-weight: bold;
   font-size: 1rem;
-  background-color: ${grey[600]};
+  background-color: white;
   padding: 12px 24px;
-  border-radius: 15px;
-  color: white;
-  border-color: white;
-
+  border-radius: 0.55rem;
+  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+  border: none;
   &:hover {
-    background-color: ${grey[700]};
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
   }
+  cursor: pointer;
 `;
 
 const btnStyle = {
