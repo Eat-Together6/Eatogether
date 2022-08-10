@@ -7,6 +7,6 @@ from orders.models import Order
 class Board(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ORDER_STATUS_CHOICE=('ING', 'FIN')
+    ORDER_STATUS_CHOICE=(('ING', 'Collecting'), ('FIN', 'Finished'))
     order_status = models.CharField(max_length=3, choices=ORDER_STATUS_CHOICE, default='ING')
     content = models.TextField()
