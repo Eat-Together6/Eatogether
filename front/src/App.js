@@ -1,9 +1,10 @@
 import React from "react";
-import Login from "./pages/Login/Login"
+import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import CreateMenu from "./pages/CreateMenu/CreateMenu";
 import Register from "./pages/Register/Register";
-import {Routes, Route, Link} from "react-router-dom";
+import FollowMenu from "./pages/FollowMenu/FollowMenu";
+import { Routes, Route, Link } from "react-router-dom";
 import AppStyle from "./AppStyle.module.css";
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
           <Link to="/login">로그인</Link>
         </nav>
       </div>
-      
+
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} /> 
+        <Route path="/login" element={<Login />} />
         <Route path="/createMenu" element={<CreateMenu />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/followMenu" element={<FollowMenu />} />
       </Routes>
     </div>
   );
