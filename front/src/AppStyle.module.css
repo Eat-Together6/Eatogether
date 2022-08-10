@@ -16,6 +16,7 @@ nav {
     text-align: center;
     color: white;
     font-weight: bold;
+    font-family: 'BMHANNAPro';
 }
 nav a:first-child {
     float: left;
@@ -31,4 +32,11 @@ nav a:last-child {
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'BMHANNAAir';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
     }

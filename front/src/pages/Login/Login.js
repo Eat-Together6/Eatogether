@@ -32,7 +32,7 @@ const LoginCard = styled.div`
 const RegisterText = styled.span`
     font-family: 'BMHANNAPro';
     position: absolute;
-    bottom: 25px;
+    bottom: 35px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ const RegisterText = styled.span`
 const Title = styled.h1`
     font-family: 'BMHANNAPro';
     width: 100%;
-    height: 150px;
+    height: 130px;
     display: flex;
     justify-content: center;
     align-items: center;
