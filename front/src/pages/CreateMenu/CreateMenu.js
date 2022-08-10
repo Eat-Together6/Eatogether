@@ -3,11 +3,10 @@ import BoardInput from "../../components/EtcItem/BoardInput";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
 import BoardInput2 from "../../components/EtcItem/BoardInput2";
-import styled from "styled-components";
 
 const headerStyle = {
   fontFamily: "BMHANNAPro",
-  marginTop: "60px",
+  marginTop: "30px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -36,7 +35,7 @@ const Contents_two = {
 const btnWrapper = {
   display: "flex",
   alignItems: "center",
-  height: "200px",
+  height: "100px",
   justifyContent: "center",
   marginLeft: "100px",
 };
