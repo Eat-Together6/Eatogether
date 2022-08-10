@@ -4,6 +4,7 @@ import { styled } from "@mui/system";
 import Stack from "@mui/material/Stack";
 
 const CustomButton = styled(ButtonUnstyled)`
+  font-family: "BMHANNAPro";
   font-color: black;
   font-weight: bold;
   font-size: 0.875rem;
@@ -18,6 +19,7 @@ const CustomButton = styled(ButtonUnstyled)`
 `;
 
 const CustomButtonT = styled(ButtonUnstyled)`
+  font-family: "BMHANNAPro";
   font-color: black;
   font-weight: bold;
   font-size: 1rem;
