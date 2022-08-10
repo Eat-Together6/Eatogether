@@ -11,12 +11,14 @@ const InputWrap = styled.div`
 `;
 
 const Label = styled.span`
+    font-family: 'BMHANNAPro';
     font-size: 18px;
     font-weight: 800;
     margin: 10px;
 `;
 
 const Input = styled.input`
+    font-family: 'BMHANNAPro';
     height: 38px;
     padding: 0px 20px;
     border-radius:0.55rem;

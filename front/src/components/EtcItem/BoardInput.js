@@ -23,15 +23,15 @@ const Input = styled(InputUnstyled)(
   .${inputUnstyledClasses.input} {
     width: 400px;
     font-size: 0.875rem;
-    font-family: IBM Plex Sans, sans-serif;
+    font-family: 'BMHANNAPro';
     font-weight: 100;
     line-height: 1;
     background: ${theme.palette.mode === "dark" ? grey[900] : grey[50]};
     border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
-    border-radius: 8px;
+    border-radius: 38px;
     padding: 12px 12px;
     margin-left: 100px;
-    border-radius:0.55rem;
+    margin-bottom: 10px;
     box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
     border: none;
 
@@ -68,7 +68,7 @@ const Label = styled(({ children, className }) => {
     </p>
   );
 })`
-  font-family: IBM Plex Sans, sans-serif;
+  font-family: "BMHANNAPro";
   font-size: 1.2rem;
   margin-top: 15px;
   font-weight: 550;
@@ -97,7 +97,7 @@ const Label = styled(({ children, className }) => {
 
 //   return showRequiredError ? <p {...props}>This field is required.</p> : null;
 // })`
-//   font-family: IBM Plex Sans, sans-serif;
+//   font-family: 'BMHANNAPro';
 //   font-size: 0.875rem;
 // `;
 
