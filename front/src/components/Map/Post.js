@@ -4,7 +4,7 @@ import DaumPostcode from "react-daum-postcode";
 const Post = (props) => {
     const [roadAddress, setRoadAddress] = useState('');
     const completHandler = (data) => {
-        console.log(data);
+        // console.log(data);
         setRoadAddress(data.roadAddress);
   }
     props.setAddress(roadAddress);
