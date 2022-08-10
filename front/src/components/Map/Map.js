@@ -24,10 +24,6 @@ const Map = () => {
     //주소 검색 후 해당 위치로 지도 중심 옮기기
 
     const [address, setAddress] = useState();
-
-    const searchAddress = (e) => {
-        setAddress(e.target.value)
-    }
     const [latLng, setLatLng] = useState({
         lat:0,
         lon:0
@@ -47,6 +43,7 @@ const Map = () => {
                     lon: coords.La
                 }) // 주소 좌표로 변환하기
                 console.log("주소 검색 완료되었습니다⭕", latLng.lat, latLng.lon)
+                console.log('검색 후 : ', popup)
             } else{
                 console.log("주소가 정확하지 않습니다❌")
             }
@@ -74,26 +71,21 @@ const Map = () => {
 
     const [popup, setPopup] = useState(false);
     console.log(popup)
-    useEffect(()=>{
-        if(popup){
-            console.log("팝업 열려라")
-        }
-    },[popup])
 
     return (
-        <>
+        <div>
         <div className={NavStyle.inputWrapper}>
             <form action="" method="">
                 <input 
                     type="text" 
                     className={NavStyle.addressInput} 
                     placeholder="주소를 입력해주세요"
-                    onChange={searchAddress}
                     onClick={()=>{
                         setPopup(!popup)
                     }}
+                    value={address}
                 /> 
-                {popup && <Post />}
+                
                 <input 
                     type="button" 
                     className={NavStyle.imgBtn} 
@@ -103,11 +95,12 @@ const Map = () => {
                         }
                     }
                 />
+                {popup && <Post setAddress={setAddress} />}
             </form>
         </div>
         
         <div ref={container} className={NavStyle.map}></div>
-        </>
+        </div>
     );
 }
 

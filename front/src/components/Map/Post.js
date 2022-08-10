@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 
-const Post = () => {
-  const completHandler = (data) => {
-    console.log(data);
-    console.log('내가 팝업');
+const Post = (props) => {
+    const [roadAddress, setRoadAddress] = useState('');
+    const completHandler = (data) => {
+        console.log(data);
+        setRoadAddress(data.roadAddress);
   }
-
+    props.setAddress(roadAddress);
+    
   return (
-    <>
+    <div>
         <DaumPostcode
-          onComplete={completHandler}
+            autoClose
+            onComplete={completHandler}
         />
-    </>
+    </div>
   );
 };
 
