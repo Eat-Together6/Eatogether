@@ -2,6 +2,8 @@ import React, {useRef, useEffect, useState} from "react";
 import useGeolocation from "./useGeolocation";
 import NavStyle from "./NavStyle.module.css";
 import NewMarker from '../../assets/newMarker.png'
+import Post from "./Post";
+import { PopperUnstyled } from "@mui/base";
 
 const Map = () => {
     const location = useGeolocation();
@@ -22,10 +24,6 @@ const Map = () => {
     //주소 검색 후 해당 위치로 지도 중심 옮기기
 
     const [address, setAddress] = useState();
-
-    const searchAddress = (e) => {
-        setAddress(e.target.value)
-    }
     const [latLng, setLatLng] = useState({
         lat:0,
         lon:0
@@ -45,6 +43,7 @@ const Map = () => {
                     lon: coords.La
                 }) // 주소 좌표로 변환하기
                 console.log("주소 검색 완료되었습니다⭕", latLng.lat, latLng.lon)
+                console.log('검색 후 : ', popup)
             } else{
                 console.log("주소가 정확하지 않습니다❌")
             }
@@ -69,17 +68,24 @@ const Map = () => {
         marker.setMap(map);
         console.log("마커가 표시되었습니다✅")
     }
-    
+
+    const [popup, setPopup] = useState(false);
+    console.log(popup)
+
     return (
-        <>
+        <div>
         <div className={NavStyle.inputWrapper}>
             <form action="" method="">
                 <input 
                     type="text" 
                     className={NavStyle.addressInput} 
                     placeholder="주소를 입력해주세요"
-                    onChange={searchAddress}
-                />
+                    onClick={()=>{
+                        setPopup(!popup)
+                    }}
+                    value={address}
+                /> 
+                
                 <input 
                     type="button" 
                     className={NavStyle.imgBtn} 
@@ -89,11 +95,12 @@ const Map = () => {
                         }
                     }
                 />
+                {popup && <Post setAddress={setAddress} />}
             </form>
         </div>
         
         <div ref={container} className={NavStyle.map}></div>
-        </>
+        </div>
     );
 }
 
