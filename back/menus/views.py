@@ -2,6 +2,7 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 from menus.models import Menu
 from menus.serializers import MenuSerializer
 
@@ -52,3 +53,4 @@ class MenuDetail(APIView):
         menus = self.get_object(pk) # pk에 해당하는 객체를 반환받고 menus 인스턴스에 대입
         serializer = MenuSerializer(menus, many=True) # 이를 직렬화해서
         return Response(serializer.data) # serializer data 반환
+
