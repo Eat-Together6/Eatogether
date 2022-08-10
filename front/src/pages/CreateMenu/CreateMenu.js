@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import BoardInput2 from "../../components/EtcItem/BoardInput2";
 
 const headerStyle = {
-  marginTop: "60px",
+  fontFamily: "BMHANNAPro",
+  marginTop: "30px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -17,6 +18,7 @@ const Contents_one = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  fontFamily: "BMHANNAPro",
 };
 
 const Contents_two = {
@@ -27,12 +29,13 @@ const Contents_two = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+  fontFamily: "BMHANNAPro",
 };
 
 const btnWrapper = {
   display: "flex",
   alignItems: "center",
-  height: "200px",
+  height: "100px",
   justifyContent: "center",
   marginLeft: "100px",
 };
