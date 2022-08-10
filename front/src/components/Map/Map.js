@@ -2,6 +2,8 @@ import React, {useRef, useEffect, useState} from "react";
 import useGeolocation from "./useGeolocation";
 import NavStyle from "./NavStyle.module.css";
 import NewMarker from '../../assets/newMarker.png'
+import Post from "./Post";
+import { PopperUnstyled } from "@mui/base";
 
 const Map = () => {
     const location = useGeolocation();
@@ -69,7 +71,15 @@ const Map = () => {
         marker.setMap(map);
         console.log("마커가 표시되었습니다✅")
     }
-    
+
+    const [popup, setPopup] = useState(false);
+    console.log(popup)
+    useEffect(()=>{
+        if(popup){
+            console.log("팝업 열려라")
+        }
+    },[popup])
+
     return (
         <>
         <div className={NavStyle.inputWrapper}>
@@ -79,7 +89,11 @@ const Map = () => {
                     className={NavStyle.addressInput} 
                     placeholder="주소를 입력해주세요"
                     onChange={searchAddress}
-                />
+                    onClick={()=>{
+                        setPopup(!popup)
+                    }}
+                /> 
+                {popup && <Post />}
                 <input 
                     type="button" 
                     className={NavStyle.imgBtn} 
