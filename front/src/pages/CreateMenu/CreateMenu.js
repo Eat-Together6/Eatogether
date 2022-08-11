@@ -4,7 +4,8 @@ import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
 import BoardInput2 from "../../components/EtcItem/BoardInput2";
 import { useState, useRef } from "react";
-
+import { red } from "@mui/material/colors";
+import { borderRadius } from "@mui/system";
 
 const headerStyle = {
   fontFamily: "BMHANNAPro",
@@ -42,6 +43,64 @@ const btnWrapper = {
   marginLeft: "100px",
 };
 
+const menuDiv = {
+  margin: '10px 0'
+}
+
+
+const menuLabel = {
+  fontSize: '1.2rem',
+};
+
+const menuInput = {
+  width: '230px',
+  fontSize: '0.875rem',
+  fontWeight: '100',
+  lineHeight: '1',
+  borderRadius: '38px',
+  padding: '12px',
+  backgroundColor: '#F3F6F9',
+  boxShadow: 'inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3',
+  margin: '0 20px',
+  border: 'none'
+  
+};
+
+const menuButton = {
+  cursor: 'pointer',
+  position: 'absolute',
+  margin: '5px 0',
+  width: '40px',
+  height: '30px',
+  lineHeight: '30px',
+  borderRadius: '0.55rem',
+  backgroundColor: 'white',
+  boxShadow: '3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3'
+};
+
+const newMenuDiv = {
+  margin: ' 10px 0',
+  textAlign: 'right',
+  fontSize: '1.2rem',
+  fontWeight: '100',
+  height: '30px',
+}
+
+const menuSpan = {
+  marginRight: '20px',
+  lineHeight: '30px',
+  
+}
+
+const menuDel = {
+  padding: '0',
+  cursor: 'pointer',
+  width: '15px',
+  height: '15px',
+  borderRadius: '50px',
+  backgroundColor: '#fa4444',
+  boxShadow: '3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3'
+}
 
 // 메뉴 추가 버튼
 
@@ -49,9 +108,10 @@ const NewMenu = ({menu, onRemove}) => {
   // 추가 버튼 클릭 시, 입력된 메뉴와 가격 나타내는 컴포넌트
   return (
       <div>
-          <div>
-          <b>메뉴 : </b>{menu.menu} <b>가격 : </b>{menu.price}원
-          <button onClick={() => onRemove(menu.id)}>삭제</button>
+          <div style={newMenuDiv}>
+            <span  style={menuSpan}>{menu.menu}</span>
+            <span  style={menuSpan}>{menu.price}원</span>
+            <button style={menuDel} onClick={() => onRemove(menu.id)}>x</button>
           </div> 
       </div>
      
@@ -93,17 +153,18 @@ function CreateMenu() {
           <BoardInput label={"주문 희망 브랜드"} name="barnd" />
           <BoardInput label={"주문 희망 시간"} name="time" />
 
-          <div className="wrapper">
-            <div>
-                <label for='menu'>주문희망메뉴</label>
-                <input ref={menu} id='menu' type="text" />
-                <label for='price'>가격</label>
-                <input ref={price} id='price'type="text" />
-                <button onClick={onCreate}>추가</button>
+          <div >
+            <div style={menuDiv}>
+                <label style={menuLabel} for='menu' >주문희망메뉴</label>
+                <input style={menuInput} ref={menu} id='menu' type="text" placeholder="메뉴를 입력하세요"/>
+                <label style={menuLabel} for='price'>가격</label>
+                <input style={menuInput} ref={price} id='price'type="text" placeholder="가격을 입력하세요"/>
+                <button style={menuButton} onClick={onCreate}>추가</button>
             </div>
-           {newmenus.map((newmenu)=>( //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
-            <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
-           ))} 
+                {newmenus.map((newmenu)=>( //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                    <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                ))}   
+           
         </div>
 
           <div id="list"></div>
