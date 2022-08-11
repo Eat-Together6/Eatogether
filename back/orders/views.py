@@ -18,13 +18,13 @@ class OrderList(APIView):
         
         if order_status == 'ING':
             if latitude and longitude:
-                order_list1 = []
+                order_list = []
                 for order in orders:
                     current_location = (latitude, longitude,)
                     order_location = (order.latitude, order.longitude,)
                     if distance(current_location, order_location).m < 150:
-                        order_list1.append(order)
-                serializer = OrderSerializer(order_list1, many=True)
+                        order_list.append(order)
+                serializer = OrderSerializer(order_list, many=True)
                 return Response(serializer.data)
         else:
             serializer = OrderSerializer(orders, many=True)
