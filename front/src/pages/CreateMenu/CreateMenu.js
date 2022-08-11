@@ -40,7 +40,7 @@ const btnWrapper = {
   marginLeft: "100px",
 };
 
-const test = {
+const orderMenu = {
   display: "flex",
 };
 
@@ -70,7 +70,7 @@ function CreateMenu() {
           <BoardInput class="addess" label={"픽업 주소"} name="address" />
           <BoardInput label={"주문 희망 브랜드"} name="barnd" />
           <BoardInput label={"주문 희망 시간"} name="time" />
-          <div id="orderMenu" style={test}>
+          <div id="orderMenu" style={orderMenu}>
             <BoardInput2 label={"주문 희망 메뉴"} name="menu" />
             <BoardInput2 label={"메뉴 가격"} name="menuCost" />
           </div>
