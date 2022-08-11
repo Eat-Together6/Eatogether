@@ -2,10 +2,7 @@ import Box from "@mui/material/Box";
 import BoardInput from "../../components/EtcItem/BoardInput";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
-import BoardInput2 from "../../components/EtcItem/BoardInput2";
 import { useState, useRef, useEffect } from "react";
-import { red } from "@mui/material/colors";
-import { borderRadius } from "@mui/system";
 
 const headerStyle = {
   fontFamily: "BMHANNAPro",
@@ -51,7 +48,7 @@ const menuDiv = {
 const menuLabel = { fontSize: "1.2rem" };
 
 const menuInput = {
-  width: "230px",
+  width: "220px",
   fontSize: "0.875rem",
   fontWeight: "100",
   lineHeight: "1",
@@ -163,7 +160,7 @@ function CreateMenu() {
           <div>
             <div style={menuDiv}>
               <label style={menuLabel} htmlFor="menu">
-                주문희망메뉴
+                주문 희망 메뉴
               </label>
               <input style={menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
               <label style={menuLabel} htmlFor="price">
