@@ -5,11 +5,11 @@ import Map from "../../components/Map/Map";
 
 const Home = () => {
     return (
-        <>
+        <div>
             <Map />
             <Sidebar />
             <Bottombar />
-        </>
+        </div>
     );
 }
 

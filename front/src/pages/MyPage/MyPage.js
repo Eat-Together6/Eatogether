@@ -102,7 +102,7 @@ const MyPage = () => {
                             <InfoLabel>이메일</InfoLabel>
                             <InfoText>jk98@gmail.com</InfoText>
                         </InfoWrap>
-                        <Link to="/orderhistory"><BtnStyle>나의 주문내역</BtnStyle></Link>
+                        <Link to="/orderhistory"><LoginButton btnlabel={"나의 주문내역"} style={{width: '100%'}}></LoginButton></Link>
                 </MypageCard>
         </Container>
 );
