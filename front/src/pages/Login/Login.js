@@ -57,7 +57,7 @@ const SocialText = styled.span`
     justify-content: center;
     align-items: center;
     font-size: 15px;
-    margin-top: 40px;
+    margin-top: 35px;
 `;
 
 const SocialBtnWrap = styled.div`
