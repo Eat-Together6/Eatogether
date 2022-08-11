@@ -17,15 +17,17 @@ nav {
     text-align: center;
     color: white;
     font-weight: bold;
-    font-family: 'BMHANNAPro';
+    
 }
 nav a:first-child {
     float: left;
     line-height: 40px;
+    font-family: 'BMHANNAAir';
 }
 nav a:last-child {
     float: right;
     line-height: 40px;
+    font-family: 'BMHANNAAir';
 }
 
 @font-face {
