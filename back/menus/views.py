@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from menus.models import Menu
 from menus.serializers import MenuSerializer
 
-
+# order에서 주문하는 leader와 follwer의 모든 메뉴 get, post
 class MenuView(APIView):
     def get(self, request):
         order_id = request.GET.get('order_id', None) 
@@ -29,7 +29,7 @@ class MenuView(APIView):
         serializer = MenuSerializer(menu)
         return Response(serializer.data)
 
-
+# order에서 주문하는 leader와 follower의 메뉴 상세 get
 class MenuDetail(APIView):
     def get_object(self, pk):
         try:
