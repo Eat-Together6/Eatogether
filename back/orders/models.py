@@ -1,9 +1,7 @@
 from django.db import models
 from accounts.models import User
 
-# Order는 주문정보를 저장하기 위한 목적
-# Order인지 JoinOrder인지 구분하지 않고 Order로 통일
-# View에서 Order와 JoinOrder에 대한 개별적인 함수 선언
+# leader 주문 저장을 위한 모델
 class Order(models.Model):
     leader = models.ForeignKey(User, related_name='order_lead_user', on_delete=models.CASCADE)
     brand = models.CharField(max_length=40)
