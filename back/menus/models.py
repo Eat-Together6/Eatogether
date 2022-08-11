@@ -3,7 +3,7 @@ from django.db import models
 from accounts.models import User
 from orders.models import Order
 
-# Menu는 Order 안에서 추가메뉴를 주문받아 저장하기 위한 목적
+# Menu는 order에서 추가메뉴 작성을 위한 모델임
 class Menu(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
