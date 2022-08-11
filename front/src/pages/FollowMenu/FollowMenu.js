@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import BoardInput2 from "../../components/EtcItem/BoardInput2";
 import BoardInput3 from "../../components/EtcItem/BoardInput3";
 import BoardInput4 from "../../components/EtcItem/BoardInput4";
+import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 
 const headerStyle = {
   fontFamily: "BMHANNAPro",
@@ -41,11 +42,12 @@ const Contents_two = {
 };
 
 const Contents_three = {
-  // width: "100%",
+  width: "750px",
   display: "flex",
-  marginRight: "60px",
+  marginLeft: "0px",
   flexDirection: "column",
   marginBottom: "30px",
+  marginLeft: "50px",
   // alignItems: "center",
   // justifyContent: "center",
 };
@@ -53,10 +55,40 @@ const Contents_three = {
 const btnWrapper = {
   display: "flex",
   alignItems: "center",
-  height: "200px",
+  height: "100px",
   justifyContent: "center",
-  marginLeft: "100px",
+  marginLeft: "30px",
 };
+
+const deactivatedBtn = {
+  backgroundColor: "white",
+  color: "#ADADAD",
+  fontSize: "1rem",
+  padding: "12px 24px",
+  borderRadius: "0.55rem",
+  margin: 25,
+  boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
+  border: "none",
+  marginRight: "40px",
+  fontWeight: "bold",
+  cursor: "pointer",
+};
+
+const activatedBtn = `
+  background-color: "white",
+  fontSize: "1rem",
+  padding: "12px 24px",
+  borderRadius: "0.55rem",
+  margin: 25,
+  boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
+  border: "none",
+  marginRight: "40px",
+  fontWeight: "bold",
+  cursor: "pointer",
+  &:hover{
+    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+  }
+`;
 
 const divLeft = {
   float: "left",
@@ -65,15 +97,21 @@ const divLeft = {
 
 const divRight = {
   backgroundColor: "#f3f3f3",
+  borderRadius: "30px",
   float: "right",
-  width: "50%",
+  width: "700px",
+  marginRight: "30px",
   height: "80%",
 };
 
 const orderMenu = {
   display: "flex",
+  marginBottom: "10px",
   width: "50%",
 };
+
+/////////////////////////////////////
+/////////////////////////////////////
 
 function FollowMenu() {
   return (
@@ -89,7 +127,7 @@ function FollowMenu() {
             <BoardInput3 label={"음식점명"} />
             <BoardInput3 label={"픽업 주소"} />
             <BoardInput3 label={"주문 희망 시간"} />
-            <BoardInput3 label={"전달 사항"} />
+            <BoardInput3 label={"전달사항"} />
             <BoardInput4 label={"리더 닉네임"} />
           </div>
         </Box>
@@ -97,15 +135,25 @@ function FollowMenu() {
       <div style={divRight}>
         <Box style={Contents_one}>
           <div style={headerStyle2}>
-            <h2>나의 메뉴 추가하기</h2>
+            <h2>나의 메뉴 메뉴 추가하기</h2>
           </div>
           <div style={Contents_three}>
             <div id="orderMenu" style={orderMenu}>
               <BoardInput2 label={"주문 희망 메뉴"} name="menu" />
               <BoardInput2 label={"메뉴 가격"} name="menuCost" />
             </div>
-            <div id="list"></div>
             <BoardInput label={"총 금액"} name="sum" />
+          </div>
+          <div style={btnWrapper}>
+            {/* <button style={deactivatedBtn} label={"작성"}>
+              작성
+            </button> */}
+            {/* <button style={activatedBtn} label={"수정"}>
+              수정
+            </button> */}
+            <UnstyledButtonsSimple label={"작성"} />
+            <UnstyledButtonsSimple label={"수정"} />
+            <UnstyledButtonsSimple label={"채팅하기"} />
           </div>
         </Box>
       </div>
