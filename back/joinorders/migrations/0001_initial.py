@@ -10,18 +10,18 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('orders', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name='JoinOrder',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('location_nickname', models.CharField(max_length=20)),
-                ('latitude', models.FloatField(max_length=40)),
-                ('longitude', models.FloatField(max_length=40)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='locations', to=settings.AUTH_USER_MODEL)),
+                ('description', models.TextField()),
+                ('follower', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orders.order')),
             ],
         ),
     ]
