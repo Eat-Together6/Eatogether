@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from orders.models import Order
 from orders.serializers import OrderSerializer
 
-# leader, follower 들의 모든 주문 get, post
+# leader의 모든 주문 get, post
 class OrderList(APIView):
     def get(self, request):
         latitude = request.GET.get('latitude', None)
@@ -31,14 +31,16 @@ class OrderList(APIView):
             return Response(serializer.data)
 
     def post(self, request):
-        order = Order.objects.create(leader=self.request.user, joined_user=self.request.user,
-                                     brand=request.data['brand'], time=request.data['time'],
+        order = Order.objects.create(leader=self.request.user, brand=request.data['brand'], 
+                                     time=request.data['time'], description=request.data['description'],
                                      max_joined_user=self.request.data['max_joined_user'], 
-                                     latitude=request.data['latitude'], longitude=request.data['longitude'])
+                                     location=request.data['location'],
+                                     latitude=request.data['latitude'], longitude=request.data['longitude'],
+                                     order_status=request.data['order_status'])
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
-# leader, follower 들의 주문 상세 get, put, delete
+# leader의 주문 상세 get, put, delete
 class OrderDetail(APIView):
     def get_object(self, pk):
         try:
@@ -64,17 +66,3 @@ class OrderDetail(APIView):
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-# order에 참여하는 사람들 post
-class OrderJoinView(APIView):
-    def get_object(self, pk):
-        try:
-            return Order.objects.get(pk=pk)
-        except Order.DoesNotExist:
-            raise Http404
-
-    def post(self, request, pk):
-        order = self.get_object(pk)
-        order.joined_user.add(self.request.user)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)

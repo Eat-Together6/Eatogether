@@ -9,22 +9,24 @@ from menus.serializers import MenuSerializer
 # order에서 주문하는 leader와 follwer의 모든 메뉴 get, post
 class MenuView(APIView):
     def get(self, request):
-        order_id = request.GET.get('order_id', None) 
-        if order_id is None:
+        join_order_id = request.GET.get('join_order_id', None) 
+        if join_order_id is None:
             menus = Menu.objects.all()
             serializer = MenuSerializer(menus, many=True)
             return Response(serializer.data)
         else:
-            menus = Menu.objects.filter(order_id=order_id)
+            menus = Menu.objects.filter(join_order_id=join_order_id)
             serializer = MenuSerializer(menus, many=True)
             return Response(serializer.data)
 
     def post(self, request):
         try:
-            menu = Menu.objects.get(user=self.request.user, order_id=request.data['order_id'], menu_name=request.data['menu_name'],
-                                    menu_price=request.data['menu_price'], menu_quantity=request.data['menu_quantity'])
+            menu = Menu.objects.get(join_order_id=request.data['join_order_id'])
+            menu.menu_name = request.data['menu_name']
+            menu.menu_price = request.data['menu_price']
+            menu.menu_quantity = request.data['menu_quantity']         
         except Menu.DoesNotExist:
-            menu = Menu.objects.create(user=self.request.user, order_id=request.data['order_id'], menu_name=request.data['menu_name'],
+            menu = Menu.objects.create(join_order_id=request.data['join_order_id'], menu_name=request.data['menu_name'],
                                     menu_price=request.data['menu_price'], menu_quantity=request.data['menu_quantity'])
         serializer = MenuSerializer(menu)
         return Response(serializer.data)
@@ -33,7 +35,7 @@ class MenuView(APIView):
 class MenuDetail(APIView):
     def get_object(self, pk):
         try:
-            return Menu.objects.filter(order_id=pk)
+            return Menu.objects.filter(join_order_id=pk)
         except Menu.DoesNotExist:
             raise Http404
 

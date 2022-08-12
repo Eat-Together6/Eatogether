@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'accounts',
-    'boards',
     'locations',
+    'joinorders',
     'orders',
     'menus',
     # djangorestframework
