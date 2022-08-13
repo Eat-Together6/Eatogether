@@ -1,29 +1,32 @@
 import apiClient from "../lib/apiClient";
+// http://localhost:8000/apis/
 
-// path('menus/', views.MenuView.as_view())
-const createMenu = async (order_id, name, price) => {
-    const menu = {name: `${name}`, price: `${price}`};
+// 기존 url : path('menus/', views.MenuView.as_view())
+// => http://localhost:8000/menus/
+const createMenu = async (join_order_id, menu_name, menu_price) => {
+    const menu = {menu_name: `${menu_name}`, menu_price: `${menu_price}`};
 
     menu.forEach((item) => {
-        if(menu.hasOwnProperty(item.name)) {
-            menu[item.name] += item.price;
+        if(menu.hasOwnProperty(item.menu_name)) {
+            menu[item.menu_name] += item.menu_price;
         }
         else {
-            menu[item.name] = item.price;
+            menu[item.menu_name] = item.menu_price;
         }
-    });
+    }); 
 
     return await apiClient.post("/menus/", {
-        order_id,
+        join_order_id,
         menu,
-    });
+    }); // http://localhost:8000/apis/menus/
 };
 
-// path('menus/<int:pk>/', views.MenuDetail.as_view())
+// 기존 url : path('menus/<int:pk>/', views.MenuDetail.as_view())
+// => http://localhost:8000/menus/{정수}/
 const getMenuByOrderId = (id) => new Promise((resolve) => {
     resolve(apiClient
-        .get(`/menu/?order_id=${id}`)
+        .get(`/menu/?join_order_id=${id}`)
         .then((response) => response.data));
-});
+}); // http://localhost:8000/apis/menu/?join_order_id={정수}
 
 export { createMenu, getMenuByOrderId };

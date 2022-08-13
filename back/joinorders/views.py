@@ -1,28 +1,36 @@
+from django.shortcuts import render
+
+# Create your views here.
 from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from back import joinorders
 
 from joinorders.models import JoinOrder
 from joinorders.serializers import JoinOrderSerializer
 
-
 class JoinOrderView(APIView):
-    def get(self, request, format=None):
-        joinorders = JoinOrder.objects.all()
-        serializer = JoinOrderSerializer(joinorders, many=True)
+    def get(self, request):
+        order_id = request.GET.get('order_id', None)
+        if order_id is None:
+            join_order = JoinOrder.objects.all()
+            serializer = JoinOrderSerializer(join_order, many=True)
+            return Response(serializer.data)
+        else:
+            join_order = JoinOrder.objects.filter(order_id=order_id)
+            serializer = JoinOrderSerializer(join_order, many=True)
+            return Response(serializer.data)
+    
+    def post(self, request):
+        try:
+            join_order = JoinOrder.objects.get(order_id=request.data['order_id'])
+            join_order.follower = request.data['follower']
+            join_order.description = request.data['description']
+        except JoinOrder.DoesNotExist:
+            join_order = JoinOrder.objects.create(order_id=request.data['order_id'], follower=request.data['follower'], 
+                                                  description=request.data['description'])
+        serializer = JoinOrderSerializer(join_order)
         return Response(serializer.data)
-
-    def post(self, request, format=None):
-        order_id = request.data['order_id']
-        description = request.data['description']
-        follower = self.request.user
-
-        joinorder = JoinOrder.objects.create(order_id=order_id, description=description, follower=follower)
-        serializer = JoinOrderSerializer(joinorder)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 class JoinOrderDetail(APIView):
     def get_object(self, pk):
@@ -30,8 +38,8 @@ class JoinOrderDetail(APIView):
             return JoinOrder.objects.filter(order_id=pk)
         except JoinOrder.DoesNotExist:
             raise Http404
-
+    
     def get(self, request, pk):
-        joinorders = self.get_object(pk)
-        serializer = JoinOrderSerializer(joinorders, many=True)
+        join_orders = self.get_object(pk)
+        serializer = JoinOrderSerializer(join_orders, many=True)
         return Response(serializer.data)

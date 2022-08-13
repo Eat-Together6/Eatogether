@@ -6,7 +6,6 @@ from orders import views
 urlpatterns = [
     path('orders/', views.OrderList.as_view()),
     path('orders/<int:pk>/', views.OrderDetail.as_view()),
-    path('orders/<int:pk>/join/', views.OrderJoinView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

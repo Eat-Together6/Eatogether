@@ -1,19 +1,21 @@
-import apiClient from "../lib/apiClient"
+import apiClient from "../lib/apiClient";
+// http://localhost:8000/apis
 
-// path('locations/', views.LocationList.as_view())
-const getLocations = () => new Promise((resolve) => {
+// 기존 url : path('locations/', views.LocationList.as_view())
+const getLocations = () => new Promise(resolve => {
     resolve(apiClient
         .get('/locations/')
-        .then(response => response.data));
-});
+        .then(response => response.data)
+        );
+}); // http://localhost:8000/apis/locations/
 
-// path('locations/', views.LocationList.as_view())
+// 기존 url : path('locations/', views.LocationList.as_view())
 const addLocation = async (name, lat, lon) => {
     return await apiClient.post('/locations/', {
         name: name,
         latitude: lat,
         longitude: lon
-    })
+    }) // http://localhost:8000/apis/locations/
 }
 
 export { getLocations, addLocation }
