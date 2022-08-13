@@ -12,8 +12,6 @@ class Order(models.Model):
     max_joined_user = models.PositiveIntegerField(default=0)
     
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null = True)
-    latitude = models.CharField(max_length=40)
-    longitude = models.CharField(max_length=40)
     
     ORDER_STATUS_CHOICE=(('ING', 'Collecting'), ('FIN', 'Finished'))
     order_status = models.CharField(max_length=3, choices=ORDER_STATUS_CHOICE, default='ING')

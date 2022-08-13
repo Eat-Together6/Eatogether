@@ -7,11 +7,14 @@ from rest_framework.response import Response
 from orders.models import Order
 from orders.serializers import OrderSerializer
 
+from locations.models import Location
+
+
 # leader의 모든 주문 get, post
 class OrderList(APIView):
     def get(self, request):
-        latitude = request.GET.get('latitude', None)
-        longitude = request.GET.get('longitude', None)
+        latitude = request.GET.get(Location['latitude'], None)
+        longitude = request.GET.get(Location['longitude'], None)
         order_status = request.GET.get('order_status', None)
         
         orders = Order.objects.all()
