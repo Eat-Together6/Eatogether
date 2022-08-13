@@ -8,7 +8,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #ececec;
 `;
 
 const HistoryCard = styled.div`
@@ -20,9 +20,10 @@ const HistoryCard = styled.div`
     align-items: center;
     position: relative;
     border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-    border: none;
-    background-color: #ffff;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
+    border: 8px solid #ececec;
+    outline: none;
+    background-color: #ececec;
 `;
 
 const Title = styled.h1`
@@ -37,41 +38,43 @@ const Title = styled.h1`
 `;
 const HistoryWrap = styled.span`
     width: 70%;
-    height: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 20px;
 `;
 
 const HistoryText = styled.span`
-    font-family: 'BMHANNAPro';
-    height: 45px;
+    font-family: 'BMHANNAAir';
+    height: 50px;
     padding: 0px 20px;
     border-radius:0.55rem;
-    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
     border: none;
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 const BtnWrap = styled.button`
     display:flex;
     margin-top: auto;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
 `;
 
 const MoveButton = styled.button`
     font-family: 'BMHANNAPro';
-    background-color: white;
+    background-color: #ececec;
     font-weight: 800;
     width: 50px;
     height: 38px;
     border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
     border: none;
     &:hover{
-        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+        box-shadow: inset 3px 3px 7px #d3d3d3,
+        inset -3px -3px 7px #ffffff;
     }
     cursor: pointer;
 `;
@@ -85,6 +88,8 @@ const OrderHistory = () => {
                     <HistoryText>C님은 3/5 15:00  A님, B님과 함께 주문을 했었어요</HistoryText>
                     <HistoryText>C님은 3/9 15:00  A 님과 함께 주문을 했었어요</HistoryText>
                     <HistoryText>C님은 3/17 15:00 D 님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>C님은 3/21 18:00 D 님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>C님은 3/27 13:00 D 님과 함께 주문을 했었어요</HistoryText>
                 </HistoryWrap>
                 <BtnWrap>
                     <MoveButton>이전</MoveButton>
