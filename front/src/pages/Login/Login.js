@@ -12,7 +12,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #ececec;
 `;
 
 const LoginCard = styled.div`
@@ -24,9 +24,10 @@ const LoginCard = styled.div`
     align-items: center;
     position: relative;
     border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-    border: none;
-    background-color: #ffff;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
+    border: 8px solid #ececec;
+    outline: none;
+    background-color: #ececec;
 `;
 
 const RegisterText = styled.span`
@@ -50,7 +51,7 @@ const Title = styled.h1`
 `;
 
 const SocialText = styled.span`
-    font-family: 'BMHANNAPro';
+    font-family: 'BMHANNAAir';
     width: 100%;
     height: 70px;
     display: flex;
@@ -66,15 +67,16 @@ const SocialBtnWrap = styled.div`
 `;
 
 const SocialBtnStyle = styled.button`
-    background-color: white;
+    background-color: #ececec;
     margin: 10px;
     height: 55px;
     width: 55px;
     border-radius: 50px;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
     border: none;
     &:hover{
-        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+        box-shadow: inset 3px 3px 7px #d3d3d3,
+        inset -3px -3px 7px #ffffff;
     }
     cursor: pointer;
 `;

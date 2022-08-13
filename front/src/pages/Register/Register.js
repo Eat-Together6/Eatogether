@@ -9,7 +9,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #ececec;
 `;
 
 const RegisterCard = styled.div`
@@ -21,9 +21,10 @@ const RegisterCard = styled.div`
     align-items: center;
     position: relative;
     border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-    border: none;
-    background-color: #ffff;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
+    border: 8px solid #ececec;
+    outline: none;
+    background-color: #ececec;
 `;
 
 const Title = styled.h1`

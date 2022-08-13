@@ -10,18 +10,19 @@ const InputWrap = styled.div`
 `;
 
 const Label = styled.span`
-    font-family: 'BMHANNAPro';
+    font-family: 'BMHANNAAir';
     font-size: 18px;
     font-weight: 800;
     margin: 10px;
 `;
 
 const Input = styled.input`
-    font-family: 'BMHANNAPro';
+    background-color: #ececec;
+    font-family: 'BMHANNAAir';
     height: 38px;
     padding: 0px 20px;
     border-radius:0.55rem;
-    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
     border: none;
 `;
 
