@@ -12,7 +12,7 @@ const Map = () => {
     const container = useRef();
     const options = {
         center: new kakao.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
-		level: 4
+		level: 3
     };
     useEffect(()=>{
         setMap(new kakao.maps.Map(container.current, options));
@@ -22,6 +22,7 @@ const Map = () => {
     const [popup, setPopup] = useState(false); //true: 도로명주소 검색창 띄움
     const [address, setAddress] = useState(); // 주소 state
     const [markers, setMarker] = useState([]); // 마커 배열
+    const [circles, setCircle] = useState([]);
     const [latLngs, setLatLng] = useState([]); // 좌표 배열
     const geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체 생성
 
@@ -47,19 +48,25 @@ const Map = () => {
             markers.map((marker)=>{
                 marker.setMap(null)
             }) // 마커 배열이 한템포 늦게 업데이트 됨 이거 이용해서 업데이트 전 배열안에 있는 마커들은 삭제(배열은 그대로).
-            displayMarker(latLngs.slice(-1)[0].lat, latLngs.slice(-1)[0].lon) // 좌표 배열 중 제일 최신 객체 좌표로 마커 생성.
+            circles.map((circle)=>{
+                circle.setMap(null)
+            })
+            const lat = latLngs.slice(-1)[0].lat;
+            const lon = latLngs.slice(-1)[0].lon;
+            displayMarker(lat, lon) // 좌표 배열 중 제일 최신 객체 좌표로 마커 생성.
+            displayCircle(lat, lon)
         }
     },[latLngs]) // 좌표가 업데이트 되는 경우는 검색버튼을 클릭했을 때뿐.
     // 입력 주소로 마크 표시
     const displayMarker = (lat, lon) => {
-        // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
         const imageSrc = NewMarker;
         const imageSize = new kakao.maps.Size(50,50);
         const imageOption = {offset: new kakao.maps.Point(20,50)};
+        // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
         const marker = new kakao.maps.Marker({ // 마커 객체
             position: new kakao.maps.LatLng(lat, lon),
             image: new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption),
-            draggable: true
+            draggable: true,
         });
         marker.setMap(map); // 마커 지도에 표시
         setMarker([...markers, marker]); // 마커 배열 추가
@@ -75,6 +82,19 @@ const Map = () => {
     }
     function searchDetailAddrFromCoords(coords, callback) { // 좌표로 법정동 상세 주소 정보를 요청합니다
         geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+
+    const displayCircle = (lat, lon) => {
+        const circle = new kakao.maps.Circle({
+            center : new kakao.maps.LatLng(lat, lon),  // 원의 중심좌표 입니다 
+            radius: 200, // 미터 단위의 원의 반지름
+            strokeWeight: 0, // 선의 두께
+            fillColor: '#B1B1B1', // 채우기 색깔
+            fillOpacity: 0.4,  // 채우기 불투명도  
+        }); 
+
+        circle.setMap(map); 
+        setCircle([...circles, circle]);
     }
 
     return (
