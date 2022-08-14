@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const createMenu = async (join_order_id, menu_name, menu_price) => {
     const menu = {menu_name: `${menu_name}`, menu_price: `${menu_price}`};
 
@@ -10,14 +12,14 @@ const createMenu = async (join_order_id, menu_name, menu_price) => {
         }
     }); 
 
-    return await apiClient.post("http://localhost:8000/menus/", {
+    return await axios.post("http://localhost:8000/menus/", {
         join_order_id,
         menu,
     });
 };
 
 const getMenuByOrderId = (id) => new Promise((resolve) => {
-    resolve(apiClient
+    resolve(axios
         .get(`http://localhost:8000/menu/?join_order_id=${id}`)
         .then((response) => response.data));
 });
