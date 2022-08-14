@@ -1,16 +1,18 @@
+import axios from "axios";
+
 const getLocations = () => new Promise(resolve => {
-    resolve(apiClient
+    resolve(axios
         .get('http://localhost:8000/locations/')
         .then(response => response.data)
         );
 });
 
-const addLocation = async (name, lat, lon) => {
-    return await apiClient.post('http://localhost:8000/locations/', {
-        name: name,
-        latitude: lat,
-        longitude: lon
-    })
-}
+const addLocation = async (name, latitude, longitude) => {
+    return await axios.post('http://localhost:8000/locations/', {
+        name,
+        latitude,
+        longitude,
+    });
+};
 
 export { getLocations, addLocation }
