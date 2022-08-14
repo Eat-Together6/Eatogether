@@ -2,6 +2,7 @@ import React, {useRef, useEffect, useState} from "react";
 import useGeolocation from "./useGeolocation";
 import NavStyle from "./NavStyle.module.css";
 import NewMarker from '../../assets/newMarker.png'
+import FollowMarker from '../../assets/followMarker.png';
 import Post from "./Post";
 import { PopperUnstyled } from "@mui/base";
 
@@ -22,8 +23,34 @@ const Map = () => {
     const [popup, setPopup] = useState(false); //true: 도로명주소 검색창 띄움
     const [address, setAddress] = useState(); // 주소 state
     const [markers, setMarker] = useState([]); // 마커 배열
-    const [circles, setCircle] = useState([]);
+    const [circles, setCircle] = useState([]); // 원 배열
     const [latLngs, setLatLng] = useState([]); // 좌표 배열
+    const [followMarkers, setFollowMarker] = useState([
+        {
+            id: 1,
+            lat: 37.6426777370276,
+            lon: 127.005734734447,
+            
+        },
+        {
+            id: 2,
+            lat: 37.643388653764,
+            lon: 127.006683392309,
+        },
+        {
+            id: 3,
+            lat: 37.6437089427402,
+            lon: 127.006872983831,
+        }
+    ]);
+
+    useEffect(()=> {
+        followMarkers.map((followMarker)=>{
+            displayFollowMarker(followMarker.lat, followMarker.lon);
+            console.log(0);
+        })
+    });
+
     const geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체 생성
 
     const searchAndMoveByAddress = () => {
@@ -44,6 +71,7 @@ const Map = () => {
     // 최초 랜더링, latLngs(좌표)업데이트 될때마다 랜더링 - 하나의 마커만 생성
     useEffect(()=>{
         console.log('가장 최근 주소 좌표 : ', latLngs.slice(-1)[0])
+
         if(latLngs.length > 0){ 
             markers.map((marker)=>{
                 marker.setMap(null)
@@ -80,6 +108,7 @@ const Map = () => {
             })
         });
     }
+
     function searchDetailAddrFromCoords(coords, callback) { // 좌표로 법정동 상세 주소 정보를 요청합니다
         geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
     }
@@ -95,6 +124,18 @@ const Map = () => {
 
         circle.setMap(map); 
         setCircle([...circles, circle]);
+    }
+
+    const displayFollowMarker = (lat, lon) => {
+        const imageSrc = FollowMarker;
+        const imageSize = new kakao.maps.Size(50,50);
+        const imageOption = {offset: new kakao.maps.Point(20,50)};
+        // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
+        const marker = new kakao.maps.Marker({ // 마커 객체
+            position: new kakao.maps.LatLng(lat, lon),
+            image: new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption),
+        });
+        marker.setMap(map); // 마커 지도에 표시
     }
 
     return (
