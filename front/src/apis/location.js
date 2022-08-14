@@ -1,16 +1,16 @@
 const getLocations = () => new Promise(resolve => {
     resolve(apiClient
-        .get('/locations/')
+        .get('http://localhost:8000/locations/')
         .then(response => response.data)
         );
-}); // http://localhost:8000/locations/
+});
 
 const addLocation = async (name, lat, lon) => {
-    return await apiClient.post('/locations/', {
+    return await apiClient.post('http://localhost:8000/locations/', {
         name: name,
         latitude: lat,
         longitude: lon
-    }) // http://localhost:8000/locations/
+    })
 }
 
 export { getLocations, addLocation }
