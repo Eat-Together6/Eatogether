@@ -1,4 +1,3 @@
-from warnings import catch_warnings
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,13 +6,13 @@ from locations.models import Location
 from locations.serializers import LocationSerializer
 
 class LocationList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
     def get(self, request, format=None):
-        if self.request.user.is_authenticated:
-            locations = Location.objects.filter(user=self.request.user)
-            serializer = LocationSerializer(locations, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+        locations = Location.objects.filter(user=self.request.user)
+        serializer = LocationSerializer(locations, many=True)
+        return Response(serializer.data)
 
     def post(self, request, format=None):
         data = request.data.copy()
