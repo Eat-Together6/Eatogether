@@ -16,7 +16,7 @@ class OrderList(APIView):
         latitude = request.GET.get('latitude', None)
         longitude = request.GET.get('longitude', None)
         order_status = request.GET.get('order_status', None)
-        
+
         orders = Order.objects.all()
         
         if order_status == 'ING':
