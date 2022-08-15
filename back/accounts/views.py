@@ -1,4 +1,3 @@
-from asyncio import constants
 import requests
 import os
 from django.shortcuts import redirect
@@ -17,12 +16,8 @@ from allauth.socialaccount.providers.naver import views as naver_view
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialAccount
 
-
 User = get_user_model()
-from .models import Profile
 
-from django.shortcuts import render
-from rest_framework import generics
 
 BASE_URL = 'http://localhost:8000/'
 GOOGLE_CALLBACK_URI = BASE_URL + 'accounts/google/callback/'

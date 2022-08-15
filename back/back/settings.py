@@ -1,13 +1,21 @@
 from pathlib import Path
 import sys,os
-
-
 from dotenv import load_dotenv
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# Path(__file__).resolve().parent.parent -> EATOGETHER_2.0/back
+# Path(__file__).resolve().parent        -> EATOGETHER_2.0/back/back
+# Path(__file__).resolve()               -> EATOGETHER_2.0/back/back/settings.py
+# SECRET_BASE_FILE = os.path.join(BASE_DIR, 'secret.json')
 
+# secrets = json.loads(open(SECRET_BASE_FILE).read())
+# for key, value in secrets.items():
+#     setattr(sys.modules[__name__], key, value)
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
@@ -68,7 +76,6 @@ CORS_ALLOW_METHODS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -149,13 +156,14 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'accounts.User'
 
 # email, username 외 회원가입시 필드를 추가로 저장할거 아닌 이상 어답터는 확장안해도된다
-# ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
 
 REST_FRAMEWORK = {
@@ -168,9 +176,9 @@ REST_FRAMEWORK = {
     ],
 }
 
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
-}
+# REST_AUTH_SERIALIZERS = {
+#     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserSerializer',
+# }
 
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None # username 필드 사용 x
@@ -191,3 +199,4 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
