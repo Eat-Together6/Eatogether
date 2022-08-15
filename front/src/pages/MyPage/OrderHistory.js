@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PagiButton from "../../components/EtcItem/PagiButton";
 
@@ -80,24 +80,28 @@ const MoveButton = styled.button`
 `;
 
 const OrderHistory = () => {
+
+    const[historydata, setHistoryData] = useState({username: "미스포츈", month: "3", day: "5", time:"15:00", crew:"A"});
+    const[pagebutton, setPageButton] = useState({pagenumber: 1})
+
+    useEffect(()=>{
+        //데이터 받아오기 await async check!
+    }, []);
+
     return (
         <Container>
             <HistoryCard>
-                <Title>케이틀린님의 주문내역</Title>
+                <Title>{historydata.username}님의 주문내역</Title>
                 <HistoryWrap>
-                    <HistoryText>C님은 3/5 15:00  A님, B님과 함께 주문을 했었어요</HistoryText>
-                    <HistoryText>C님은 3/9 15:00  A 님과 함께 주문을 했었어요</HistoryText>
-                    <HistoryText>C님은 3/17 15:00 D 님과 함께 주문을 했었어요</HistoryText>
-                    <HistoryText>C님은 3/21 18:00 D 님과 함께 주문을 했었어요</HistoryText>
-                    <HistoryText>C님은 3/27 13:00 D 님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>{historydata.username}님은 {historydata.month}/{historydata.day} {historydata.time}  {historydata.crew}님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>{historydata.username}님은 {historydata.month}/{historydata.day} {historydata.time}  {historydata.crew}님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>{historydata.username}님은 {historydata.month}/{historydata.day} {historydata.time}  {historydata.crew}님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>{historydata.username}님은 {historydata.month}/{historydata.day} {historydata.time}  {historydata.crew}님과 함께 주문을 했었어요</HistoryText>
+                    <HistoryText>{historydata.username}님은 {historydata.month}/{historydata.day} {historydata.time}  {historydata.crew}님과 함께 주문을 했었어요</HistoryText>
                 </HistoryWrap>
                 <BtnWrap>
                     <MoveButton>이전</MoveButton>
-                    <PagiButton btnlabel={1}/>
-                    <PagiButton btnlabel={2}/>
-                    <PagiButton btnlabel={3}/>
-                    <PagiButton btnlabel={4}/>
-                    <PagiButton btnlabel={5}/>
+                    <PagiButton btnlabel={pagebutton.pagenumber}/>
                     <MoveButton>다음</MoveButton>
                 </BtnWrap>
             </HistoryCard>

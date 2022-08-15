@@ -86,22 +86,29 @@ const Logo = styled.img`
     height: 30px;
 `;
 
+const LinkStyle = {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+}
+
 const Login = () => {
+
     //submit작업
     return (
         <div>
             <Container>
                 <LoginCard>
-                        <Title>Eatogether는 당신을 기다려요!</Title>
+                        <Title>웰컴투 더치배달</Title>
                         <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"} Type={"text"}/>
                         <CustomInput label={"비밀 번호"} placeholderText={"비밀번호를 입력하세요"} Type={"password"}/>
-                        <LoginButton btnlabel={"로그인"}></LoginButton>
+                        <Link to="/" style={LinkStyle}><LoginButton btnlabel={"로그인"}></LoginButton></Link>
                         <SocialText>소셜 로그인</SocialText>
                         <SocialBtnWrap>
                             <SocialBtnStyle><Logo src={GoogleLogo} /></SocialBtnStyle>
                             <SocialBtnStyle><Logo src={KakaoLogo} /></SocialBtnStyle>
                         </SocialBtnWrap>
-                    <RegisterText>아직 계정이 없으신가요?<Link to="/register">회원 가입하기</Link></RegisterText>
+                    <RegisterText>아직 계정이 없으신가요?&nbsp;<Link to="/register">회원 가입하기</Link></RegisterText>
                 </LoginCard>
             </Container>
         </div>
