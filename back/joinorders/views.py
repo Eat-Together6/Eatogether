@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 from joinorders.models import JoinOrder
 from joinorders.serializers import JoinOrderSerializer
 
+from accounts.models import User
+
 class JoinOrderView(APIView):
     def get(self, request):
         order_id = request.GET.get('order_id', None)
@@ -22,12 +24,14 @@ class JoinOrderView(APIView):
             return Response(serializer.data)
     
     def post(self, request):
+        user = User.objects.get(id=request.data['user'])
         try:
             join_order = JoinOrder.objects.get(order_id=request.data['order_id'])
             join_order.follower = request.data['follower']
             join_order.description = request.data['description']
         except JoinOrder.DoesNotExist:
-            join_order = JoinOrder.objects.create(order_id=request.data['order_id'], follower=request.data['follower'], 
+            join_order = JoinOrder.objects.create(order_id=request.data['order_id'], 
+                                                  follower=user, 
                                                   description=request.data['description'])
         serializer = JoinOrderSerializer(join_order)
         return Response(serializer.data)
