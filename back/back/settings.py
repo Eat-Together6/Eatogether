@@ -1,23 +1,23 @@
 from pathlib import Path
 import json
-import os
+import os, environ
 import sys
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-# Path(__file__).resolve().parent.parent -> EATOGETHER_2.0/back
-# Path(__file__).resolve().parent        -> EATOGETHER_2.0/back/back
-# Path(__file__).resolve()               -> EATOGETHER_2.0/back/back/settings.py
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 ROOT_DIR = os.path.dirname(BASE_DIR)
-# SECRET_BASE_FILE = os.path.join(BASE_DIR, 'secret.json')
 
-# secrets = json.loads(open(SECRET_BASE_FILE).read())
-# for key, value in secrets.items():
-#     setattr(sys.modules[__name__], key, value)
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+# reading .env file
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-rwur1&ze*l!z=xeoemc-*rpcn=^pb8^zj=jd8afmtesa53)ws%'
@@ -45,9 +45,26 @@ INSTALLED_APPS = [
     'menus',
     # djangorestframework
     'rest_framework',
+    # corsheader
+    "corsheaders",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    'http://localhost:3000',
+]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

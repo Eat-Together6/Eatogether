@@ -1,18 +1,13 @@
-import apiClient from "../lib/apiClient";
-// http://localhost:8000/apis
+import axios from "axios";
 
-// 기존 url : path('joinorders/', views.JoinOrderView.as_view())
-// => http://localhost:8000/joinorders/
 const getJoinOrders = (id) => new Promise((resolve) => {
-    resolve(apiClient
-        .get(`/joinorders/${id}/`)
+    resolve(axios
+        .get(`http://localhost:8000/joinorders/${id}/`)
         .then((response) => response.data));
-}); // http://localhost:8000/apis/joinorders/{정수}
+});
 
-// 기존 url : path('joinorders/<int:pk>/', views.JoinOrderDetail.as_view()),
-// => http://localhost:8000/joinorders/{정수}
 const addJoinOrder = async (order_id, follower, description) => {
-  return await apiClient.post("/locations/", {order_id, follower, description});
-}; // http://localhost:8000/apis/joinorders/{정수}/locations/
+  return await axios.post("http://localhost:8000/joinorders/", {order_id, follower, description});
+};
 
 export { getJoinOrders, addJoinOrder };
