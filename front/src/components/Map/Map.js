@@ -48,7 +48,6 @@ const Map = () => {
     useEffect(()=> {
         followMarkers.map((followMarker)=>{
             displayFollowMarker(followMarker.lat, followMarker.lon);
-            console.log(0);
         })
     });
 
@@ -77,13 +76,13 @@ const Map = () => {
             markers.map((marker)=>{
                 marker.setMap(null)
             }) // 마커 배열이 한템포 늦게 업데이트 됨 이거 이용해서 업데이트 전 배열안에 있는 마커들은 삭제(배열은 그대로).
-            circles.map((circle)=>{
-                circle.setMap(null)
-            })
+            // circles.map((circle)=>{
+            //     circle.setMap(null)
+            // })
             const lat = latLngs.slice(-1)[0].lat;
             const lon = latLngs.slice(-1)[0].lon;
             displayMarker(lat, lon) // 좌표 배열 중 제일 최신 객체 좌표로 마커 생성.
-            displayCircle(lat, lon)
+            // displayCircle(lat, lon)
         }
     },[latLngs]) // 좌표가 업데이트 되는 경우는 검색버튼을 클릭했을 때뿐.
     // 입력 주소로 마크 표시
@@ -100,14 +99,32 @@ const Map = () => {
         marker.setMap(map); // 마커 지도에 표시
         setMarker([...markers, marker]); // 마커 배열 추가
 
-        kakao.maps.event.addListener(marker, 'dragend', function() { // 마커 드래그가 끝나면
-            searchDetailAddrFromCoords(marker.getPosition(), function(result, status){ //드래그 끝난 마커 좌표로 도로명 주소 가져오기
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+            const latlng = mouseEvent.latLng;  // 클릭한 위도, 경도 정보를 가져옵니다 
+            marker.setPosition(latlng); // 마커 위치를 클릭한 위치로 옮깁니다
+            circles.map((circle)=>{
+                circle.setMap(null)
+            })
+            displayCircle(latlng.getLat(), latlng.getLng())
+            console.log("클릭한 위치 : ", latlng.getLat(), latlng.getLng())
+            searchDetailAddrFromCoords(latlng, function(result, status){ //클릭 끝난 마커 좌표로 도로명 주소 가져오기
                 if(status === kakao.maps.services.Status.OK){
                     setPopup(false) // 도로명주소 팝업 false로 변경 -> 주소검색창 재사용하도록
                     setAddress(result[0].road_address.address_name) // 가져온 도로명주소로 address 업데이트
+                    
                 }
             })
+            
         });
+
+        // kakao.maps.event.addListener(marker, 'dragend', function() { // 마커 드래그가 끝나면
+        //     searchDetailAddrFromCoords(marker.getPosition(), function(result, status){ //드래그 끝난 마커 좌표로 도로명 주소 가져오기
+        //         if(status === kakao.maps.services.Status.OK){
+        //             setPopup(false) // 도로명주소 팝업 false로 변경 -> 주소검색창 재사용하도록
+        //             setAddress(result[0].road_address.address_name) // 가져온 도로명주소로 address 업데이트
+        //         }
+        //     })
+        // });
     }
 
     function searchDetailAddrFromCoords(coords, callback) { // 좌표로 법정동 상세 주소 정보를 요청합니다
@@ -126,7 +143,7 @@ const Map = () => {
         circle.setMap(map); 
         setCircle([...circles, circle]);
     }
-
+    console.log("원", circles)
     const displayFollowMarker = (lat, lon) => {
         const imageSrc = FollowMarker;
         const imageSize = new kakao.maps.Size(50,50);
