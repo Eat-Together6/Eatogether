@@ -4,7 +4,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('locations/', include('locations.urls')),
-    path('joinorders/', include('orders.urls')),
+    path('orders/', include('orders.urls')),
+    path('joinorders/', include('joinorders.urls')),
     path('menus/', include('menus.urls')),
     path('accounts/',include('accounts.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
