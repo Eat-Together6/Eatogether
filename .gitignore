@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,react,node,python,venv,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,react,node,python,venv,visualstudiocode
-
+#API KEY
+.env
 ### Django ###
 *.log
 *.pot
@@ -441,3 +442,6 @@ pip-selfcheck.json
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/django,react,node,python,venv,visualstudiocode
+
+# secret.json
+secret.json
