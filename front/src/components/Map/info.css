@@ -1,0 +1,26 @@
+.infoWrap {
+    width: 150px;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    
+}
+
+.infoWrap div{
+    margin: 5px;
+}
+.storeName {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.infoWrap .orderState {
+    margin-top: 10px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #FF8743;
+    font-size: 13px;
+    border-radius: 0.55rem;
+
+}

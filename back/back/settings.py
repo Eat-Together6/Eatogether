@@ -3,11 +3,15 @@ import sys,os
 from dotenv import load_dotenv
 load_dotenv()
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Path(__file__).resolve().parent.parent -> EATOGETHER_2.0/back
 # Path(__file__).resolve().parent        -> EATOGETHER_2.0/back/back
 # Path(__file__).resolve()               -> EATOGETHER_2.0/back/back/settings.py
+
+ROOT_DIR = os.path.dirname(BASE_DIR)
+
 # SECRET_BASE_FILE = os.path.join(BASE_DIR, 'secret.json')
 
 # secrets = json.loads(open(SECRET_BASE_FILE).read())
@@ -157,6 +161,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
@@ -198,5 +203,3 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
 }
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
