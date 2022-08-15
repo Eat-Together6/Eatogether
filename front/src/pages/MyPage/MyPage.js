@@ -79,7 +79,7 @@ const LinkStyle = {
 
 const MyPage = () => {
 
-    const[userdata, setUserData] = useState({id: "jk98", nickname: "케이틀린", email:"jk98@gmail.com"});
+    const[userdata, setUserData] = useState({id: "kj89", nickname: "미스포츈", email:"jk98@gmail.com"});
 
     useEffect(()=>{
         //데이터 받아오기 await async check!
