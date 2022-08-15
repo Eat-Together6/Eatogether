@@ -30,7 +30,7 @@ export const AddressInput = styled.input`
     opacity: 0.5;
     box-shadow: 7px 7px 14px #d97339, -7px -7px 14px #ff9b4d;
     padding: 5px 20px;
-    $:focus-visible{
+    &:focus-visible{
         outline: #ff8743;     
     }
 `;
