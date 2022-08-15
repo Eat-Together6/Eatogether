@@ -1,5 +1,7 @@
-import * as React from "react";
-import FormControlUnstyled, { useFormControlUnstyledContext } from "@mui/base/FormControlUnstyled";
+import { useEffect, useState } from "react";
+import FormControlUnstyled, {
+  useFormControlUnstyledContext,
+} from "@mui/base/FormControlUnstyled";
 import InputUnstyled, { inputUnstyledClasses } from "@mui/base/InputUnstyled";
 import { styled } from "@mui/system";
 import clsx from "clsx";
@@ -41,7 +43,9 @@ const Input = styled(InputUnstyled)(
     }
 
     &:focus {
-      outline: 3px solid ${theme.palette.mode === "dark" ? grey[200] : grey[200]};
+      outline: 3px solid ${
+        theme.palette.mode === "dark" ? grey[200] : grey[200]
+      };
     }
   }
 `
@@ -49,9 +53,9 @@ const Input = styled(InputUnstyled)(
 
 const Label = styled(({ children, className }) => {
   const formControlContext = useFormControlUnstyledContext();
-  const [dirty, setDirty] = React.useState(false);
+  const [dirty, setDirty] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (formControlContext?.filled) {
       setDirty(true);
     }
@@ -64,7 +68,10 @@ const Label = styled(({ children, className }) => {
   const { error, required, filled } = formControlContext;
   const showRequiredError = dirty && required && !filled;
   return (
-    <p style={LabelStyle} className={clsx(className, error || showRequiredError ? "invalid" : "")}>
+    <p
+      style={LabelStyle}
+      className={clsx(className, error || showRequiredError ? "invalid" : "")}
+    >
       {children}
     </p>
   );
@@ -91,7 +98,7 @@ const LabelStyle = {
 };
 
 export default function UseFormControl({ label, divShow }) {
-  const [open, setOpen] = React.useState("none");
+  const [open, setOpen] = useState("none");
 
   const Input_click = () => {
     if (divShow == "block") {
@@ -99,7 +106,7 @@ export default function UseFormControl({ label, divShow }) {
     }
   };
 
-  // ¸Þ´º Ãß°¡ ¹öÆ°
+  // ï¿½Þ´ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½Æ°
   const btn_click = (e) => {
     let MenuItem = document.createElement("p");
     MenuItem.style.fontSize = "15px";
@@ -107,20 +114,26 @@ export default function UseFormControl({ label, divShow }) {
     let ChildList = e.target.parentElement.children;
 
     if (ChildList[1].value != "" && ChildList[1].value != "") {
-      MenuItem.innerHTML = e.target.parentElement.children[1].value + ":" + e.target.parentElement.children[2].value + "¿ø";
+      MenuItem.innerHTML =
+        e.target.parentElement.children[1].value +
+        ":" +
+        e.target.parentElement.children[2].value +
+        "ï¿½ï¿½";
       e.target.parentElement.appendChild(MenuItem);
     } else {
-      Window.alert("¸Þ´º ÀÌ¸§°ú °¡°ÝÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      Window.alert("ï¿½Þ´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½");
     }
-    //ÃÊ±âÈ­
+    //ï¿½Ê±ï¿½È­
     ChildList[1].value = "";
     ChildList[2].value = "";
   };
   const handlingInput = () => {
-    if (label === "ÁÖ¹® Èñ¸Á ¸Þ´º") {
-      return <Input onClick={Input_click} placeholder="¸Þ´º¸¦ ÀÔ·ÂÇÏ¼¼¿ä" />;
-    } else if (label === "¸Þ´º °¡°Ý") {
-      return <Input onClick={Input_click} placeholder="¸Þ´ºÀÇ °¡°ÝÀ» ÀÔ·ÂÇÏ¼¼¿ä" />;
+    if (label === "ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½") {
+      return <Input onClick={Input_click} placeholder="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½" />;
+    } else if (label === "ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½") {
+      return (
+        <Input onClick={Input_click} placeholder="ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½" />
+      );
     } else {
       return <Input onClick={Input_click} />;
     }
