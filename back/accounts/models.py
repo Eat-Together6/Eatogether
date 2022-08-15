@@ -1,6 +1,4 @@
-from django.contrib.auth.models import BaseUserManager
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin,BaseUserManager,AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 from django.db import models
@@ -31,6 +29,9 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **kwargs)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    username = None
+    img = models.ImageField(upload_to='profile/', blank=True, null=True) #프로필 사진
+    # phone_num = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(unique=True, null=True,
             help_text=_('Required. Letters, digits and ''@/./+/-/_ only.'),
         validators=[RegexValidator(r'^[\w.@+-]+$', _('Enter a valid email address.'), 'invalid')
@@ -63,3 +64,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 # https://groups.google.com/g/django-users/c/HiJPduCJE7s?pli=1
 # https://velog.io/@martinalee94/Regex-input-invalid체크-정규표현식
+
+
+
+
+
