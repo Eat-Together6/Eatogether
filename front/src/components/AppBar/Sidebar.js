@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import sidebar from "./sidebar.module.css"
 import styled from "styled-components";
-
 import axios from 'axios';
 
 const Sidebar = () => {

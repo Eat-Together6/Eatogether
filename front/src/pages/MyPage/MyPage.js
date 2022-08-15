@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import UserImage from "../../assets/user.png";
@@ -53,7 +53,7 @@ const InfoWrap = styled.div`
 `;
 
 const InfoLabel = styled.span`
-font-family: 'BMHANNAAir';
+    font-family: 'BMHANNAAir';
     font-size: 18px;
     font-weight: 800;
     margin: 10px;
@@ -71,7 +71,20 @@ const InfoText = styled.span`
     align-items: center;
 `;
 
+const LinkStyle = {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+}
+
 const MyPage = () => {
+
+    const[userdata, setUserData] = useState({id: "jk98", nickname: "케이틀린", email:"jk98@gmail.com"});
+
+    useEffect(()=>{
+        //데이터 받아오기 await async check!
+    }, []);
+
     return (
         <Container>
                 <MypageCard>
@@ -79,17 +92,17 @@ const MyPage = () => {
                         <FaceLogo src={UserImage} />
                         <InfoWrap>
                             <InfoLabel>아이디</InfoLabel>
-                            <InfoText>jk98</InfoText>
+                            <InfoText>{userdata.id}</InfoText>
                         </InfoWrap>
                         <InfoWrap>
                             <InfoLabel>닉네임</InfoLabel>
-                            <InfoText>케이틀린</InfoText>
+                            <InfoText>{userdata.nickname}</InfoText>
                         </InfoWrap>
                         <InfoWrap>
                             <InfoLabel>이메일</InfoLabel>
-                            <InfoText>jk98@gmail.com</InfoText>
+                            <InfoText>{userdata.email}</InfoText>
                         </InfoWrap>
-                        <Link to="/orderhistory"><LoginButton btnlabel={"나의 주문내역"} style={{width: '100%'}}></LoginButton></Link>
+                        <Link to="/orderhistory" style={LinkStyle}><LoginButton btnlabel={"나의 주문내역"}></LoginButton></Link>
                 </MypageCard>
         </Container>
 );
