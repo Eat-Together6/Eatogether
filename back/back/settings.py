@@ -10,11 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Path(__file__).resolve()               -> EATOGETHER_2.0/back/back/settings.py
 
 ROOT_DIR = os.path.dirname(BASE_DIR)
-SECRET_BASE_FILE = os.path.join(BASE_DIR, 'secret.json')
+# SECRET_BASE_FILE = os.path.join(BASE_DIR, 'secret.json')
 
-secrets = json.loads(open(SECRET_BASE_FILE).read())
-for key, value in secrets.items():
-    setattr(sys.modules[__name__], key, value)
+# secrets = json.loads(open(SECRET_BASE_FILE).read())
+# for key, value in secrets.items():
+#     setattr(sys.modules[__name__], key, value)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'accounts',
-    'boards',
     'locations',
+    'joinorders',
     'orders',
     'menus',
     # djangorestframework
@@ -130,4 +130,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

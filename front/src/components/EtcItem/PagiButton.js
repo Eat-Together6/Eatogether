@@ -2,13 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const BtnStyle = styled.button`
-    font-family: 'BMHANNAAir';
-    margin-top: 40px;
+    font-family: 'BMHANNAPro';
     background-color: #ececec;
     font-weight: 800;
-    width: 70%;
+    width: 38px;
     height: 38px;
-    border-radius: 0.55rem;
+    border-radius:0.55rem;
     box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
     border: none;
     &:hover{
@@ -18,10 +17,9 @@ const BtnStyle = styled.button`
     cursor: pointer;
 `;
 
-
-const LoginButton = ({btnlabel}) => {
+const PagiButton = ({btnlabel}) => {
     return (
-            <BtnStyle>{btnlabel}</BtnStyle>       
+        <BtnStyle>{btnlabel}</BtnStyle>
 );
 }
-export default LoginButton;
+export default PagiButton;

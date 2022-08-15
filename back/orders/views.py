@@ -47,29 +47,13 @@ class OrderDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk):
-        # TODO: 주문에 들어가기
         order = self.get_object(pk)
         serializer = OrderSerializer(order, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def delete(self, request, pk):
         order = self.get_object(pk)
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class OrderJoinView(APIView):
-    def get_object(self, pk):
-        try:
-            return Order.objects.get(pk=pk)
-        except Order.DoesNotExist:
-            raise Http404
-
-    def post(self, request, pk):
-        order = self.get_object(pk)
-        order.joined_user.add(self.request.user)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)

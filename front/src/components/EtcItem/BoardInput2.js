@@ -21,7 +21,7 @@ const Input = styled(InputUnstyled)(
   ({ theme }) => `
   
   .${inputUnstyledClasses.input} {
-    width: 150px;
+    width: 300px;
     font-size: 0.875rem;
     font-family: 'BMHANNAPro';
     font-weight: 100;
@@ -32,11 +32,10 @@ const Input = styled(InputUnstyled)(
     padding: 12px 12px;
     box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
     border: none;
-
+    margin-left: 85px;
     &:hover {
       background: ${theme.palette.mode === "dark" ? "" : grey[100]};
     }
-
     &:focus {
       outline: 3px solid ${theme.palette.mode === "dark" ? grey[200] : grey[200]};
     }
@@ -69,9 +68,9 @@ const Label = styled(({ children, className }) => {
   font-family: "BMHANNAPro";
   font-size: 1.2rem;
   margin-top: 15px;
+  margin-left: 20px;
   font-weight: 550;
   width: 30px;
-
   &.invalid {
     color: red;
   }

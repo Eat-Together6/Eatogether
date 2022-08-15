@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import UserImage from "../../assets/user.png";
@@ -10,7 +10,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #ececec;
 `;
 
 const MypageCard = styled.div`
@@ -22,9 +22,10 @@ const MypageCard = styled.div`
     align-items: center;
     position: relative;
     border-radius: 0.55rem;
-    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-    border: none;
-    background-color: #ffff;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
+    border: 8px solid #ececec;
+    outline: none;
+    background-color: #ececec;
 `;
 
 const Title = styled.h1`
@@ -52,24 +53,38 @@ const InfoWrap = styled.div`
 `;
 
 const InfoLabel = styled.span`
-    font-family: 'BMHANNAPro';
+    font-family: 'BMHANNAAir';
     font-size: 18px;
     font-weight: 800;
     margin: 10px;
 `;
 
 const InfoText = styled.span`
-    font-family: 'BMHANNAPro';
+    background-color: #ececec;
+    font-family: 'BMHANNAAir';
     height: 38px;
     padding: 0px 20px;
     border-radius:0.55rem;
-    box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
     border: none;
     display: flex;
     align-items: center;
 `;
 
+const LinkStyle = {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+}
+
 const MyPage = () => {
+
+    const[userdata, setUserData] = useState({id: "jk98", nickname: "케이틀린", email:"jk98@gmail.com"});
+
+    useEffect(()=>{
+        //데이터 받아오기 await async check!
+    }, []);
+
     return (
         <Container>
                 <MypageCard>
@@ -77,17 +92,17 @@ const MyPage = () => {
                         <FaceLogo src={UserImage} />
                         <InfoWrap>
                             <InfoLabel>아이디</InfoLabel>
-                            <InfoText>jk98</InfoText>
+                            <InfoText>{userdata.id}</InfoText>
                         </InfoWrap>
                         <InfoWrap>
                             <InfoLabel>닉네임</InfoLabel>
-                            <InfoText>케이틀린</InfoText>
+                            <InfoText>{userdata.nickname}</InfoText>
                         </InfoWrap>
                         <InfoWrap>
                             <InfoLabel>이메일</InfoLabel>
-                            <InfoText>jk98@gmail.com</InfoText>
+                            <InfoText>{userdata.email}</InfoText>
                         </InfoWrap>
-                        <Link to="/orderhistory"><LoginButton btnlabel={"나의 주문내역"} style={{width: '100%'}}></LoginButton></Link>
+                        <Link to="/orderhistory" style={LinkStyle}><LoginButton btnlabel={"나의 주문내역"}></LoginButton></Link>
                 </MypageCard>
         </Container>
 );
