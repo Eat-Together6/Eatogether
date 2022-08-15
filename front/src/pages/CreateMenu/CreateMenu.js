@@ -144,6 +144,13 @@ function CreateMenu() {
   });
   console.log(sumPrice); // 총가격은 잘 나오는데 이걸 value 값에 연결 어떻게 하는지 모르겠음.
 
+  function menu_OnMouseover() {
+    document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
+  }
+  function menu_onMouseOut() {
+    document.getElementById("menuButton").style.boxShadow = "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
+  }
+
   return (
     <>
       <Box>
@@ -167,7 +174,7 @@ function CreateMenu() {
                 가격
               </label>
               <input style={menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-              <button style={menuButton} onClick={onCreate}>
+              <button id="menuButton" style={menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
                 추가
               </button>
             </div>
