@@ -1,117 +1,47 @@
 import React from "react";
-import styled from "styled-components";
-import CustomInput from "../../components/EtcItem/CustomInput";
-import GoogleLogo from "../../assets/google.png";
-import KakaoLogo from "../../assets/kakao-talk.png";
-import LoginButton from "../../components/EtcItem/LoginButton";
-import {Link} from "react-router-dom";
-
-const Container = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ececec;
-`;
-
-const LoginCard = styled.div`
-    border: 1px solid black;
-    width: 600px;
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    border-radius: 0.55rem;
-    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
-    border: 8px solid #ececec;
-    outline: none;
-    background-color: #ececec;
-`;
-
-const RegisterText = styled.span`
-    font-family: 'BMHANNAPro';
-    position: absolute;
-    bottom: 35px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-`;
-
-const Title = styled.h1`
-    font-family: 'BMHANNAPro';
-    width: 100%;
-    height: 130px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0px;
-    font-size: 25px;
-`;
-
-const SocialText = styled.span`
-    font-family: 'BMHANNAAir';
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    margin-top: 35px;
-`;
-
-const SocialBtnWrap = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const SocialBtnStyle = styled.button`
-    background-color: #ececec;
-    margin: 10px;
-    height: 55px;
-    width: 55px;
-    border-radius: 50px;
-    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
-    border: none;
-    &:hover{
-        box-shadow: inset 3px 3px 7px #d3d3d3,
-        inset -3px -3px 7px #ffffff;
-    }
-    cursor: pointer;
-`;
-
-const Logo = styled.img`
-    width: 30px;
-    height: 30px;
-`;
-
-const LinkStyle = {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
-}
+import * as style from "./styles";
+import CustomInput from "components/EtcItem/CustomInput";
+import GoogleLogo from "assets/images/google.png";
+import KakaoLogo from "assets/images/kakao-talk.png";
+import LoginButton from "components/EtcItem/LoginButton";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-
-    //submit작업
-    return (
-        <div>
-            <Container>
-                <LoginCard>
-                        <Title>웰컴투 더치배달</Title>
-                        <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"} Type={"text"}/>
-                        <CustomInput label={"비밀 번호"} placeholderText={"비밀번호를 입력하세요"} Type={"password"}/>
-                        <Link to="/" style={LinkStyle}><LoginButton btnlabel={"로그인"}></LoginButton></Link>
-                        <SocialText>소셜 로그인</SocialText>
-                        <SocialBtnWrap>
-                            <SocialBtnStyle><Logo src={GoogleLogo} /></SocialBtnStyle>
-                            <SocialBtnStyle><Logo src={KakaoLogo} /></SocialBtnStyle>
-                        </SocialBtnWrap>
-                    <RegisterText>아직 계정이 없으신가요?&nbsp;<Link to="/register">회원 가입하기</Link></RegisterText>
-                </LoginCard>
-            </Container>
-        </div>
-);
-}
+  //submit작업
+  return (
+    <>
+      <style.Container>
+        <style.LoginCard>
+          <style.Title>웰컴투 더치배달</style.Title>
+          <CustomInput
+            label={"아이디"}
+            placeholderText={"아이디를 입력하세요"}
+            Type={"text"}
+          />
+          <CustomInput
+            label={"비밀 번호"}
+            placeholderText={"비밀번호를 입력하세요"}
+            Type={"password"}
+          />
+          <Link to="/" style={style.LinkStyle}>
+            <LoginButton btnlabel={"로그인"}></LoginButton>
+          </Link>
+          <style.SocialText>소셜 로그인</style.SocialText>
+          <style.SocialBtnWrap>
+            <style.SocialBtnStyle>
+              <style.Logo src={GoogleLogo} />
+            </style.SocialBtnStyle>
+            <style.SocialBtnStyle>
+              <style.Logo src={KakaoLogo} />
+            </style.SocialBtnStyle>
+          </style.SocialBtnWrap>
+          <style.RegisterText>
+            아직 계정이 없으신가요?&nbsp;
+            <Link to="/register">회원 가입하기</Link>
+          </style.RegisterText>
+        </style.LoginCard>
+      </style.Container>
+    </>
+  );
+};
 export default Login;
