@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import PagiButton from "../../components/EtcItem/PagiButton";
 
@@ -60,7 +60,7 @@ const HistoryText = styled.span`
 const BtnWrap = styled.button`
     display:flex;
     margin-top: auto;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 `;
 
 const MoveButton = styled.button`
