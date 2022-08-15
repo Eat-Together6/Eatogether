@@ -34,6 +34,7 @@ const InputP = styled.input`
     border-radius:0.55rem;
     box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
     border: none;
+    ::placeholder {font-family: 'BMHANNAAir';}
 `;
 
 const CustomInput = ({label, placeholderText, Type}) => {
