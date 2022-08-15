@@ -16,7 +16,7 @@ const Label = styled.span`
     margin: 10px;
 `;
 
-const Input = styled.input`
+const InputT = styled.input`
     background-color: #ececec;
     font-family: 'BMHANNAAir';
     height: 38px;
@@ -26,13 +26,26 @@ const Input = styled.input`
     border: none;
 `;
 
+const InputP = styled.input`
+    background-color: #ececec;
+    font-family: 'Roboto', Hekvetica, Arial, sans-serif;
+    height: 38px;
+    padding: 0px 20px;
+    border-radius:0.55rem;
+    box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
+    border: none;
+    ::placeholder {font-family: 'BMHANNAAir';}
+`;
 
-const CustomInput = ({label, placeholderText}) => {
+const CustomInput = ({label, placeholderText, Type}) => {
     return (
         <InputWrap>
                     <Label>{label}</Label>
-                    <Input placeholder={placeholderText}/>
+                    {Type === "password" ?
+                        <InputP placeholder={placeholderText} type={Type}/>:
+                        <InputT placeholder={placeholderText} type={Type}/>
+                    }
         </InputWrap>
-);
+    );
 }
 export default CustomInput;

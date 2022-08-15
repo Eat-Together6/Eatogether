@@ -87,13 +87,14 @@ const Logo = styled.img`
 `;
 
 const Login = () => {
+    //submit작업
     return (
         <div>
             <Container>
                 <LoginCard>
                         <Title>Eatogether는 당신을 기다려요!</Title>
-                        <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"}/>
-                        <CustomInput label={"비밀 번호"} placeholderText={"비밀번호를 입력하세요"}/>
+                        <CustomInput label={"아이디"} placeholderText={"아이디를 입력하세요"} Type={"text"}/>
+                        <CustomInput label={"비밀 번호"} placeholderText={"비밀번호를 입력하세요"} Type={"password"}/>
                         <LoginButton btnlabel={"로그인"}></LoginButton>
                         <SocialText>소셜 로그인</SocialText>
                         <SocialBtnWrap>
