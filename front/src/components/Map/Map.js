@@ -4,6 +4,7 @@ import NavStyle from "./NavStyle.module.css";
 import NewMarker from '../../assets/newMarker.png'
 import FollowMarker from '../../assets/followMarker.png';
 import Post from "./Post";
+import "./info.css"
 import { PopperUnstyled } from "@mui/base";
 
 const Map = () => {
@@ -136,6 +137,50 @@ const Map = () => {
             image: new kakao.maps.MarkerImage(imageSrc,imageSize,imageOption),
         });
         marker.setMap(map); // 마커 지도에 표시
+
+        let iwContent = document.createElement("div")
+        iwContent.classList.add("infoWrap")
+        iwContent.addEventListener('click', (()=>{
+            infowindow.close()
+            isopen = true;
+        }));
+        let storeName = document.createElement("div")
+        storeName.textContent = "long long store name"
+        storeName.classList.add("storeName")
+        let time = document.createElement("div")
+        time.textContent = "15:00 주문예정"
+        time.classList.add("time")
+        let joinNum = document.createElement("div")
+        joinNum.textContent = " 2 / 4 참여 중"
+        joinNum.classList.add("joinNum")
+        let orderState = document.createElement("div")
+        orderState.textContent = "주문 중"
+        orderState.classList.add("orderState")
+
+        iwContent.append(
+            storeName,
+            time,
+            joinNum,
+            orderState
+          );
+
+        
+        const infowindow = new kakao.maps.InfoWindow({
+            content : iwContent,
+        });
+        let isopen = true;
+        kakao.maps.event.addListener(marker, 'click', function() {
+             // 마커 위에 인포윈도우를 표시합니다
+            if(isopen) {
+                infowindow.open(map, marker);
+                isopen = false;
+            } else {
+                infowindow.close();
+                isopen = true;
+            } 
+      });
+
+      
     }
 
     return (
@@ -163,6 +208,8 @@ const Map = () => {
         
         <div ref={container} className={NavStyle.map}></div>
         </div>
+        
+        
     );
 }
 
