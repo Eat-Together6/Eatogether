@@ -34,12 +34,13 @@ class OrderList(APIView):
             return Response(serializer.data)
 
     def post(self, request):
-        order = Order.objects.create(leader=self.request.user, brand=request.data['brand'], 
-                                     time=request.data['time'], description=request.data['description'],
-                                     max_joined_user=self.request.data['max_joined_user'], 
-                                     location=request.data['location'],
-                                     latitude=request.data['latitude'], longitude=request.data['longitude'],
-                                     order_status=request.data['order_status'])
+        location =Location.objects.get(id=request.data['location'])
+        order = Order.objects.create(leader=request.user,
+                                     brand=request.data['brand'],
+                                     time=request.data['time'],
+                                     description=request.data['description'],
+                                     max_joined_user=request.data['max_joined_user'], 
+                                     location=location)
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 

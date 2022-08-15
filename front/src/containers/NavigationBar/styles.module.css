@@ -1,0 +1,38 @@
+.wrapper {
+  z-index: 998;
+}
+nav {
+  background-color: #ff8743;
+  width: 100vw;
+  height: 70px;
+  padding: 15px 50px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+nav a:first-child {
+  float: left;
+  line-height: 40px;
+  font-family: "BMHANNAAir";
+}
+nav a:last-child {
+  float: right;
+  line-height: 40px;
+  font-family: "BMHANNAAir";
+}
+
+@font-face {
+  font-family: "BMHANNAPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BMHANNAAir";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
