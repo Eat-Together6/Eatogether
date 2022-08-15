@@ -3,107 +3,17 @@ import BoardInput from "../../components/EtcItem/BoardInput";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-
-const headerStyle = {
-  fontFamily: "BMHANNAPro",
-  marginTop: "10px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "150px",
-};
-
-const Contents_one = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  fontFamily: "BMHANNAPro",
-};
-
-const Contents_two = {
-  fontSize: "30px",
-  width: "100%",
-  display: "flex",
-  marginRight: "60px",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  fontFamily: "BMHANNAPro",
-};
-
-const btnWrapper = {
-  display: "flex",
-  alignItems: "center",
-  height: "100px",
-  justifyContent: "center",
-  marginLeft: "100px",
-};
-
-const menuDiv = {
-  margin: "10px 0",
-  marginLeft: "40px",
-};
-
-const menuLabel = { fontSize: "1.2rem" };
-
-const menuInput = {
-  width: "220px",
-  fontSize: "0.875rem",
-  fontWeight: "100",
-  lineHeight: "1",
-  borderRadius: "38px",
-  padding: "12px",
-  backgroundColor: "#F3F6F9",
-  boxShadow: "inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3",
-  margin: "0 20px",
-  border: "none",
-};
-
-const menuButton = {
-  cursor: "pointer",
-  position: "absolute",
-  margin: "5px 0",
-  width: "40px",
-  height: "30px",
-  lineHeight: "30px",
-  borderRadius: "0.55rem",
-  backgroundColor: "white",
-  boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
-};
-
-const newMenuDiv = {
-  margin: " 10px 0",
-  textAlign: "right",
-  fontSize: "1.2rem",
-  fontWeight: "100",
-  height: "30px",
-};
-
-const menuSpan = {
-  marginRight: "20px",
-  lineHeight: "30px",
-};
-
-const menuDel = {
-  padding: "0",
-  cursor: "pointer",
-  width: "15px",
-  height: "15px",
-  borderRadius: "50px",
-  backgroundColor: "#fa4444",
-  boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
-};
+import styles from "./styles.js";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemove }) => {
   // 추가 버튼 클릭 시, 입력된 메뉴와 가격 나타내는 컴포넌트
   return (
     <div>
-      <div style={newMenuDiv}>
-        <span style={menuSpan}>{menu.menu}</span>
-        <span style={menuSpan}>{menu.price}원</span>
-        <button style={menuDel} onClick={() => onRemove(menu.id)}>
+      <div style={styles.newMenuDiv}>
+        <span style={styles.menuSpan}>{menu.menu}</span>
+        <span style={styles.menuSpan}>{menu.price}원</span>
+        <button style={styles.menuDel} onClick={() => onRemove(menu.id)}>
           x
         </button>
       </div>
@@ -145,36 +55,56 @@ function CreateMenu() {
   console.log(sumPrice); // 총가격은 잘 나오는데 이걸 value 값에 연결 어떻게 하는지 모르겠음.
 
   function menu_OnMouseover() {
-    document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
+    document.getElementById("menuButton").style.boxShadow =
+      "inset 2px 2px 5px #b8b9be";
   }
   function menu_onMouseOut() {
-    document.getElementById("menuButton").style.boxShadow = "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
+    document.getElementById("menuButton").style.boxShadow =
+      "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
   }
 
   return (
     <>
       <Box>
-        <div style={headerStyle}>
+        <div style={styles.headerStyle}>
           <h1>새 메뉴 작성하기</h1>
         </div>
       </Box>
-      <Box style={Contents_one}>
-        <div style={Contents_two}>
+      <Box style={styles.Contents_one}>
+        <div style={styles.Contents_two}>
           <BoardInput class="addess" label={"픽업 주소"} name="address" />
           <BoardInput label={"주문 희망 브랜드"} name="barnd" />
           <BoardInput label={"주문 희망 시간"} name="time" />
 
           <div>
-            <div style={menuDiv}>
-              <label style={menuLabel} htmlFor="menu">
+            <div style={styles.menuDiv}>
+              <label style={styles.menuLabel} htmlFor="menu">
                 주문 희망 메뉴
               </label>
-              <input style={menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
-              <label style={menuLabel} htmlFor="price">
+              <input
+                style={styles.menuInput}
+                ref={styles.menu}
+                id="menu"
+                type="text"
+                placeholder="메뉴를 입력하세요"
+              />
+              <label style={styles.menuLabel} htmlFor="price">
                 가격
               </label>
-              <input style={menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-              <button id="menuButton" style={menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+              <input
+                style={styles.menuInput}
+                ref={price}
+                id="price"
+                type="text"
+                placeholder="가격을 입력하세요"
+              />
+              <button
+                id="menuButton"
+                style={styles.menuButton}
+                onClick={onCreate}
+                onMouseOver={menu_OnMouseover}
+                onMouseOut={menu_onMouseOut}
+              >
                 추가
               </button>
             </div>
@@ -190,7 +120,7 @@ function CreateMenu() {
           <div id="list"></div>
           <BoardInput label={"총 금액"} name="sum" />
           <BoardInput label={"전달 사항"} name="description" />
-          <div id="btnWrap" style={btnWrapper}>
+          <div id="btnWrap" style={styles.btnWrapper}>
             <Link style={{ textDecoration: "none", color: "black" }} to="/">
               <UnstyledButtonsSimple label={"작성"} />
             </Link>
