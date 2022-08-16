@@ -12,12 +12,11 @@ class UserDetailSerializer(serializers.ModelSerializer):
 class SignUpSerializer(RegisterSerializer):
     username = None
     name = serializers.CharField()
-    phone_num = serializers.CharField()
+
 
     def get_cleaned_data(self):
         return {
             'password1': self.validated_data.get('password1', ''),
             'email': self.validated_data.get('email', ''),
             'name': self.validated_data.get('name', ''),
-            'phone_num': self.validated_data.get('phone_num', ''),
         }
