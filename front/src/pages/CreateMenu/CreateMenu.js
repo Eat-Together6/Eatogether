@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import BoardInput from "../../components/EtcItem/BoardInput";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
@@ -65,71 +64,89 @@ function CreateMenu() {
 
   return (
     <>
-      <Box>
-        <div style={styles.headerStyle}>
-          <h1>새 메뉴 작성하기</h1>
-        </div>
-      </Box>
-      <Box style={styles.Contents_one}>
-        <div style={styles.Contents_two}>
-          <BoardInput class="addess" label={"픽업 주소"} name="address" />
-          <BoardInput label={"주문 희망 브랜드"} name="barnd" />
-          <BoardInput label={"주문 희망 시간"} name="time" />
-
-          <div>
+      <div style={styles.background}>
+        <Box>
+          <div style={styles.headerStyle}>
+            <h1>새 메뉴 작성하기</h1>
+          </div>
+        </Box>
+        <Box style={styles.Contents_one}>
+          <div style={styles.Contents_two}>
             <div style={styles.menuDiv}>
-              <label style={styles.menuLabel} htmlFor="menu">
-                주문 희망 메뉴
-              </label>
-              <input
-                style={styles.menuInput}
-                ref={styles.menu}
-                id="menu"
-                type="text"
-                placeholder="메뉴를 입력하세요"
-              />
-              <label style={styles.menuLabel} htmlFor="price">
-                가격
-              </label>
-              <input
-                style={styles.menuInput}
-                ref={price}
-                id="price"
-                type="text"
-                placeholder="가격을 입력하세요"
-              />
-              <button
-                id="menuButton"
-                style={styles.menuButton}
-                onClick={onCreate}
-                onMouseOver={menu_OnMouseover}
-                onMouseOut={menu_onMouseOut}
-              >
-                추가
-              </button>
+              <label style={styles.label}>픽업 주소</label>
+              <input style={styles.input} placeholder="주소가 자동으로 뜨게" />
             </div>
-            {newmenus.map(
-              (
-                newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
-              ) => (
-                <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
-              )
-            )}
+            <div style={styles.menuDiv}>
+              <label style={styles.label}>음식점명</label>
+              <input
+                style={styles.input}
+                placeholder="음식점 이름을 입력해주세요"
+              />
+            </div>
+            <div style={styles.menuDiv}>
+              <label style={styles.label}>주문 희망 시간</label>
+              <input style={styles.input} type="time" />
+            </div>
+            <div>
+              <div style={styles.menuDiv}>
+                <label style={styles.menuLabel} htmlFor="menu">
+                  주문 희망 메뉴
+                </label>
+                <input
+                  style={styles.menuInput}
+                  ref={menu}
+                  id="menu"
+                  type="text"
+                  placeholder="메뉴를 입력하세요"
+                />
+                <label style={styles.menuLabel} htmlFor="price">
+                  가격
+                </label>
+                <input
+                  style={styles.menuInput}
+                  ref={price}
+                  id="price"
+                  type="text"
+                  placeholder="가격을 입력하세요"
+                />
+                <button
+                  id="menuButton"
+                  style={styles.menuButton}
+                  onClick={onCreate}
+                  onMouseOver={menu_OnMouseover}
+                  onMouseOut={menu_onMouseOut}
+                >
+                  추가
+                </button>
+              </div>
+              {newmenus.map(
+                (
+                  newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                ) => (
+                  <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                )
+              )}
+            </div>
+            <div style={styles.sumStyle}>
+              <div style={styles.sumLabel}>총 금액</div>
+              <div style={styles.sumPrice}>{sumPrice}원</div>
+            </div>
+            <div style={styles.menuDiv}>
+              <label style={styles.label}>전달사항</label>
+              <input style={styles.input} placeholder="" />
+            </div>
+            <div id="list"></div>
+            <div id="btnWrap" style={styles.btnWrapper}>
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+                <UnstyledButtonsSimple label={"작성"} />
+              </Link>
+              <Link style={{ textDecoration: "none", color: "black" }} to="/">
+                <UnstyledButtonsSimple label={"작성 취소"} />
+              </Link>
+            </div>
           </div>
-
-          <div id="list"></div>
-          <BoardInput label={"총 금액"} name="sum" />
-          <BoardInput label={"전달 사항"} name="description" />
-          <div id="btnWrap" style={styles.btnWrapper}>
-            <Link style={{ textDecoration: "none", color: "black" }} to="/">
-              <UnstyledButtonsSimple label={"작성"} />
-            </Link>
-            <Link style={{ textDecoration: "none", color: "black" }} to="/">
-              <UnstyledButtonsSimple label={"작성 취소"} />
-            </Link>
-          </div>
-        </div>
-      </Box>
+        </Box>
+      </div>
     </>
   );
 }
