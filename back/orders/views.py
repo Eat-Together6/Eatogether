@@ -46,27 +46,26 @@ class OrderList(APIView):
 
 # leader의 주문 상세 get, put, delete
 class OrderDetail(APIView): 
-    def get_object(self, pk): # POSTMAN TEST 완료
+    def get_object(self, pk): 
         try:
-            return Order.objects.get(pk=pk)
+            return Order.objects.filter(pk=pk)
         except Order.DoesNotExist:
             raise Http404
-    
+
     def get(self, request, pk): # POSTMAN TEST 완료
-        join_order = self.get_object(pk)
-        serializer = OrderSerializer(join_order)
+        order = self.get_object(pk)
+        serializer = OrderSerializer(order)
         return Response(serializer.data)
-        
+
     def put(self, request, pk): # POSTMAN TEST 완료
-        join_order = self.get_object(pk)
-        serializer = OrderSerializer(join_order, data=request.data)
+        order = self.get_object(pk)
+        serializer = OrderSerializer(order, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete(self, request, pk): # POSTMAN TEST 완료
-        join_order = self.get_object(pk)
-        join_order.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def delete(self, request, pk): # POSTMAN TEST 완료
+        order = self.get_object(pk)
+        order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
