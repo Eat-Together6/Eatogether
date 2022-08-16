@@ -4,9 +4,15 @@ import { atom } from "recoil";
 
 const authState = atom({
   key: "authState", // atom를 지칭할 수 있는 unique ID
-  default: { // 초기값 설정
+  default: {
+    // 초기값 설정
     isLoggedIn: false,
-    username: "",
+    name: "",
+    email: "",
+    social_img: "",
+    user_id: "",
+    access_token: "",
+    refresh_token: "",
   },
 });
 
