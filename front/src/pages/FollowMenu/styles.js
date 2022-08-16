@@ -1,4 +1,8 @@
 export default {
+  // background: {
+  //   backgroundColor: "#ececec",
+  // },
+
   headerStyle: {
     fontFamily: "BMHANNAPro",
     marginTop: "10px",
@@ -29,6 +33,7 @@ export default {
     width: "100%",
     display: "flex",
     marginRight: "60px",
+    marginTop: "40px",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -100,19 +105,74 @@ export default {
     marginLeft: "40px",
   },
 
-  menuLabel: { fontSize: "1.2rem" },
+  label: {
+    fontFamily: "BMHANNAPro",
+    fontSize: "1.2rem",
+    marginTop: "15px",
+    fontWeight: "550",
+  },
+
+  menuLabel: {
+    fontSize: "1.2rem",
+    marginRight: "20px",
+  },
+
+  sumLabel: {
+    marginLeft: "440px",
+    marginTop: "5px",
+    marginBottom: "10px",
+    fontSize: "1.3rem",
+    color: "#38726C",
+  },
+
+  sumStyle: {
+    display: "flex",
+  },
+
+  sumPrice: {
+    marginLeft: "30px",
+    marginTop: "5px",
+    marginBottom: "0px",
+    fontSize: "1.3rem",
+    color: "#38726C",
+  },
+
+  input: {
+    width: "350px",
+    fontSize: "0.875rem",
+    marginLeft: "160px",
+    backgroundColor: "#ececec",
+    fontFamily: "BMHANNAPro",
+    height: "38px",
+    padding: "0px 20px",
+    borderRadius: "0.55rem",
+    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
+  },
+
+  leaderInput: {
+    width: "350px",
+    height: "80px",
+    fontSize: "0.875rem",
+    marginLeft: "160px",
+    backgroundColor: "#ececec",
+    fontFamily: "BMHANNAPro",
+    padding: "0px 20px",
+    borderRadius: "0.55rem",
+    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
+  },
 
   menuInput: {
     width: "180px",
     fontSize: "0.875rem",
     fontWeight: "100",
+    marginRight: "20px",
     lineHeight: "1",
-    borderRadius: "38px",
-    padding: "12px",
-    backgroundColor: "#F3F6F9",
-    boxShadow: "inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3",
-    margin: "0 20px",
-    border: "none",
+    backgroundColor: "#ececec",
+    fontFamily: "BMHANNAPro",
+    height: "38px",
+    padding: "0px 20px",
+    borderRadius: "0.55rem",
+    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
   },
 
   menuButton: {

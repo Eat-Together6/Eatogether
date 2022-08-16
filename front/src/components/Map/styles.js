@@ -26,12 +26,13 @@ export const AddressInput = styled.input`
     height: 40px;
     border-radius: 50px;
     color: black;
-    background-color: #ffffff;
-    opacity: 0.5;
-    box-shadow: 7px 7px 14px #d97339, -7px -7px 14px #ff9b4d;
+    background-color: #FFC3A0;
     padding: 5px 20px;
     &:focus-visible{
         outline: #ff8743;     
+    }
+    ::placeholder {
+        color: #BB5A00;
     }
 `;
 

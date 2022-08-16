@@ -127,7 +127,10 @@ function CreateMenu() {
                 )
               )}
             </div>
-            <div style={styles.sumLabel}>총 금액</div>
+            <div style={styles.sumStyle}>
+              <div style={styles.sumLabel}>총 금액</div>
+              <div style={styles.sumPrice}>{sumPrice}원</div>
+            </div>
             <div style={styles.menuDiv}>
               <label style={styles.label}>전달사항</label>
               <input style={styles.input} placeholder="" />
