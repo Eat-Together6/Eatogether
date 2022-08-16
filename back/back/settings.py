@@ -82,6 +82,7 @@ CORS_ALLOW_METHODS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -194,7 +195,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 REST_USE_JWT = True
-
+JWT_AUTH_COOKIE = 'eatogether'
 from datetime import timedelta
 
 SIMPLE_JWT = {

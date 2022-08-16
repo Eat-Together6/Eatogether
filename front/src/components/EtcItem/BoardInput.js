@@ -78,29 +78,6 @@ const Label = styled(({ children, className }) => {
   }
 `;
 
-// const HelperText = styled((props) => {
-//   const formControlContext = useFormControlUnstyledContext();
-//   const [dirty, setDirty] = React.useState(false);
-
-//   React.useEffect(() => {
-//     if (formControlContext?.filled) {
-//       setDirty(true);
-//     }
-//   }, [formControlContext]);
-
-//   if (formControlContext === undefined) {
-//     return null;
-//   }
-
-//   const { required, filled } = formControlContext;
-//   const showRequiredError = dirty && required && !filled;
-
-//   return showRequiredError ? <p {...props}>This field is required.</p> : null;
-// })`
-//   font-family: 'BMHANNAPro';
-//   font-size: 0.875rem;
-// `;
-
 const WrapStyle = {
   display: "flex",
   paddingLeft: "20px",
