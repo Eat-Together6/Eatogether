@@ -12,7 +12,7 @@ export default {
   getUser() {
     return axios.post("accounts/user/", null, tokenConfig());
   },
-  logout() {
-    return axios.post("dj-rest-auth/logout/", null, tokenConfig());
+  logout(data) {
+    return axios.post("dj-rest-auth/logout/", data, tokenConfig());
   },
 };
