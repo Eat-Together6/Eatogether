@@ -28,3 +28,4 @@ export const Span = styled.span`
         float: right;
     };
 `;
+
