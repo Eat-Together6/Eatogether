@@ -38,7 +38,7 @@ const Login = () => {
           auth
             .kakaoAuthenticate({ access_token: data.access_token, code: code })
             .then((res) => {
-              console.log("뭐야슈벌?", res.data, res.data.access_token);
+              // 스피너 true
               saveUserInfo(res.data.access_token, res.data.refresh_token);
             })
             .catch((err) => console.log("실패", err));
@@ -63,6 +63,7 @@ const Login = () => {
           access_token: access,
           refresh_token: refresh,
         });
+        // 스피너 false
         alert("로그인");
         navigate("/");
       })
@@ -75,6 +76,7 @@ const Login = () => {
   };
   const Login = async () => {
     await auth.login(form).then((res) => {
+      // 스피너 true
       saveUserInfo(res.data.access_token, res.data.refresh_token);
     });
   };
@@ -109,6 +111,7 @@ const Login = () => {
   };
 
   const onSuccess = (response) => {
+    // 스피너 true
     console.log(response);
     const data = {
       code: response.tokenId,
