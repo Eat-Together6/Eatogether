@@ -11,11 +11,12 @@ from menus.serializers import MenuSerializer
 class MenuView(APIView):
     def get(self, request): #postman 테스트 완료
         join_order_id = request.GET.get('join_order_id', None) 
-        if join_order_id is None:
+        if join_order_id is None: #postman 테스트 완료
+            print(join_order_id)
             menus = Menu.objects.all()
             serializer = MenuSerializer(menus, many=True)
             return Response(serializer.data)
-        else: #postman 테스트 실패 : join_order_id가 주어져도 모든 menus를 받아옴.
+        else: #postman 테스트 완료 / join_order_id를 쿼리 스트링이 아니라, http body에 담아와서 생기는 문제였음!!
             menu = Menu.objects.filter(join_order_id=join_order_id)
             serializer = MenuSerializer(menu, many=True)
             return Response(serializer.data)
@@ -30,7 +31,7 @@ class MenuView(APIView):
         serializer = MenuSerializer(menu)
         return Response(serializer.data)
 
-class MenuDetail(APIView): # 디테일 함수는 다시 보니 잘 동작
+class MenuDetail(APIView): # postman 테스트 완료
     def get_object(self, pk):
         try:
             return Menu.objects.get(pk=pk)
