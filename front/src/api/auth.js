@@ -15,4 +15,10 @@ export default {
   logout(data) {
     return axios.post("dj-rest-auth/logout/", data, tokenConfig());
   },
+  login(data) {
+    return axios.post("dj-rest-auth/login/", data);
+  },
+  registration(data) {
+    return axios.post("dj-rest-auth/registration/", data);
+  },
 };
