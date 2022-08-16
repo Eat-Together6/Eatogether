@@ -195,7 +195,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 REST_USE_JWT = True
-
+JWT_AUTH_COOKIE = 'eatogether'
 from datetime import timedelta
 
 SIMPLE_JWT = {

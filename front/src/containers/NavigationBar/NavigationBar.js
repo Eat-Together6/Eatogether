@@ -4,17 +4,20 @@ import { Link } from "react-router-dom";
 import auth from "api/auth";
 import { useResetRecoilState } from "recoil";
 import { authState } from "state";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function NavigationBar({ user }) {
   const resetUser = useResetRecoilState(authState);
   const logout = async () => {
     await auth
-      .logout()
+      .logout({
+        refresh: getCookie("refresh_token"),
+      })
       .then((res) => {
         resetUser();
         deleteCookie("access_token");
         deleteCookie("refresh_token");
+        alert("로그아웃 되었습니다!");
       })
       .catch((e) => console.log(e));
   };

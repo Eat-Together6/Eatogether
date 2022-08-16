@@ -49,4 +49,4 @@ class LocationDetail(APIView):
         location = self.get_object(pk)
         location.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+        
