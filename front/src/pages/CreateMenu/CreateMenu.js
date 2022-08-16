@@ -24,7 +24,24 @@ function CreateMenu() {
   const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
+  // 서버에 보낼 form
+  const [menuForm, setMenuForm] = useState({
+    storeName: "",
+    time: "00:00:00",
+    menu: [],
+    cost: 0,
+    description: "",
+  });
   let sumPrice = 0; // 총 가격 구할 변수 선언
+  const handlingForm = (e) => {
+    const { name, value } = e.target;
+    console.log({
+      storeName: form.storeName,
+      order_time: form.time,
+      description: form.description,
+    });
+  };
+
   const onCreate = (e) => {
     // 추가 클릭시 , 메누 배열 다음 id 값, 메뉴와 가격 input에 들어있는 value를 배열에 새롭게 추가 --> input값들은 빈 value로 돌리기
     if (menu.current.value !== "" && price.current.value !== "") {
@@ -39,7 +56,7 @@ function CreateMenu() {
       menu.current.value = "";
       price.current.value = "";
     } else {
-      console.log("메뉴와 가격을 입력해주세요"); // input 값이 비어있는데 추가 버튼 누를 시 배열 추가 안됨. 경고메세지
+      console.log("메뉴와 가격을 입력해주세요");
     }
   };
   const onRemove = (id) => {
@@ -75,16 +92,20 @@ function CreateMenu() {
               <input style={styles.input} placeholder="주소가 자동으로 뜨게" />
             </div>
             <div style={styles.menuDiv}>
-              <label style={styles.label}>음식점명</label>
+              <label style={styles.label} name="storeName" value={form.storeName} onChange={handlingForm}>
+                음식점명
+              </label>
               <input style={styles.input} placeholder="음식점 이름을 입력해주세요" />
             </div>
             <div style={styles.menuDiv}>
-              <label style={styles.label}>주문 희망 시간</label>
+              <label style={styles.label} name="time" value={form.time} onChange={handlingForm}>
+                주문 희망 시간
+              </label>
               <input style={styles.input} type="time" />
             </div>
             <div>
               <div style={styles.menuDiv}>
-                <label style={styles.menuLabel} htmlFor="menu">
+                <label style={styles.menuLabel} htmlFor="menu" name="menu" value={form.menu} onChange={handlingForm}>
                   주문 희망 메뉴
                 </label>
                 <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
