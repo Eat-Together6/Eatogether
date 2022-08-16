@@ -30,6 +30,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = None
+    name = models.CharField(max_length=10, default="user")
     social_img = models.URLField(blank=True, null=True) #프로필 사진
     # phone_num = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(unique=True, null=True,

@@ -12,7 +12,7 @@ from locations.models import Location
 
 # leader의 모든 주문 get, post
 class OrderList(APIView):
-    def get(self, request):
+    def get(self, request): # POSTMAN TEST 완료
         latitude = request.GET.get('latitude', None)
         longitude = request.GET.get('longitude', None)
         order_status = request.GET.get('order_status', None)
@@ -33,7 +33,7 @@ class OrderList(APIView):
             serializer = OrderSerializer(orders, many=True)
             return Response(serializer.data)
 
-    def post(self, request):
+    def post(self, request): # POSTMAN TEST 완료
         location =Location.objects.get(id=request.data['location'])
         order = Order.objects.create(leader=request.user,
                                      brand=request.data['brand'],
@@ -45,19 +45,19 @@ class OrderList(APIView):
         return Response(serializer.data)
 
 # leader의 주문 상세 get, put, delete
-class OrderDetail(APIView):
-    def get_object(self, pk):
+class OrderDetail(APIView): 
+    def get_object(self, pk): 
         try:
-            return Order.objects.get(pk=pk)
+            return Order.objects.filter(pk=pk)
         except Order.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk):
+    def get(self, request, pk): # POSTMAN TEST 완료
         order = self.get_object(pk)
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
-    def put(self, request, pk):
+    def put(self, request, pk): # POSTMAN TEST 완료
         order = self.get_object(pk)
         serializer = OrderSerializer(order, data=request.data)
         if serializer.is_valid():
@@ -65,7 +65,7 @@ class OrderDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def delete(self, request, pk): # POSTMAN TEST 완료
         order = self.get_object(pk)
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
