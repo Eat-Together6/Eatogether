@@ -87,7 +87,7 @@ function CreateMenu() {
                 <label style={styles.menuLabel} htmlFor="menu">
                   주문 희망 메뉴
                 </label>
-                <input style={styles.menuInput} ref={styles.menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
                 <label style={styles.menuLabel} htmlFor="price">
                   가격
                 </label>
@@ -104,7 +104,10 @@ function CreateMenu() {
                 )
               )}
             </div>
-            <div style={styles.sumLabel}>총 금액</div>
+            <div style={styles.sumStyle}>
+              <div style={styles.sumLabel}>총 금액</div>
+              <div style={styles.sumPrice}>{sumPrice}원</div>
+            </div>
             <div style={styles.menuDiv}>
               <label style={styles.label}>전달사항</label>
               <input style={styles.input} placeholder="" />
