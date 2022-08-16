@@ -29,3 +29,5 @@ class MenuView(APIView):
                                    )
         serializer = MenuSerializer(menu)
         return Response(serializer.data)
+
+#디테일 뷰 postman에서 안 돌아감 한 번 확인해보기
