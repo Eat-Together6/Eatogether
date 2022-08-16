@@ -1,7 +1,4 @@
 import Box from "@mui/material/Box";
-import BoardInput2 from "../../components/EtcItem/BoardInput2";
-import BoardInput3 from "../../components/EtcItem/BoardInput3";
-import BoardInput4 from "../../components/EtcItem/BoardInput4";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
@@ -64,58 +61,71 @@ function FollowMenu() {
 
   return (
     <>
-      <Box>
-        <div style={styles.headerStyle}>
-          <h1>주문 상세 페이지</h1>
-        </div>
-      </Box>
-      <div style={styles.divLeft}>
-        <Box style={styles.Contents_one}>
-          <div style={styles.Contents_two}>
-            <BoardInput3 label={"음식점명"} />
-            <BoardInput3 label={"픽업 주소"} />
-            <BoardInput3 label={"주문 희망 시간"} />
-            <BoardInput3 label={"전달사항"} />
-            <BoardInput4 label={"리더 닉네임"} />
+      <div style={styles.background}>
+        <Box>
+          <div style={styles.headerStyle}>
+            <h1>주문 상세 페이지</h1>
           </div>
         </Box>
-      </div>
-      <div style={styles.divRight}>
-        <Box style={styles.Contents_one}>
-          <div style={styles.headerStyle2}>
-            <h2>나의 메뉴 메뉴 추가하기</h2>
-          </div>
-          <div style={styles.Contents_three}>
-            <div>
+        <div style={styles.divLeft}>
+          <Box style={styles.Contents_one}>
+            <div style={styles.Contents_two}>
               <div style={styles.menuDiv}>
-                <label style={styles.menuLabel} htmlFor="menu">
-                  주문 희망 메뉴
-                </label>
-                <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
-                <label style={styles.menuLabel} htmlFor="price">
-                  가격
-                </label>
-                <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
-                  추가
-                </button>
+                <label style={styles.label}>음식점명</label>
+                <input style={styles.input} placeholder="음식명 데이터" />
               </div>
-              {newmenus.map(
-                (
-                  newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
-                ) => (
-                  <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
-                )
-              )}
+              <div style={styles.menuDiv}>
+                <label style={styles.label}>픽업 주소</label>
+                <input style={styles.input} placeholder="주소 데이터" />
+              </div>
+              <div style={styles.menuDiv}>
+                <label style={styles.label}>주문 희망 시간</label>
+                <input style={styles.input} placeholder="주문 희망 시간 데이터" />
+              </div>
+              <div style={styles.menuDiv}>
+                <label style={styles.label}>리더 닉네임</label>
+                <input style={styles.leaderInput} placeholder="리더 주문 정보 데이터" />
+              </div>
             </div>
-            <BoardInput2 label={"총 금액"} name="sum" />
-          </div>
-          <div style={styles.btnWrapper}>
-            <UnstyledButtonsSimple label={"작성"} />
-            <UnstyledButtonsSimple label={"수정"} />
-            <UnstyledButtonsSimple label={"채팅하기"} />
-          </div>
-        </Box>
+          </Box>
+        </div>
+        <div style={styles.divRight}>
+          <Box style={styles.Contents_one}>
+            <div style={styles.headerStyle2}>
+              <h2>나의 메뉴 메뉴 추가하기</h2>
+            </div>
+            <div style={styles.Contents_three}>
+              <div>
+                <div style={styles.menuDiv}>
+                  <label style={styles.menuLabel} htmlFor="menu">
+                    주문 희망 메뉴
+                  </label>
+                  <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                  <label style={styles.menuLabel} htmlFor="price">
+                    가격
+                  </label>
+                  <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
+                  <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                    추가
+                  </button>
+                </div>
+                {newmenus.map(
+                  (
+                    newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                  ) => (
+                    <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                  )
+                )}
+              </div>
+              <div style={styles.sumLabel}>총 금액</div>
+            </div>
+            <div style={styles.btnWrapper}>
+              <UnstyledButtonsSimple label={"작성"} />
+              <UnstyledButtonsSimple label={"수정"} />
+              <UnstyledButtonsSimple label={"채팅하기"} />
+            </div>
+          </Box>
+        </div>
       </div>
     </>
   );
