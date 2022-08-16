@@ -27,10 +27,7 @@ const Map = () => {
   const [popup, setPopup] = useState(false);
   const [address, setAddress] = useState();
   const [latLngs, setLatLng] = useState([]);
-  const [markers, setMarker] = useState([{
-    marker : {},
-    circle : {}
-  }]);
+  const [markers, setMarker] = useState([]);
   const [followMarkers, setFollowMarker] = useState([
     {
       id: 1,
@@ -47,6 +44,13 @@ const Map = () => {
 
   const geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체 생성
   const searchAndMove = () => {
+    if(markers.length > 0) {
+      markers.map((marker) => {
+        marker.marker.setMap(null)
+        marker.circle.setMap(null)
+      })
+    }
+    
     geocoder.addressSearch(address, function (result, status) {
       //주소를 좌표로 변환
       if (status === kakao.maps.services.Status.OK) {
