@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
+}
+.inputWrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+  margin: auto;
+  z-index: 999;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.addressInput {
+  width: 45vw;
+  height: 40px;
+  border-radius: 50px;
+  color: black;
+  background-color: #ffffff;
+  opacity: 0.5;
+  box-shadow: 7px 7px 14px #d97339, -7px -7px 14px #ff9b4d;
+  padding: 5px 20px;
+}
+
+.addressInput:focus-visible {
+  outline: #ff8743;
+}
+
+.imgBtn {
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  background-image: url(assets/images/searchIcon.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+form {
+  display: inline-block;
+}
+
+.map {
+  width: 100vw;
+  height: 100vh;
+}
+
+#__daum__layer_1 {
+  width: 93%;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+}

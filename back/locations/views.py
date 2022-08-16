@@ -7,8 +7,8 @@ from django.http import Http404
 from locations.models import Location
 from locations.serializers import LocationSerializer
 
-class LocationList(APIView): 
-    def get(self, request, format=None): # POSTMAN TEST 완료
+class LocationList(APIView):
+    def get(self, request, format=None):
         if self.request.user.is_authenticated:
             locations = Location.objects.filter(user=self.request.user)
             serializer = LocationSerializer(locations, many=True)
@@ -16,7 +16,7 @@ class LocationList(APIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-    def post(self, request, format=None): # POSTMAN TEST 완료
+    def post(self, request, format=None):
         data = request.data.copy()
         data['user'] = self.request.user.id
         serializer = LocationSerializer(data=data)
@@ -26,18 +26,18 @@ class LocationList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LocationDetail(APIView):
-    def get_object(self, pk): # POSTMAN TEST 완료
+    def get_object(self, pk):
         try:
             return Location.objects.get(pk=pk)
         except Location.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk): # POSTMAN TEST 완료
+    def get(self, request, pk):
         location = self.get_object(pk)
         serializer = LocationSerializer(location)
         return Response(serializer.data)
 
-    def put(self, request, pk): # POSTMAN TEST 완료
+    def put(self, request, pk):
         location = self.get_object(pk)
         serializer = LocationSerializer(location, data=request.data)
         if serializer.is_valid():
@@ -45,7 +45,7 @@ class LocationDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk): # POSTMAN TEST 완료
+    def delete(self, request, pk):
         location = self.get_object(pk)
         location.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

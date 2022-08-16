@@ -1,13 +1,6 @@
 from rest_framework import serializers
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from django.contrib.auth import get_user_model
-User = get_user_model()
 
-
-class UserDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id','name','email','social_img']
 
 class SignUpSerializer(RegisterSerializer):
     username = None

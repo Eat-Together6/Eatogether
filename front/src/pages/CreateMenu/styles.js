@@ -1,12 +1,8 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  background: {
-    background: "#ececec",
-  },
-
   headerStyle: {
     fontFamily: "BMHANNAPro",
-    marginTop: "0px",
+    marginTop: "10px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -47,34 +43,17 @@ export default {
 
   menuLabel: { fontSize: "1.2rem" },
 
-  label: {
-    fontFamily: "BMHANNAPro",
-    fontSize: "1.2rem",
-    marginTop: "15px",
-    fontWeight: "550",
-  },
-
-  input: {
-    width: "350px",
-    fontSize: "0.875rem",
-    marginLeft: "160px",
-    marginBottom: "18px",
-    backgroundColor: "#ececec",
-    fontFamily: "BMHANNAPro",
-    height: "38px",
-    padding: "0px 20px",
-    borderRadius: "0.55rem",
-    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
-  },
-
   menuInput: {
-    width: "200px",
+    width: "220px",
     fontSize: "0.875rem",
-    borderRadius: "0.55rem",
+    fontWeight: "100",
+    lineHeight: "1",
+    borderRadius: "38px",
     padding: "12px",
-    backgroundColor: "#ececec",
-    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
+    backgroundColor: "#F3F6F9",
+    boxShadow: "inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3",
     margin: "0 20px",
+    border: "none",
   },
 
   menuButton: {
@@ -110,12 +89,5 @@ export default {
     borderRadius: "50px",
     backgroundColor: "#fa4444",
     boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
-  },
-
-  sumLabel: {
-    marginLeft: "150px",
-    marginTop: "5px",
-    marginBottom: "10px",
-    fontSize: "1.2rem",
   },
 };

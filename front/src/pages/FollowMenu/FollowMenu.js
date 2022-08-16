@@ -111,6 +111,12 @@ function FollowMenu() {
             <BoardInput2 label={"총 금액"} name="sum" />
           </div>
           <div style={styles.btnWrapper}>
+            {/* <button style={deactivatedBtn} label={"작성"}>
+              작성
+            </button> */}
+            {/* <button style={activatedBtn} label={"수정"}>
+              수정
+            </button> */}
             <UnstyledButtonsSimple label={"작성"} />
             <UnstyledButtonsSimple label={"수정"} />
             <UnstyledButtonsSimple label={"채팅하기"} />

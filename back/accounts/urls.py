@@ -2,7 +2,6 @@ from django.urls import path
 from accounts import views
 
 urlpatterns = [
-    path('user/',views.get_user_obj),
   
     path('google/authenticate/', views.authenticate_google, name='google_callback'),  
     path('google/login/finish/', views.GoogleLogin.as_view(), name='google_login_todjango'),

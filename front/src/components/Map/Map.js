@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
-import * as style from "./styles";
-import "./infoWindow.css";
 import useGeolocation from "./useGeolocation";
+import NavStyle from "./NavStyle.module.css";
 import NewMarker from "assets/images/newMarker.png";
 import FollowMarker from "assets/images/followMarker.png";
 import Post from "./Post";
-
+import "./info.css";
+import { PopperUnstyled } from "@mui/base";
 
 const Map = () => {
   const location = useGeolocation();
@@ -187,28 +187,30 @@ const Map = () => {
   };
 
   return (
-    <>
-        <style.Container>
-            <style.InputWrapper>
-                <style.Form action="" method="">
-                    <style.AddressInput
-                        type="text"
-                        placeholder="주소를 입력해주세요"
-                        onClick={() => {
-                        setPopup(!popup);
-                        }}
-                        value={address} // 업데이트될 때마다 검색창도 업데이트
-                    ></style.AddressInput>
-                    <style.ImgButton
-                        type="button"
-                        onClick={searchAndMoveByAddress}
-                    ></style.ImgButton>
-                    {popup && <Post setAddress={setAddress} />}
-                </style.Form>
-            </style.InputWrapper>
-            <style.MapContainer ref={container}></style.MapContainer>
-        </style.Container>
-    </>
+    <div>
+      <div className={NavStyle.inputWrapper}>
+        <form action="" method="">
+          <input
+            type="text"
+            className={NavStyle.addressInput}
+            placeholder="주소를 입력해주세요"
+            onClick={() => {
+              setPopup(!popup);
+            }}
+            value={address} // 업데이트될 때마다 검색창도 업데이트
+          />
+
+          <input
+            type="button"
+            className={NavStyle.imgBtn}
+            onClick={searchAndMoveByAddress}
+          />
+          {popup && <Post setAddress={setAddress} />}
+        </form>
+      </div>
+
+      <div ref={container} className={NavStyle.map}></div>
+    </div>
   );
 };
 

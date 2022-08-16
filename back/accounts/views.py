@@ -16,26 +16,15 @@ from allauth.socialaccount.providers.naver import views as naver_view
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from allauth.socialaccount.models import SocialAccount
 
-from .serializers import UserDetailSerializer
-
 User = get_user_model()
 
 
 BASE_URL = 'http://localhost:8000/'
-
-
+GOOGLE_CALLBACK_URI = BASE_URL + 'accounts/google/callback/'
+KAKAO_CALLBACK_URI = BASE_URL + 'accounts/kakao/callback/'
+NAVER_CALLBACK_URI = BASE_URL + 'accounts/naver/callback/'
 
 state = os.environ.get('STATE')
-
-@api_view(['POST'])
-def get_user_obj(request):
-    user = request.user
-    if user.is_authenticated:
-        serializer = UserDetailSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    else:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
-
 
 @api_view(['POST'])
 def authenticate_google(request):
@@ -61,9 +50,9 @@ def authenticate_google(request):
         if accept_status != 200:
             return Response({'err_msg': 'failed to signin'}, status=accept_status)
         accept_json = accept.json()
-        User.objects.filter(email=email).update(name=name,
+        User.objects.filter(email=email).update(realname=name,
                                           email=email,
-                                          social_img = profile_image
+                                          social_profile = profile_image
                                           )
         # accept_json.pop('user', None)
         return Response(accept_json)
@@ -77,9 +66,9 @@ def authenticate_google(request):
             return Response({'err_msg': 'failed to signup'}, status=accept_status)
         accept_json = accept.json()
         # accept_json.pop('user', None)
-        User.objects.filter(email=email).update(name=name,
+        User.objects.filter(email=email).update(realname=name,
                                           email=email,
-                                          social_img=profile_image
+                                          social_profile=profile_image
                                           )
         return Response(accept_json)
 
@@ -93,6 +82,7 @@ class GoogleLogin(SocialLoginView):
 def authenticate_kakao(request):
 
 
+    print("?",request.data)
     access_token = request.data["access_token"]
     code =request.data['code']
     """
@@ -103,10 +93,12 @@ def authenticate_kakao(request):
     profile_json = profile_request.json()
     kakao_account = profile_json.get('kakao_account')
 
+    print(kakao_account)
     email = kakao_account.get('email')
     profile = kakao_account.get("profile")
     nickname = profile.get("nickname")
     profile_image = profile.get("thumbnail_image_url")   # 사이즈 'thumbnail_image_url' < 'profile_image_url'
+    print('image', profile_image)
 
     """
     Signup or Signin Request
@@ -129,9 +121,10 @@ def authenticate_kakao(request):
             return Response({'err_msg': 'failed to signin'}, status=accept_status)
         accept_json = accept.json()
         # accept_json.pop('user', None)
-        User.objects.filter(email=email).update(name=nickname,
+        print("accept_json이뭐여",accept_json)
+        User.objects.filter(email=email).update(realname=nickname,
                                           email=email,
-                                          social_img=profile_image
+                                          social_profile=profile_image
                                           )
         return Response(accept_json)
     except User.DoesNotExist:
@@ -146,14 +139,15 @@ def authenticate_kakao(request):
         #카카오에서 전화번호, 주소 받으려면 사업자 등록 해야됨.
         accept_json = accept.json()
         # accept_json.pop('user', None)
-        User.objects.filter(email=email).update(name=nickname,                                 
-                                         social_img=profile_image                             
+        User.objects.filter(email=email).update(realname=nickname,                                 
+                                         social_profile=profile_image                             
                                          )
         return Response(accept_json)
 
 class KakaoLogin(SocialLoginView):
     adapter_class = kakao_view.KakaoOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = KAKAO_CALLBACK_URI
 
 
 def naver_login(request):
@@ -167,7 +161,7 @@ def naver_callback(request):
     client_id = os.environ.get('SOCIAL_AUTH_NAVER_CLIENT_ID')
     clientSecret = os.environ.get('SOCIAL_AUTH_NAVER_SECRET')
     code = request.GET.get("code")
-    # redirect_uri = NAVER_CALLBACK_URI
+    redirect_uri = NAVER_CALLBACK_URI
     """
     Access Token Request
     """
@@ -217,17 +211,23 @@ def naver_callback(request):
         accept_json = accept.json()
         accept_json.pop('user', None)
         User.objects.filter(email=email).update(
-            name = realname,
+            realname = realname,
             nickname = nickname,
             phone = phone,
         )
 
         user = User.objects.get(email=email)
-
+        Profile.objects.filter(username=email).update(
+            user = user,
+            username = email,
+            profile_image = profile_image
+        )
+            
         return JsonResponse(accept_json)
     except User.DoesNotExist:
         # 기존에 가입된 유저가 없으면 새로 가입
         data = {'access_token': access_token, 'code': code}
+        print(data)
         accept = requests.post(
             f"{BASE_URL}accounts/naver/login/finish/", data=data)
         accept_status = accept.status_code
@@ -235,7 +235,7 @@ def naver_callback(request):
             return JsonResponse({'err_msg': 'failed to signup'}, status=accept_status)
         # user의 pk, email, first name, last name과 Access Token, Refresh token 가져옴
         User.objects.filter(email=email).update(
-            name = realname,
+            realname = realname,
             nickname = nickname,
             phone = phone
         )
@@ -254,3 +254,4 @@ def naver_callback(request):
 class NaverLogin(SocialLoginView):
     adapter_class = naver_view.NaverOAuth2Adapter
     client_class = OAuth2Client
+    callback_url = NAVER_CALLBACK_URI
