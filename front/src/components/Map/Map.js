@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import * as style from "./styles";
 import "./infoWindow.css";
 import useGeolocation from "./useGeolocation";
-import NewMarker from "assets/images/newMarker.png";
-import FollowMarker from "assets/images/followMarker.png";
+import NewMarker from "assets/images/createMK.png";
+import FollowMarker from "assets/images/followMK.png";
 import SearchInput from "./SearchInput";
 
 
@@ -50,7 +50,6 @@ const Map = () => {
         marker.circle.setMap(null)
       })
     }
-    
     geocoder.addressSearch(address, function (result, status) {
       //주소를 좌표로 변환
       if (status === kakao.maps.services.Status.OK) {
