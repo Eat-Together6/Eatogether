@@ -3,15 +3,26 @@ import * as style from "./styles";
 import { Link } from "react-router-dom";
 import UserImage from "assets/images/user.png";
 import LoginButton from "components/EtcItem/LoginButton";
+import auth from "api/auth";
+import { ThemeConsumer } from "styled-components";
 
 const MyPage = () => {
   const [userdata, setUserData] = useState({
     id: "jk98",
-    nickname: "케이틀린",
+    name: "케이틀린",
     email: "jk98@gmail.com",
   });
 
+  const getUserData = async() => {
+    await auth.getUser()
+    .then((response) => {
+      console.log(response)
+      setUserData(response.data)
+    });
+  }
+
   useEffect(() => {
+    getUserData()
     //데이터 받아오기 await async check!
   }, []);
 

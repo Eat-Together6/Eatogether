@@ -40,6 +40,7 @@ export const Button = styled.button`
     background-color: transparent;
     font-Size: 15px;
     font-family: 'BMHANNAPro';
+    cursor: pointer;
 `;
 
 export const Profile = styled.img`
