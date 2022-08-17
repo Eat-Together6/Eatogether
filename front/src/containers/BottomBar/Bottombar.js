@@ -1,12 +1,15 @@
 import React from "react";
 import * as style from "./styles";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { authState } from "state";
 
-const Bottombar = ({user, isClickLeaderMK, isClickFollowMK}) => {
+const Bottombar = ({ isClickLeaderMK, isClickFollowMK}) => {
+  const userInfo = useRecoilValue(authState);
   return (
     <div>
       <style.Wrapper>
-        { user.isLoggedIn && isClickLeaderMK ? (
+        { userInfo.isLoggedIn && isClickLeaderMK ? (
             <style.Span2>
               <Link to="/createMenu">새 메뉴 만들기</Link>
             </style.Span2>
@@ -25,7 +28,7 @@ const Bottombar = ({user, isClickLeaderMK, isClickFollowMK}) => {
           </style.Span1>
         )}
         
-        { user.isLoggedIn ? (
+        { userInfo.isLoggedIn ? (
           <style.Span2>
             <Link to="/createMenu">채팅하기</Link>
           </style.Span2>
