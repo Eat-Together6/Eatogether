@@ -1,5 +1,47 @@
 // eslint-disable-next-line import/no-anonymous-default-export
+import styled from "styled-components";
+
+export const Button = styled.button`
+    background-color: white;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 0.55rem;
+    margin: 25;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    },
+    &:nth-child(n+2) {
+      margin-left: 20px;
+    }
+`;
+
+export const Wrap = styled.div`
+    font-size: 18px;
+    padding: 50px;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    background-color: #ececec;
+    box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
+`;
+
+export const Table = styled.table`
+    margin: auto;
+    line-height: 30px;
+    & > tr > td:first-child {
+      padding-right: 50px;
+    }
+    & > tr > td:last-child {
+      font-family: 'BMHANNAAir';
+      font-weight: bold;
+    }
+`;
+
 export default {
+  
   background: {
     width: "100%",
     height: "100vh",
@@ -8,7 +50,7 @@ export default {
 
   headerStyle: {
     fontFamily: "BMHANNAPro",
-    marginTop: "0px",
+    margin: "0",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
