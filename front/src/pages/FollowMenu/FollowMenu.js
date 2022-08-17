@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 import { useRecoilValue } from "recoil";
@@ -113,7 +112,7 @@ function FollowMenu() {
                       가격
                     </label>
                     <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                    <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                    <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
                       추가
                     </button>
                   </div>
@@ -127,7 +126,7 @@ function FollowMenu() {
                       가격
                     </label>
                     <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
-                    <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut} disabled>
+                    <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut} disabled>
                       추가
                     </button>
                   </div>
@@ -147,15 +146,21 @@ function FollowMenu() {
             </div>
             {userInfo.isLoggedIn ? (
               <div style={styles.btnWrapper}>
-                <UnstyledButtonsSimple label={"작성"} />
-                <UnstyledButtonsSimple label={"수정"} />
-                <UnstyledButtonsSimple label={"채팅하기"} />
+                <button style={styles.button}>작성</button>
+                <button style={styles.button}>수정</button>
+                <button style={styles.button}>채팅</button>
               </div>
             ) : (
               <div style={styles.btnWrapper}>
-                <UnstyledButtonsSimple label={"작성"} disabled />
-                <UnstyledButtonsSimple label={"수정"} disabled />
-                <UnstyledButtonsSimple label={"채팅하기"} disabled />
+                <button style={styles.button} disabled>
+                  작성
+                </button>
+                <button style={styles.button} disabled>
+                  수정
+                </button>
+                <button style={styles.button} disabled>
+                  채팅
+                </button>
               </div>
             )}
           </Box>
