@@ -50,7 +50,7 @@ export const ImgButton = styled.input`
 
 export const MapContainer = styled.div`
     width: 100vw;
-    height: 100vh; 
+    height: 90vh; 
 `;
 
 export const Form = styled.form`

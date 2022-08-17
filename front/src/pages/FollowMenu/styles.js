@@ -56,23 +56,9 @@ export default {
     marginLeft: "30px",
   },
 
-  deactivatedBtn: {
+  button: {
     backgroundColor: "white",
-    color: "#ADADAD",
-    fontSize: "1rem",
-    padding: "12px 24px",
-    borderRadius: "0.55rem",
-    margin: 25,
-    boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
-    border: "none",
-    marginRight: "40px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  activatedBtn: {
-    backgroundColor: "white",
-    fontSize: "1rem",
+    fontSize: "0.9rem",
     padding: "12px 24px",
     borderRadius: "0.55rem",
     margin: 25,

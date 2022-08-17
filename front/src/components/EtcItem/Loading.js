@@ -6,7 +6,7 @@ import Spinner from "assets/images/LoadingText2.gif"
 const Background = styled.div`
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 110vh;
     top: 0;
     left: 0;
     background: #ffffffb7;
