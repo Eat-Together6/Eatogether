@@ -3,9 +3,11 @@ from geopy.distance import distance
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from orders import serializers
 
 from orders.models import Order
-from orders.serializers import OrderSerializer
+from joinorders.models import JoinOrder
+from orders.serializers import OrderSerializer, UserOrderListSerializer
 
 from locations.models import Location
 
@@ -69,3 +71,14 @@ class OrderDetail(APIView):
         order = self.get_object(pk)
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class OrderListByUser(APIView):
+    def get(self, request):
+        # 해당 유저가 오더, 조인 오더한 리스트 Get
+        joinOrders = JoinOrder.objects.filter(follower=self.request.user)
+        serializer = UserOrderListSerializer(joinOrders, many=True)
+        return Response(serializer.data)
+
+        
+
+        

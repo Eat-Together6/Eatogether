@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as style from "./styles";
 import CustomInput from "components/EtcItem/CustomInput";
 import GoogleLogo from "assets/images/google.png";
@@ -13,8 +13,10 @@ import { useRecoilState } from "recoil";
 import { authState } from "state";
 import { setCookie, deleteCookie } from "cookies-next";
 import { useInput } from "hooks";
+import Loading from "components/EtcItem/Loading";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const [, setUser] = useRecoilState(authState);
   const [form, handleForm, reset] = useInput({
     email: "",
@@ -34,14 +36,17 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("??", data);
+        setLoading(true);
         if (data.access_token) {
           auth
             .kakaoAuthenticate({ access_token: data.access_token, code: code })
             .then((res) => {
-              // 스피너 true
               saveUserInfo(res.data.access_token, res.data.refresh_token);
             })
-            .catch((err) => console.log("실패", err));
+            .catch((err) => {
+              alert(err.response.data.err_msg);
+              console.log("실패", err);
+            });
         } else {
           alert("인증되지 않은 회원입니다.");
           navigate("/login");
@@ -63,7 +68,7 @@ const Login = () => {
           access_token: access,
           refresh_token: refresh,
         });
-        // 스피너 false
+        setLoading(false);
         alert("로그인");
         navigate("/");
       })
@@ -71,14 +76,22 @@ const Login = () => {
         deleteCookie("access_token");
         deleteCookie("refresh_token");
         console.log(e);
+        setLoading(false);
         alert("로그인이 실패했습니다 다시 시도해주세요!");
       });
   };
   const Login = async () => {
-    await auth.login(form).then((res) => {
-      // 스피너 true
-      saveUserInfo(res.data.access_token, res.data.refresh_token);
-    });
+    setLoading(true);
+    await auth
+      .login(form)
+      .then((res) => {
+        saveUserInfo(res.data.access_token, res.data.refresh_token);
+      })
+      .catch((e) => {
+        setLoading(false);
+        alert("로그인이 실패하였습니다 다시 시도하여 주십쇼");
+        console.log(e);
+      });
   };
 
   useEffect(() => {
@@ -107,11 +120,15 @@ const Login = () => {
       .then((res) => {
         saveUserInfo(res.data.access_token, res.data.refresh_token);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.err_msg);
+        setLoading(false);
+      });
   };
 
   const onSuccess = (response) => {
-    // 스피너 true
+    setLoading(true);
     console.log(response);
     const data = {
       code: response.tokenId,
@@ -129,6 +146,7 @@ const Login = () => {
   return (
     <>
       <style.Container>
+        {loading ? <Loading /> : null}
         <style.LoginCard>
           <style.Title>웰컴투 더치배달</style.Title>
           <CustomInput

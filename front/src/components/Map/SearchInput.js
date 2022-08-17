@@ -2,7 +2,7 @@ import React from "react";
 import * as style from "./styles";
 import Post from "./Post";
 
-const SearchInput = ({popup, setPopup, address, setAddress, searchAndMoveByAddress}) => {
+const SearchInput = ({popup, setPopup, address, setAddress, searchAndMove}) => {
     
     return (
         <>
@@ -18,7 +18,7 @@ const SearchInput = ({popup, setPopup, address, setAddress, searchAndMoveByAddre
                     ></style.AddressInput>
                     <style.ImgButton
                         type="button"
-                        onClick={searchAndMoveByAddress}
+                        onClick={searchAndMove}
                     ></style.ImgButton>
                     {popup && <Post setAddress={setAddress} />}
                 </style.Form>

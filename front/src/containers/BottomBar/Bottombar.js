@@ -1,19 +1,44 @@
 import React from "react";
-import bottombar from "./bottombar.module.css";
-import { Routes, Route, Link } from "react-router-dom";
-import CreateMenu from "../../pages/CreateMenu/CreateMenu";
+import * as style from "./styles";
+import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { authState } from "state";
 
-const Bottombar = () => {
+const Bottombar = ({ isClickLeaderMK, isClickFollowMK}) => {
+  const userInfo = useRecoilValue(authState);
   return (
     <div>
-      <div className={bottombar.wrapper}>
-        <Link to="/createMenu">새 메뉴 만들기</Link>
-        <Link to="/followMenu">참여하기</Link>
-        <Link to="/createMenu">채팅하기</Link>
-      </div>
-      <Routes>
-        <Route path="/createMenu" element={<CreateMenu />} />
-      </Routes>
+      <style.Wrapper>
+        { userInfo.isLoggedIn && isClickLeaderMK ? (
+            <style.Span2>
+              <Link to="/createMenu">새 메뉴 만들기</Link>
+            </style.Span2>
+        ) : (
+            <style.Span1>
+              새 메뉴 만들기
+            </style.Span1>
+        )}
+        { isClickFollowMK ? (
+            <style.Span2>
+              <Link to="/followMenu">참여하기</Link>
+            </style.Span2>
+        ) : (
+          <style.Span1>
+            참여하기
+          </style.Span1>
+        )}
+        
+        { userInfo.isLoggedIn ? (
+          <style.Span2>
+            <Link to="/createMenu">채팅하기</Link>
+          </style.Span2>
+        ) : (
+          <style.Span1>
+            채팅하기
+          </style.Span1>
+        )
+      }
+      </style.Wrapper>
     </div>
   );
 };
