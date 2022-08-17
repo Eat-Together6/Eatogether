@@ -39,7 +39,7 @@ function CreateMenu() {
           <div style={styles.Contents_two}>
             <div style={styles.menuDiv}>
               <label style={styles.label}>픽업 주소</label>
-              <input style={styles.input} placeholder="주소가 자동으로 뜨게" value={address[0].address} />
+              <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
             </div>
             <div style={styles.menuDiv}>
               <label style={styles.label} name="storeName" value={form.storeName} onChange={handlingForm}>

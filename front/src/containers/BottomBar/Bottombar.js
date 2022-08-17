@@ -15,7 +15,7 @@ const Bottombar = ({ isClickLeaderMK, isClickFollowMK}) => {
             </style.Span2>
         ) : (
             <style.Span1>
-              새 메뉴 만들기
+              <Link to="/createMenu">새 메뉴 만들기</Link>
             </style.Span1>
         )}
         { isClickFollowMK ? (
@@ -24,7 +24,7 @@ const Bottombar = ({ isClickLeaderMK, isClickFollowMK}) => {
             </style.Span2>
         ) : (
           <style.Span1>
-            참여하기
+            <Link to="/followMenu">참여하기</Link>
           </style.Span1>
         )}
         
@@ -34,7 +34,7 @@ const Bottombar = ({ isClickLeaderMK, isClickFollowMK}) => {
           </style.Span2>
         ) : (
           <style.Span1>
-            채팅하기
+            <Link to="/createMenu">채팅하기</Link>
           </style.Span1>
         )
       }
