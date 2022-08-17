@@ -4,14 +4,14 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 
 // 메뉴 추가 버튼
-const NewMenu = ({ menu, onRemove }) => {
+const NewMenu = ({ menu, onRemoveMenu }) => {
   // 추가 버튼 클릭 시, 입력된 메뉴와 가격 나타내는 컴포넌트
   return (
     <div>
       <div style={styles.newMenuDiv}>
         <span style={styles.menuSpan}>{menu.menu}</span>
         <span style={styles.menuSpan}>{menu.price}원</span>
-        <button style={styles.menuDel} onClick={() => onRemove(menu.id)}>
+        <button style={styles.menuDel} onClick={() => onRemoveMenu(menu.id)}>
           x
         </button>
       </div>
@@ -24,7 +24,7 @@ function FollowMenu() {
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
   let sumPrice = 0; // 총 가격 구할 변수 선언
-  const onCreate = (e) => {
+  const onAddMenu = (e) => {
     // 추가 클릭시 , 메누 배열 다음 id 값, 메뉴와 가격 input에 들어있는 value를 배열에 새롭게 추가 --> input값들은 빈 value로 돌리기
     if (menu.current.value !== "" && price.current.value !== "") {
       setNewmenus([
@@ -41,16 +41,16 @@ function FollowMenu() {
       console.log("메뉴와 가격을 입력해주세요"); // input 값이 비어있는데 추가 버튼 누를 시 배열 추가 안됨. 경고메세지
     }
   };
-  const onRemove = (id) => {
+  const onRemoveMenu = (id) => {
     // 삭제하고자 하는 배열 내 객체 id와 일치하면 배열에서 삭제
     setNewmenus(newmenus.filter((menu) => menu.id !== id)); // filter : 일치하지 않는 id로 새로운 배열 만듦. (즉, id일치하면 배열에서 삭제)
   };
 
   newmenus.map((newmenu) => {
-    // 배열 안 객체를 하나씩 돌면서 sumPrice 변수에 각 가격 더해 총가격 구하기
     sumPrice += parseInt(newmenu.price);
   });
-  console.log(sumPrice); // 총가격은 잘 나오는데 이걸 value 값에 연결 어떻게 하는지 모르겠음.
+
+  function onCreateMenu() {}
 
   function menu_OnMouseover() {
     document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
@@ -109,7 +109,7 @@ function FollowMenu() {
                     가격
                   </label>
                   <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                  <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                  <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
                     추가
                   </button>
                 </div>
@@ -117,7 +117,7 @@ function FollowMenu() {
                   (
                     newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
                   ) => (
-                    <NewMenu menu={newmenu} onRemove={onRemove} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                    <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
                   )
                 )}
               </div>
@@ -127,9 +127,14 @@ function FollowMenu() {
               </div>
             </div>
             <div style={styles.btnWrapper}>
-              <UnstyledButtonsSimple label={"작성"} />
-              <UnstyledButtonsSimple label={"수정"} />
-              <UnstyledButtonsSimple label={"채팅하기"} />
+              {/* 버튼이 활성화 되었을 때 -> <UnstyledButtonsSimple></UnstyledButtonsSimple>
+              버튼이 비활성화 되었을 때 -> <button></button> */}
+              <UnstyledButtonsSimple onClick={onCreateMenu} label={"작성"} />
+              {/* <UnstyledButtonsSimple label={"수정"} />
+              <UnstyledButtonsSimple label={"채팅하기"} /> */}
+              {/* <button style={styles.activatedBtn}>작성</button> */}
+              <button style={styles.deactivatedBtn}>수정</button>
+              <button style={styles.deactivatedBtn}>채팅</button>
             </div>
           </Box>
         </div>

@@ -59,7 +59,7 @@ export default {
   deactivatedBtn: {
     backgroundColor: "white",
     color: "#ADADAD",
-    fontSize: "1rem",
+    fontSize: "0.9rem",
     padding: "12px 24px",
     borderRadius: "0.55rem",
     margin: 25,
@@ -67,12 +67,11 @@ export default {
     border: "none",
     marginRight: "40px",
     fontWeight: "bold",
-    cursor: "pointer",
   },
 
   activatedBtn: {
     backgroundColor: "white",
-    fontSize: "1rem",
+    fontSize: "0.9rem",
     padding: "12px 24px",
     borderRadius: "0.55rem",
     margin: 25,
