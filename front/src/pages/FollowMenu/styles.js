@@ -50,11 +50,13 @@ export default {
 
   btnWrapper: {
     display: "flex",
+    float: "right",
     alignItems: "center",
-    height: "100px",
     justifyContent: "center",
-    marginLeft: "30px",
+    marginRight: "170px",
   },
+
+  buttonBox: {},
 
   button: {
     backgroundColor: "white",
