@@ -29,3 +29,6 @@ export const Span = styled.span`
     };
 `;
 
+export const Logo = styled.img`
+    margin-top: 0px;
+`;
