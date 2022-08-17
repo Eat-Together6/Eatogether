@@ -36,15 +36,17 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("??", data);
-        setLoading(true)
+        setLoading(true);
         if (data.access_token) {
           auth
             .kakaoAuthenticate({ access_token: data.access_token, code: code })
             .then((res) => {
-              
               saveUserInfo(res.data.access_token, res.data.refresh_token);
             })
-            .catch((err) => console.log("실패", err));
+            .catch((err) => {
+              alert(err.response.data.err_msg);
+              console.log("실패", err);
+            });
         } else {
           alert("인증되지 않은 회원입니다.");
           navigate("/login");
@@ -66,7 +68,7 @@ const Login = () => {
           access_token: access,
           refresh_token: refresh,
         });
-        setLoading(false)
+        setLoading(false);
         alert("로그인");
         navigate("/");
       })
@@ -74,14 +76,22 @@ const Login = () => {
         deleteCookie("access_token");
         deleteCookie("refresh_token");
         console.log(e);
+        setLoading(false);
         alert("로그인이 실패했습니다 다시 시도해주세요!");
       });
   };
   const Login = async () => {
-    setLoading(true)
-    await auth.login(form).then((res) => {
-      saveUserInfo(res.data.access_token, res.data.refresh_token);
-    });
+    setLoading(true);
+    await auth
+      .login(form)
+      .then((res) => {
+        saveUserInfo(res.data.access_token, res.data.refresh_token);
+      })
+      .catch((e) => {
+        setLoading(false);
+        alert("로그인이 실패하였습니다 다시 시도하여 주십쇼");
+        console.log(e);
+      });
   };
 
   useEffect(() => {
@@ -110,11 +120,15 @@ const Login = () => {
       .then((res) => {
         saveUserInfo(res.data.access_token, res.data.refresh_token);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.err_msg);
+        setLoading(false);
+      });
   };
 
   const onSuccess = (response) => {
-    setLoading(true)
+    setLoading(true);
     console.log(response);
     const data = {
       code: response.tokenId,

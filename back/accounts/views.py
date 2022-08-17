@@ -41,14 +41,17 @@ def get_user_obj(request):
 def authenticate_google(request):
     code = request.data['code']
     access_token = request.data['access_token']
-    email = request.data['access_token']
+    email = request.data['email']
     profile_image = request.data['profile_image']
     name = request.data['name']
+    # print("데이터목록 code   =>",code,"\n access_token  =>",access_token,"\n email  =>",email,"\n profile_image  =>",profile_image,"\n name  =>",name)
     try:
         user = User.objects.get(email=email)
+     
         # 기존에 가입된 유저의 Provider가 google이 아니면 에러 발생, 맞으면 로그인
         # 다른 SNS로 가입된 유저
         social_user = SocialAccount.objects.get(user=user)
+     
         if social_user is None:
             return Response({'err_msg': 'email exists but not social user'}, status=status.HTTP_400_BAD_REQUEST)
         if social_user.provider != 'google':
@@ -67,6 +70,8 @@ def authenticate_google(request):
                                           )
         # accept_json.pop('user', None)
         return Response(accept_json)
+    except SocialAccount.DoesNotExist:
+        return Response({'err_msg':'해당 이메일은 본 서비스 회원가입으로 등록된 이메일입니다.기본 로그인하시길 바랍니다.'},status=status.HTTP_400_BAD_REQUEST)
     except User.DoesNotExist:
         # 기존에 가입된 유저가 없으면 새로 가입
         data = {'access_token': access_token, 'code': code}
@@ -134,6 +139,7 @@ def authenticate_kakao(request):
                                           social_img=profile_image
                                           )
         return Response(accept_json)
+    
     except User.DoesNotExist:
         # 기존에 가입된 유저가 없으면 새로 가입
         data = {'access_token': access_token, 'code': code}
@@ -150,7 +156,8 @@ def authenticate_kakao(request):
                                          social_img=profile_image                             
                                          )
         return Response(accept_json)
-
+    except SocialAccount.DoesNotExist:
+        return Response({'err_msg':'해당 이메일은 본 서비스 회원가입으로 등록된 이메일입니다.기본 로그인하시길 바랍니다.'},status=status.HTTP_400_BAD_REQUEST)
 class KakaoLogin(SocialLoginView):
     adapter_class = kakao_view.KakaoOAuth2Adapter
     client_class = OAuth2Client
