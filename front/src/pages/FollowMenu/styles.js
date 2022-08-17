@@ -149,18 +149,6 @@ export default {
     boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
   },
 
-  leaderInput: {
-    width: "350px",
-    height: "80px",
-    fontSize: "0.875rem",
-    marginLeft: "160px",
-    backgroundColor: "#ececec",
-    fontFamily: "BMHANNAPro",
-    padding: "0px 20px",
-    borderRadius: "0.55rem",
-    boxShadow: "inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff",
-  },
-
   menuInput: {
     width: "180px",
     fontSize: "0.875rem",
