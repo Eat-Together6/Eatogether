@@ -76,7 +76,7 @@ class OrderListByUser(APIView):
     def get(self, request):
         # 해당 유저가 오더, 조인 오더한 리스트 Get
         joinOrders = JoinOrder.objects.filter(follower=self.request.user)
-        serializer = UserOrderListSerializer(joinOrders)
+        serializer = UserOrderListSerializer(joinOrders, many=True)
         return Response(serializer.data)
 
         
