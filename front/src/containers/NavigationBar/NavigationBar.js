@@ -31,13 +31,18 @@ export default function NavigationBar({ user }) {
           </style.Span>
           {user.isLoggedIn ? (
             <>
+              {/* <style.Span>
+                <style.Profile src={user.social_img !== "" ? user.social_img : ""}/>
+              </style.Span> */}
               <style.Span>
-                <img src={user.social_img !== "" ? user.social_img : ""}></img>
-                <Link to="/mypage">{user.name}</Link>
+                <style.Button onClick={logout}>로그아웃</style.Button>
               </style.Span>
               <style.Span>
-                <button onClick={logout}>로그아웃</button>
+                <Link to="/mypage"> 마이페이지 </Link>
+                {/* {user.name} */}
               </style.Span>
+              
+
             </>
           ) : (
             <style.Span>
