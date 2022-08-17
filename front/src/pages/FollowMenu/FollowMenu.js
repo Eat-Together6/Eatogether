@@ -79,12 +79,16 @@ function FollowMenu() {
                 <input style={styles.input} placeholder="주소 데이터" />
               </div>
               <div style={styles.menuDiv}>
+                <label style={styles.label}>주문 희망 날짜</label>
+                <input style={styles.input} placeholder="주문 희망 날짜 데이터" />
+              </div>
+              <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 시간</label>
                 <input style={styles.input} placeholder="주문 희망 시간 데이터" />
               </div>
               <div style={styles.menuDiv}>
-                <label style={styles.label}>리더 닉네임</label>
-                <input style={styles.leaderInput} placeholder="리더 주문 정보 데이터" />
+                <label style={styles.label}>전달사항</label>
+                <input style={styles.input} placeholder="전달사항 데이터" />
               </div>
             </div>
           </Box>
