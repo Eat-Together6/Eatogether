@@ -5,6 +5,7 @@ import auth from "api/auth";
 import { useResetRecoilState } from "recoil";
 import { authState } from "state";
 import { deleteCookie, getCookie } from "cookies-next";
+import Logo from "assets/images/logo.png"
 
 export default function NavigationBar({ user }) {
   const resetUser = useResetRecoilState(authState);
@@ -26,7 +27,7 @@ export default function NavigationBar({ user }) {
       <style.Wrapper>
         <style.Nav>
           <style.Span>
-            <Link to="/">더치 배달</Link>
+            <Link to="/"><style.Logo src={Logo}/></Link>
           </style.Span>
           {user.isLoggedIn ? (
             <>

@@ -54,10 +54,12 @@ function CreateMenu() {
   console.log(sumPrice); // 총가격은 잘 나오는데 이걸 value 값에 연결 어떻게 하는지 모르겠음.
 
   function menu_OnMouseover() {
-    document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
+    document.getElementById("menuButton").style.boxShadow =
+      "inset 2px 2px 5px #b8b9be";
   }
   function menu_onMouseOut() {
-    document.getElementById("menuButton").style.boxShadow = "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
+    document.getElementById("menuButton").style.boxShadow =
+      "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
   }
 
   return (
@@ -76,7 +78,10 @@ function CreateMenu() {
             </div>
             <div style={styles.menuDiv}>
               <label style={styles.label}>음식점명</label>
-              <input style={styles.input} placeholder="음식점 이름을 입력해주세요" />
+              <input
+                style={styles.input}
+                placeholder="음식점 이름을 입력해주세요"
+              />
             </div>
             <div style={styles.menuDiv}>
               <label style={styles.label}>주문 희망 시간</label>
@@ -87,12 +92,30 @@ function CreateMenu() {
                 <label style={styles.menuLabel} htmlFor="menu">
                   주문 희망 메뉴
                 </label>
-                <input style={styles.menuInput} ref={styles.menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                <input
+                  style={styles.menuInput}
+                  ref={menu}
+                  id="menu"
+                  type="text"
+                  placeholder="메뉴를 입력하세요"
+                />
                 <label style={styles.menuLabel} htmlFor="price">
                   가격
                 </label>
-                <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                <input
+                  style={styles.menuInput}
+                  ref={price}
+                  id="price"
+                  type="text"
+                  placeholder="가격을 입력하세요"
+                />
+                <button
+                  id="menuButton"
+                  style={styles.menuButton}
+                  onClick={onCreate}
+                  onMouseOver={menu_OnMouseover}
+                  onMouseOut={menu_onMouseOut}
+                >
                   추가
                 </button>
               </div>
@@ -104,7 +127,10 @@ function CreateMenu() {
                 )
               )}
             </div>
-            <div style={styles.sumLabel}>총 금액</div>
+            <div style={styles.sumStyle}>
+              <div style={styles.sumLabel}>총 금액</div>
+              <div style={styles.sumPrice}>{sumPrice}원</div>
+            </div>
             <div style={styles.menuDiv}>
               <label style={styles.label}>전달사항</label>
               <input style={styles.input} placeholder="" />

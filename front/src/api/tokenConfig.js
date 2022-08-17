@@ -2,7 +2,6 @@ import { getCookie } from "cookies-next";
 
 const tokenConfig = () => {
   const token = getCookie("access_token");
-  console.log("ㅅㅂ?", token);
   // Headers
   const config = {
     headers: {

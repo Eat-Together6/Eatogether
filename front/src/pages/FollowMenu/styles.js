@@ -118,10 +118,23 @@ export default {
   },
 
   sumLabel: {
-    marginLeft: "360px",
+    marginLeft: "440px",
     marginTop: "5px",
     marginBottom: "10px",
-    fontSize: "1.2rem",
+    fontSize: "1.3rem",
+    color: "#38726C",
+  },
+
+  sumStyle: {
+    display: "flex",
+  },
+
+  sumPrice: {
+    marginLeft: "30px",
+    marginTop: "5px",
+    marginBottom: "0px",
+    fontSize: "1.3rem",
+    color: "#38726C",
   },
 
   input: {

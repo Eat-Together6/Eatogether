@@ -117,7 +117,10 @@ function FollowMenu() {
                   )
                 )}
               </div>
-              <div style={styles.sumLabel}>총 금액</div>
+              <div style={styles.sumStyle}>
+                <div style={styles.sumLabel}>총 금액</div>
+                <div style={styles.sumPrice}>{sumPrice}원</div>
+              </div>
             </div>
             <div style={styles.btnWrapper}>
               <UnstyledButtonsSimple label={"작성"} />
