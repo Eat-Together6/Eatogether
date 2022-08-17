@@ -1,13 +1,15 @@
 import Box from "@mui/material/Box";
 import * as style from "./styles";
-import { Link } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./styles.js";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
 import WriteEnd from "pages/CreateMenu/WriteEnd";
+import { createOrder } from "api/order";
 
 function CreateMenu() {
+  const create = createOrder();
+  console.log(create)
   const address = useRecoilState(locationState);
   const [end, setEnd] = useState(false);
   // 서버에 보낼 state
@@ -23,6 +25,7 @@ function CreateMenu() {
   const date = useRef();
   const time = useRef();
   const description = useRef();
+  const pass = (!!leaderOrder.address && !!leaderOrder.date && !!leaderOrder.time && !!leaderOrder.storeName);
 
   const writeEnd = () => {
     setLeaderOrder({
@@ -34,7 +37,8 @@ function CreateMenu() {
     })
     setEnd(true);
   };
-  console.log("end" ,end)
+
+  
   return (
     <>
       <div style={styles.background}>
@@ -49,9 +53,8 @@ function CreateMenu() {
               <WriteEnd menuData={leaderOrder} />
               <div>
                 <style.Button onClick={()=>{setEnd(false)}}>수정</style.Button>
-                <style.Button onClick={()=>{alert("등록하시겠습니까?")}}>등록</style.Button>
+                <style.Button onClick={pass ? ()=>{alert('등록하시겠습니까?')} : ()=>{alert("정보를 모두 입력해주세요('전달사항' 외)")}}>등록</style.Button>
               </div>
-              
             </Box>
           )
         : (
@@ -62,9 +65,7 @@ function CreateMenu() {
                 <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
               </div>
               <div style={styles.menuDiv}>
-                <label style={styles.label} name="storeName" >
-                  음식점명
-                </label>
+                <label style={styles.label} name="storeName" >음식점명</label>
                 <input style={styles.input} ref={storeName} placeholder="음식점 이름을 입력해주세요" required/>
               </div>
               <div style={styles.menuDiv}>
