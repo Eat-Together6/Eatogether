@@ -5,11 +5,13 @@ import useGeolocation from "./useGeolocation";
 import NewMarker from "assets/images/createMK.png";
 import FollowMarker from "assets/images/followMK.png";
 import SearchInput from "./SearchInput";
+import { useRecoilState } from "recoil";
+import locationState from "state/locationState";
 
 
 
 const Map = ({setClickLeaderMK, setClickFollowMK}) => {
-  
+  const [, setLocation] = useRecoilState(locationState);
   const location = useGeolocation();
   const { kakao } = window;
   const [map, setMap] = useState();
@@ -26,8 +28,7 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
   }, [location]);
 
   const [popup, setPopup] = useState(false);
-  const [address, setAddress] = useState();
-  const [latLngs, setLatLng] = useState([]);
+  const [address, setAddress] = useState(); 
   const [markers, setMarker] = useState([]);
   const [followMarkers, setFollowMarker] = useState([
     {
@@ -57,16 +58,13 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords); //변환된 좌표를 지도 중심으로 이동
-        setLatLng([
-          ...latLngs,
-          {
-            //변환된 좌표 배열에 추가
-            lat: coords.Ma,
-            lon: coords.La,
-          },
-        ]);
         displayMarker(coords.Ma, coords.La )
-        console.log("주소 검색 완료되었습니다⭕",coords.Ma, coords.La );
+        console.log("주소 검색 완료되었습니다⭕");
+        setLocation({
+          address: address,
+          latitude: coords.Ma,
+          longitude: coords.La,
+        })
       } else {
         alert("주소가 정확하지 않습니다❌");
       }
@@ -112,6 +110,11 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
           if(status === kakao.maps.services.Status.OK){
               setPopup(false)
               setAddress(result[0].road_address.address_name)
+              setLocation({
+                address: result[0].road_address.address_name,
+                latitude: marker.getPosition().Ma,
+                longitude: marker.getPosition().La,
+              });
             }
         })
     });
@@ -127,6 +130,11 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
         if (status === kakao.maps.services.Status.OK) {
           setPopup(false); // 도로명주소 팝업 false로 변경 -> 주소검색창 재사용하도록
           setAddress(result[0].road_address.address_name); // 가져온 도로명주소로 address 업데이트
+          setLocation({
+            address: result[0].road_address.address_name,
+            latitude: latlng.Ma,
+            longitude: latlng.La,
+          })
         }
       });
     });
@@ -138,7 +146,6 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
   }
 
-  const [isInfo, setInfo] = useState(false);
   const displayFollowMarker = (lat, lon) => {
     const imageSrc = FollowMarker;
     const imageSize = new kakao.maps.Size(50, 50);
@@ -188,7 +195,6 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
       infowindow.open(map,marker);
     });
   };
-
   return (
     <>
         <style.Container>

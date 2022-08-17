@@ -5,8 +5,9 @@ import { atom } from "recoil";
 const locationState = atom({
     key: "locationState", // atom를 지칭할 수 있는 unique ID
     default: { // 초기값 설정
+        address: "",
         latitude: "0",
-        longitude: "0"
+        longitude: "0",
     },
 });
 
