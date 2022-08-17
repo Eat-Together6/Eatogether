@@ -3,8 +3,12 @@ import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
+import { useRecoilState } from "recoil";
+import locationState from "state/locationState";
 
 function CreateMenu() {
+  const address = useRecoilState(locationState);
+  console.log(address[0].address)
   // 서버에 보낼 Form
   const [form, setForm] = useState({
     storeName: "",
@@ -35,7 +39,7 @@ function CreateMenu() {
           <div style={styles.Contents_two}>
             <div style={styles.menuDiv}>
               <label style={styles.label}>픽업 주소</label>
-              <input style={styles.input} placeholder="주소가 자동으로 뜨게" />
+              <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
             </div>
             <div style={styles.menuDiv}>
               <label style={styles.label} name="storeName" value={form.storeName} onChange={handlingForm}>

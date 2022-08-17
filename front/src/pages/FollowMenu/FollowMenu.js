@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import UnstyledButtonsSimple from "../../components/EtcItem/BasicButton";
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
+import { useRecoilValue } from "recoil";
+import { authState } from "state";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -20,6 +22,7 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
 };
 
 function FollowMenu() {
+  const userInfo = useRecoilValue(authState);
   const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
@@ -100,19 +103,35 @@ function FollowMenu() {
             </div>
             <div style={styles.Contents_three}>
               <div>
-                <div style={styles.menuDiv}>
-                  <label style={styles.menuLabel} htmlFor="menu">
-                    주문 희망 메뉴
-                  </label>
-                  <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
-                  <label style={styles.menuLabel} htmlFor="price">
-                    가격
-                  </label>
-                  <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                  <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
-                    추가
-                  </button>
-                </div>
+                {userInfo.isLoggedIn ? (
+                  <div style={styles.menuDiv}>
+                    <label style={styles.menuLabel} htmlFor="menu">
+                      주문 희망 메뉴
+                    </label>
+                    <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                    <label style={styles.menuLabel} htmlFor="price">
+                      가격
+                    </label>
+                    <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
+                    <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                      추가
+                    </button>
+                  </div>
+                ) : (
+                  <div style={styles.menuDiv}>
+                    <label style={styles.menuLabel} htmlFor="menu">
+                      주문 희망 메뉴
+                    </label>
+                    <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" disabled />
+                    <label style={styles.menuLabel} htmlFor="price">
+                      가격
+                    </label>
+                    <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
+                    <button id="menuButton" style={styles.menuButton} onClick={onCreate} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut} disabled>
+                      추가
+                    </button>
+                  </div>
+                )}
                 {newmenus.map(
                   (
                     newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
@@ -126,16 +145,19 @@ function FollowMenu() {
                 <div style={styles.sumPrice}>{sumPrice}원</div>
               </div>
             </div>
-            <div style={styles.btnWrapper}>
-              {/* 버튼이 활성화 되었을 때 -> <UnstyledButtonsSimple></UnstyledButtonsSimple>
-              버튼이 비활성화 되었을 때 -> <button></button> */}
-              <UnstyledButtonsSimple onClick={onCreateMenu} label={"작성"} />
-              {/* <UnstyledButtonsSimple label={"수정"} />
-              <UnstyledButtonsSimple label={"채팅하기"} /> */}
-              {/* <button style={styles.activatedBtn}>작성</button> */}
-              <button style={styles.deactivatedBtn}>수정</button>
-              <button style={styles.deactivatedBtn}>채팅</button>
-            </div>
+            {userInfo.isLoggedIn ? (
+              <div style={styles.btnWrapper}>
+                <UnstyledButtonsSimple label={"작성"} />
+                <UnstyledButtonsSimple label={"수정"} />
+                <UnstyledButtonsSimple label={"채팅하기"} />
+              </div>
+            ) : (
+              <div style={styles.btnWrapper}>
+                <UnstyledButtonsSimple label={"작성"} disabled />
+                <UnstyledButtonsSimple label={"수정"} disabled />
+                <UnstyledButtonsSimple label={"채팅하기"} disabled />
+              </div>
+            )}
           </Box>
         </div>
       </div>
