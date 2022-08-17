@@ -12,7 +12,7 @@ function App() {
     <>
       <GlobalStyle />
       <NavigationBar user={userInfo} />
-      {userInfo.isLoggedIn ? <Authorized /> : <Unauthorized />}
+      {userInfo.isLoggedIn ? <Authorized user={userInfo}/> : <Unauthorized user={userInfo}/>}
     </>
   );
 }
