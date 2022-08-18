@@ -1,6 +1,6 @@
 import React from "react";
 import * as style from "./styles";
-import createOrder from "api/order";
+import { createOrder } from "api/order";
 import { addLocation } from "api/location";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
