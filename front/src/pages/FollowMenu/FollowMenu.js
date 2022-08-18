@@ -68,7 +68,8 @@ function FollowMenu() {
   function menu_onMouseOut() {
     document.getElementById("menuButton").style.boxShadow = "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
   }
-
+  console.log("dd", newmenus);
+  console.log("price", sumPrice);
   return (
     <>
       <div style={styles.background}>
@@ -105,7 +106,7 @@ function FollowMenu() {
         </div>
         {createBtnState ? (
           <>
-            <CompletedMenuForm setCreateBtnState={setCreateBtnState} />
+            <CompletedMenuForm setCreateBtnState={setCreateBtnState} newmenus={newmenus} sumPrice={sumPrice} />
           </>
         ) : (
           <div style={styles.divRight} id="divRight">
