@@ -1,33 +1,25 @@
 import axios from "./config";
 import tokenConfig from "./tokenConfig";
 
-const getOrders = (latitude, longitude) => new Promise((resolve) => {
-  if (latitude && longitude) {
-    resolve(axios
-        .get(`http://localhost:8000/orders/?latitude=${latitude}&longitude=${longitude}`)
-        .then((response) => response.data));
-  }
-  else {
-    resolve(axios
-        .get("http://localhost:8000/orders/")
-        .then((response) => response.data));
-  }
-});
+// 백엔드에서 views, urls 수정해서 쿼리문으로 데이터 접근할 수 있어야 함
 
-const createOrder = (data) => { 
-  return axios.post('orders/', data, tokenConfig());
+export default {
+  getOrders() { // 모든 order 가져오기 
+    return axios.get("/orders/").then(res => res.data);
+  },
+  getOrdersAndJoinOrders(data) { // 모든 order, joinorder 가져오기
+    return axios.post("/orders/user/", data, tokenConfig());
+  },
+  createOrder() { // Leader의 order 등록하기
+    return axios.post("/orders/").then(res => res.data);
+  },
+  createJoinOrder() { // Follower의 joinorder 등록하기
+    return axios.post("/joinorders/").then(res => res.data);
+  },
+  getOrderByLeader(data) { // Leader의 특정 order 가져오기 <수정필요>
+    return axios.get("orders?leader=???", data, tokenConfig());
+  },
+  getOrderByFollower(data) { // Follower의 특정 joinorder 가져오기 <수정필요>
+    return axios.get("joinorders?follower=???", data, tokenConfig());
+  },
 };
-
-
-const getOrder = (order_id) => new Promise((resolve) => {
-    resolve(axios
-        .get(`http://localhost:8000/orders/${order_id}/`)
-        .then((response) => response.data));
-});
-
-
-const joinOrder = async (order_id) => {
-  return await axios.post(`http://localhost:8000/orders/${order_id}/join/`);
-};
-
-export { getOrders, createOrder, getOrder, joinOrder };
