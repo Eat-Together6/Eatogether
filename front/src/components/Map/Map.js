@@ -19,20 +19,25 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   const searchDetailAddrFromCoords = (coords, callback) => {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
   }; // 좌표로 법정동 상세 주소 정보 요청
-
-  //Map 지도 생성하기
-  const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
   const [followMarkers, setFollowMarker] = useState([
     {
       id: 999,
       lat: 37.6426777370276,
       lon: 127.005734734447,
+      store: "",
+      ordertime: "",
     },
   ]);
+
+  //Map 지도 생성하기
+  const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
   const [map, setMap] = useState();
   const container = useRef();
   const options = {
-    center: new kakao.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
+    center: new kakao.maps.LatLng(
+      location.coordinates.lat,
+      location.coordinates.lng
+    ),
     level: 4,
   };
   useEffect(() => {
@@ -49,12 +54,13 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
         //   const lon = order.location_obj.longitude;
         //   displayFollowMarker(id, lat, lon);
         // }
-        console.log(res.data);
         const orderList = res.data.map((order) => {
           return {
             id: order.id,
             lat: order.location_obj.latitude,
             lon: order.location_obj.longitude,
+            store: order.store,
+            ordertime: order.time.substring(11, 16),
           };
         });
         setFollowMarker(orderList);
@@ -68,7 +74,13 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   useEffect(() => {
     followMarkers.map((followMarker) => {
-      displayFollowMarker(followMarker.id, followMarker.lat, followMarker.lon);
+      displayFollowMarker(
+        followMarker.id,
+        followMarker.lat,
+        followMarker.lon,
+        followMarker.store,
+        followMarker.ordertime
+      );
     });
   });
 
@@ -136,17 +148,20 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
       setClickLeaderMK(true);
       setClickFollowMK(false);
       circle.setPosition(marker.getPosition());
-      searchDetailAddrFromCoords(marker.getPosition(), function (result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          setPopup(false);
-          setLocation({
-            address: result[0].road_address.address_name,
-            latitude: marker.getPosition().Ma,
-            longitude: marker.getPosition().La,
-          });
-          setIsClick(false);
+      searchDetailAddrFromCoords(
+        marker.getPosition(),
+        function (result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            setPopup(false);
+            setLocation({
+              address: result[0].road_address.address_name,
+              latitude: marker.getPosition().Ma,
+              longitude: marker.getPosition().La,
+            });
+            setIsClick(false);
+          }
         }
-      });
+      );
     });
 
     kakao.maps.event.addListener(map, "click", function (mouseEvent) {
@@ -171,7 +186,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   };
 
   // displayFollowMarker 함수 : 좌표 인자로 받아 마커 생성 및 info 창 생성.
-  const displayFollowMarker = (id, lat, lon) => {
+  const displayFollowMarker = (id, lat, lon, store, ordertime) => {
     const imageSrc = FollowMarker;
     const imageSize = new kakao.maps.Size(50, 50);
     const imageOption = { offset: new kakao.maps.Point(20, 50) };
@@ -180,7 +195,6 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
       position: new kakao.maps.LatLng(lat, lon),
       image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     });
-    console.log("마커", marker);
     marker.setMap(map); // 마커 지도에 표시
 
     let iwContent = document.createElement("div");
@@ -191,22 +205,22 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
     });
 
     let storeName = document.createElement("div");
-    storeName.textContent = "long long store name";
+    storeName.textContent = store;
     storeName.classList.add("storeName");
 
     let time = document.createElement("div");
-    time.textContent = "15:00 주문예정";
+    time.textContent = `${ordertime}주문예정`;
     time.classList.add("time");
 
-    let joinNum = document.createElement("div");
-    joinNum.textContent = " 2 / 4 참여 중";
-    joinNum.classList.add("joinNum");
+    // let joinNum = document.createElement("div");
+    // joinNum.textContent = " 2 / 4 참여 중";
+    // joinNum.classList.add("joinNum");
 
     let orderState = document.createElement("div");
     orderState.textContent = "주문 중";
     orderState.classList.add("orderState");
 
-    iwContent.append(storeName, time, joinNum, orderState);
+    iwContent.append(storeName, time, orderState);
 
     const infowindow = new kakao.maps.InfoWindow({
       content: iwContent,
@@ -224,7 +238,13 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   return (
     <>
       <style.Container>
-        <SearchInput popup={popup} setPopup={setPopup} searchAndMove={searchAndMove} isClick={isClick} setIsClick={setIsClick} />
+        <SearchInput
+          popup={popup}
+          setPopup={setPopup}
+          searchAndMove={searchAndMove}
+          isClick={isClick}
+          setIsClick={setIsClick}
+        />
         <style.MapContainer ref={container}></style.MapContainer>
       </style.Container>
     </>
