@@ -5,7 +5,7 @@ from orders.models import Order
 
 
 class JoinOrder(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    follower = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="joinOrders")
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="joinOrders")
     description = models.TextField()
 

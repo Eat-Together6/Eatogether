@@ -7,7 +7,7 @@ const BtnStyle = styled.button`
   background-color: #ececec;
   font-weight: 800;
   width: 70%;
-  height: 38px;
+  height: 45px;
   border-radius: 0.55rem;
   box-shadow: 5px 5px 10px #b1b1b1, -5px -5px 10px #ffffff;
   border: none;

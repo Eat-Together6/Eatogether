@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 import * as style from "./styles";
 import { useRecoilValue } from "recoil";
@@ -8,6 +8,8 @@ import CompletedMenuForm from "components/EtcItem/CompletedMenuForm/CompletedMen
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
 import useInput from "hooks/useInput.js";
+import { useLocation } from "react-router-dom";
+import { getOrder } from "api/order.js";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -37,9 +39,21 @@ function FollowMenu() {
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
   let sumPrice = 0; // 총 가격 구할 변수 선언
+  const location = useLocation();
+
+  useEffect(() => {
+    getOrderInfo(2);
+  }, []);
 
   const onClickedCreateBtn = () => {
     setCreateBtnState(!createBtnState);
+  };
+  const getOrderInfo = async (id) => {
+    await getOrder(id)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   const onAddMenu = (e) => {

@@ -9,6 +9,7 @@ from locations.serializers import LocationSerializer
 
 class LocationList(APIView): 
     def get(self, request, format=None): # POSTMAN TEST 완료
+        print("????",self.request.user.is_authenticated)
         if self.request.user.is_authenticated:
             locations = Location.objects.filter(user=self.request.user)
             serializer = LocationSerializer(locations, many=True)
