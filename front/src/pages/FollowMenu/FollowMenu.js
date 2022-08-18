@@ -3,6 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 import { useRecoilValue } from "recoil";
 import { authState } from "state";
+import CompletedMenuForm from "components/EtcItem/CompletedMenuForm/CompletedMenuForm.js";
+import { useRecoilState } from "recoil";
+import locationState from "state/locationState";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -21,11 +24,18 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
 };
 
 function FollowMenu() {
+  const address = useRecoilState(locationState);
   const userInfo = useRecoilValue(authState);
+  const [createBtnState, setCreateBtnState] = useState(false); // 작성 버튼 useState
   const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
   let sumPrice = 0; // 총 가격 구할 변수 선언
+
+  const onClickedCreateBtn = () => {
+    setCreateBtnState(!createBtnState);
+  };
+
   const onAddMenu = (e) => {
     // 추가 클릭시 , 메누 배열 다음 id 값, 메뉴와 가격 input에 들어있는 value를 배열에 새롭게 추가 --> input값들은 빈 value로 돌리기
     if (menu.current.value !== "" && price.current.value !== "") {
@@ -52,8 +62,6 @@ function FollowMenu() {
     sumPrice += parseInt(newmenu.price);
   });
 
-  function onCreateMenu() {}
-
   function menu_OnMouseover() {
     document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
   }
@@ -78,7 +86,7 @@ function FollowMenu() {
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
-                <input style={styles.input} placeholder="주소 데이터" />
+                <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>
@@ -95,76 +103,89 @@ function FollowMenu() {
             </div>
           </Box>
         </div>
-        <div style={styles.divRight}>
-          <Box style={styles.Contents_one}>
-            <div style={styles.headerStyle2}>
-              <h2>나의 메뉴 메뉴 추가하기</h2>
-            </div>
-            <div style={styles.Contents_three}>
+        {createBtnState ? (
+          <>
+            <CompletedMenuForm setCreateBtnState={setCreateBtnState} />
+          </>
+        ) : (
+          <div style={styles.divRight} id="divRight">
+            <Box style={styles.Contents_one}>
+              <div style={styles.headerStyle2}>
+                <h2>나의 메뉴 추가하기</h2>
+              </div>
+              <div style={styles.Contents_three}>
+                <div>
+                  {userInfo.isLoggedIn ? (
+                    <div style={styles.menuDiv}>
+                      <label style={styles.menuLabel} htmlFor="menu">
+                        주문 희망 메뉴
+                      </label>
+                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                      <label style={styles.menuLabel} htmlFor="price">
+                        가격
+                      </label>
+                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
+                      <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
+                        추가
+                      </button>
+                    </div>
+                  ) : (
+                    <div style={styles.menuDiv}>
+                      <label style={styles.menuLabel} htmlFor="menu">
+                        주문 희망 메뉴
+                      </label>
+                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" disabled />
+                      <label style={styles.menuLabel} htmlFor="price">
+                        가격
+                      </label>
+                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
+                      <button
+                        id="menuButton"
+                        style={styles.menuButton}
+                        onClick={onAddMenu}
+                        onMouseOver={menu_OnMouseover}
+                        onMouseOut={menu_onMouseOut}
+                        disabled
+                      >
+                        추가
+                      </button>
+                    </div>
+                  )}
+                  {newmenus.map(
+                    (
+                      newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                    ) => (
+                      <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                    )
+                  )}
+                </div>
+                <div style={styles.sumStyle}>
+                  <div style={styles.sumLabel}>총 금액</div>
+                  <div style={styles.sumPrice}>{sumPrice}원</div>
+                </div>
+              </div>
               <div>
                 {userInfo.isLoggedIn ? (
-                  <div style={styles.menuDiv}>
-                    <label style={styles.menuLabel} htmlFor="menu">
-                      주문 희망 메뉴
-                    </label>
-                    <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
-                    <label style={styles.menuLabel} htmlFor="price">
-                      가격
-                    </label>
-                    <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                    <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
-                      추가
+                  <div style={styles.btnWrapper}>
+                    <button style={styles.button} onClick={onClickedCreateBtn}>
+                      작성
                     </button>
+                    <button style={styles.button}>채팅</button>
                   </div>
                 ) : (
-                  <div style={styles.menuDiv}>
-                    <label style={styles.menuLabel} htmlFor="menu">
-                      주문 희망 메뉴
-                    </label>
-                    <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" disabled />
-                    <label style={styles.menuLabel} htmlFor="price">
-                      가격
-                    </label>
-                    <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
-                    <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut} disabled>
-                      추가
+                  <div style={styles.btnWrapper}>
+                    <button style={styles.button} disabled>
+                      작성
+                    </button>
+                    <button style={styles.button} disabled>
+                      채팅
                     </button>
                   </div>
                 )}
-                {newmenus.map(
-                  (
-                    newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
-                  ) => (
-                    <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
-                  )
-                )}
               </div>
-              <div style={styles.sumStyle}>
-                <div style={styles.sumLabel}>총 금액</div>
-                <div style={styles.sumPrice}>{sumPrice}원</div>
-              </div>
-            </div>
-            {userInfo.isLoggedIn ? (
-              <div style={styles.btnWrapper}>
-                <button style={styles.button}>작성</button>
-                <button style={styles.button}>수정</button>
-                <button style={styles.button}>채팅</button>
-              </div>
-            ) : (
-              <div style={styles.btnWrapper}>
-                <button style={styles.button} disabled>
-                  작성
-                </button>
-                <button style={styles.button} disabled>
-                  수정
-                </button>
-                <button style={styles.button} disabled>
-                  채팅
-                </button>
-              </div>
-            )}
-          </Box>
-        </div>
+            </Box>
+          </div>
+        )}
       </div>
     </>
   );

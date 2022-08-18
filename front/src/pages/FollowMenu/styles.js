@@ -1,8 +1,4 @@
 export default {
-  // background: {
-  //   backgroundColor: "#ececec",
-  // },
-
   headerStyle: {
     fontFamily: "BMHANNAPro",
     marginTop: "10px",
@@ -51,10 +47,10 @@ export default {
   btnWrapper: {
     display: "flex",
     alignItems: "center",
-    height: "100px",
     justifyContent: "center",
-    marginLeft: "30px",
   },
+
+  buttonBox: {},
 
   button: {
     backgroundColor: "white",

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./config";
 
 const getJoinOrders = (id) => new Promise((resolve) => {
     resolve(axios
@@ -6,8 +6,8 @@ const getJoinOrders = (id) => new Promise((resolve) => {
         .then((response) => response.data));
 });
 
-const addJoinOrder = async (order_id, follower, description) => {
-  return await axios.post("http://localhost:8000/joinorders/", {order_id, follower, description});
+const addJoinOrder =  (order_id, follower, description) => {
+  return  axios.post("joinorders/", {order_id, follower, description});
 };
 
 export { getJoinOrders, addJoinOrder };
