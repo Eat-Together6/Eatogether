@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import * as style from "./styles";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import styles from "./styles.js";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
@@ -27,28 +27,6 @@ function CreateMenu() {
   }
   console.log(inputs)
   const [end, setEnd] = useState(false);
-  // const postOrder = async()=>{
-  //   await addLocation({
-  //     location_nickname : address[0].address,
-  //     latitude: address[0].latitude,
-  //     longitude: address[0].longitude
-  //   }).then(res=> {
-  //     createOrder({
-  //       location:res.data.id,
-  //       max_joined_user:3,
-  //       description: description.current.value,
-  //       time: date.current.value+"T"+ time.current.value,
-  //       brand: brand.current.value,
-  //     }).then(res=>{
-  //       alert("성공")
-  //       setEnd(true);
-  //     })
-  //   }).catch(e=>(alert("실패",e)))
-  // }
-
-
-
-
   
   return (
     <>
