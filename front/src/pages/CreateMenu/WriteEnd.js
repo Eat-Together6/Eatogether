@@ -1,6 +1,6 @@
 import React from "react";
 import * as style from "./styles";
-import { createOrder } from "api/order";
+import {createOrder}  from "api/order";
 import { addLocation} from 'api/location'
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
@@ -14,17 +14,21 @@ const WriteEnd = ({setEnd, data}) => {
             latitude: address[0].latitude,
             longitude: address[0].longitude
         }).then(res=> {
+            console.log(">>>>>",res.data, data)
             createOrder({
                 location: res.data.id,
                 max_joined_user: data.maxJoiner,
                 description: data.description,
                 time: data.date+"T"+ data.time,
                 brand: data.brand,
-        }).then(res=>{
+        }).then(reponse=>{
             alert("성공")
         })
-        }).catch(e=>(alert("실패",e)))
-  }
+        }).catch(e=>{
+            alert("실패",e)
+            console.log("error",e)
+         })
+    }
     // const check = () => {
     //     if(!!data.brand && !!data.date && !!data.time && !!data.maxJoiner) {
     //         postOrder();
