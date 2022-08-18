@@ -38,7 +38,7 @@ class OrderList(APIView):
     def post(self, request): # POSTMAN TEST 완료
         location =Location.objects.get(id=request.data['location'])
         order = Order.objects.create(leader=request.user,
-                                     brand=request.data['brand'],
+                                     store=request.data['store'],
                                      time=request.data['time'],
                                      description=request.data['description'],
                                      max_joined_user=request.data['max_joined_user'], 
