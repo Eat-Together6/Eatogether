@@ -19,7 +19,7 @@ const Label = styled.span`
 const InputT = styled.input`
   background-color: #ececec;
   font-family: "BMHANNAAir";
-  height: 38px;
+  height: 45px;
   padding: 0px 20px;
   border-radius: 0.55rem;
   box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
@@ -29,7 +29,7 @@ const InputT = styled.input`
 const InputP = styled.input`
   background-color: #ececec;
   font-family: "Roboto", Hekvetica, Arial, sans-serif;
-  height: 38px;
+  height: 45px;
   padding: 0px 20px;
   border-radius: 0.55rem;
   box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;

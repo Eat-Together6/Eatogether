@@ -8,7 +8,6 @@ import { ThemeConsumer } from "styled-components";
 
 const MyPage = () => {
   const [userdata, setUserData] = useState({
-    id: "jk98",
     name: "케이틀린",
     email: "jk98@gmail.com",
   });
@@ -32,12 +31,8 @@ const MyPage = () => {
         <style.Title>마이페이지</style.Title>
         <style.FaceLogo src={UserImage} />
         <style.InfoWrap>
-          <style.InfoLabel>아이디</style.InfoLabel>
-          <style.InfoText>{userdata.id}</style.InfoText>
-        </style.InfoWrap>
-        <style.InfoWrap>
           <style.InfoLabel>닉네임</style.InfoLabel>
-          <style.InfoText>{userdata.nickname}</style.InfoText>
+          <style.InfoText>{userdata.name}</style.InfoText>
         </style.InfoWrap>
         <style.InfoWrap>
           <style.InfoLabel>이메일</style.InfoLabel>
