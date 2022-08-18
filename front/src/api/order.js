@@ -3,17 +3,16 @@ import tokenConfig from "./tokenConfig";
 
 // 백엔드에서 views, urls 수정해서 쿼리문으로 데이터 접근할 수 있어야 함
 
- 
 const getOrders = () => {
   return axios.get("orders/");
 };
 
-const getOrderAndJoinOrders = (data) => {
-  return axios.post("orders/user/", data, tokenConfig());
+const getOrderAndJoinOrders = () => {
+  return axios.get("orders/user/");
 };
 
 const createOrder = (data) => {
-  return axios.post('orders/', data, tokenConfig());
+  return axios.post("orders/", data, tokenConfig());
 };
 
 const createJoinOrder = (data) => {
@@ -27,6 +26,5 @@ const createJoinOrder = (data) => {
 // const getOrderByFollower = () => {
 //   return axios.get("joinorders?follower=???", tokenConfig());
 // };
-  
 
-export  {getOrders, getOrderAndJoinOrders, createOrder, createJoinOrder};
+export { getOrders, getOrderAndJoinOrders, createOrder, createJoinOrder };

@@ -7,7 +7,6 @@ import locationState from "state/locationState";
 
 const WriteEnd = ({ setEnd, data }) => {
   const address = useRecoilState(locationState);
-
   const postOrder = async () => {
     await addLocation({
       location_nickname: address[0].address,
@@ -27,13 +26,13 @@ const WriteEnd = ({ setEnd, data }) => {
       })
       .catch((e) => alert("실패", e));
   };
-  // const check = () => {
-  //     if(!!data.brand && !!data.date && !!data.time && !!data.maxJoiner) {
-  //         postOrder();
-  //     } else {
-  //         alert("전달사항 외 모든 정보를 입력해주세요");
-  //     }
-  // }
+  const check = () => {
+    if (!!data.brand && !!data.date && !!data.time && !!data.maxJoiner) {
+      postOrder();
+    } else {
+      alert("전달사항 외 모든 정보를 입력해주세요");
+    }
+  };
 
   return (
     <style.Div>
@@ -74,7 +73,7 @@ const WriteEnd = ({ setEnd, data }) => {
       </style.Button>
       <style.Button
         onClick={() => {
-          postOrder();
+          check();
         }}
       >
         등록
