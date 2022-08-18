@@ -10,11 +10,11 @@ export default {
   getOrdersAndJoinOrders(data) { // 모든 order, joinorder 가져오기
     return axios.post("/orders/user/", data, tokenConfig());
   },
-  createOrder() { // Leader의 order 등록하기
-    return axios.post("/orders/").then(res => res.data);
+  createOrder(data) { // Leader의 order 등록하기
+    return axios.post("/orders/", data, tokenConfig);
   },
-  createJoinOrder() { // Follower의 joinorder 등록하기
-    return axios.post("/joinorders/").then(res => res.data);
+  createJoinOrder(data) { // Follower의 joinorder 등록하기
+    return axios.post("/joinorders/", data, tokenConfig);
   },
   getOrderByLeader(data) { // Leader의 특정 order 가져오기 <수정필요>
     return axios.get("orders?leader=???", data, tokenConfig());
