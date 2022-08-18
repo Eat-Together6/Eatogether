@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
+import * as style from "./styles";
 import { useRecoilValue } from "recoil";
 import { authState } from "state";
 import CompletedMenuForm from "components/EtcItem/CompletedMenuForm/CompletedMenuForm.js";
@@ -74,14 +75,6 @@ function FollowMenu() {
     sumPrice += parseInt(newmenu.price);
   });
 
-  function menu_OnMouseover() {
-    document.getElementById("menuButton").style.boxShadow = "inset 2px 2px 5px #b8b9be";
-  }
-  function menu_onMouseOut() {
-    document.getElementById("menuButton").style.boxShadow = "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3";
-  }
-  console.log("dd", newmenus);
-  console.log("price", sumPrice);
   return (
     <>
       <div style={styles.background}>
@@ -95,7 +88,7 @@ function FollowMenu() {
             <div style={styles.Contents_two}>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>음식점명</label>
-                <input style={styles.input} placeholder="음식명 데이터" />
+                <input style={styles.input} placeholder="음식명 데이터" readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
@@ -103,24 +96,26 @@ function FollowMenu() {
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>
-                <input style={styles.input} placeholder="주문 희망 날짜 데이터" />
+                <input style={styles.input} placeholder="주문 희망 날짜 데이터" readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 시간</label>
-                <input style={styles.input} placeholder="주문 희망 시간 데이터" />
+                <input style={styles.input} placeholder="주문 희망 시간 데이터" readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>전달사항</label>
-                <input style={styles.input} placeholder="전달사항 데이터" />
+                <input style={styles.input} placeholder="전달사항 데이터" readOnly />
               </div>
             </div>
           </Box>
         </div>
         {createBtnState ? (
+          // 작성버튼 클릭-> 주문서 작성 완료된 폼
           <>
-            <CompletedMenuForm setCreateBtnState={setCreateBtnState} newmenus={newmenus} sumPrice={sumPrice} />
+            <CompletedMenuForm newmenus={newmenus} sumPrice={sumPrice} />
           </>
         ) : (
+          // 작성버튼 클릭x-> 기본 따라가기 폼
           <div style={styles.divRight} id="divRight">
             <Box style={styles.Contents_one}>
               <div style={styles.headerStyle2}>
@@ -138,9 +133,7 @@ function FollowMenu() {
                         가격
                       </label>
                       <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                      <button id="menuButton" style={styles.menuButton} onClick={onAddMenu} onMouseOver={menu_OnMouseover} onMouseOut={menu_onMouseOut}>
-                        추가
-                      </button>
+                      <style.menuButton onClick={onAddMenu}>추가</style.menuButton>
                     </div>
                   ) : (
                     <div style={styles.menuDiv}>
@@ -152,16 +145,9 @@ function FollowMenu() {
                         가격
                       </label>
                       <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
-                      <button
-                        id="menuButton"
-                        style={styles.menuButton}
-                        onClick={onAddMenu}
-                        onMouseOver={menu_OnMouseover}
-                        onMouseOut={menu_onMouseOut}
-                        disabled
-                      >
+                      <style.menuButton onClick={onAddMenu} disabled>
                         추가
-                      </button>
+                      </style.menuButton>
                     </div>
                   )}
                   {newmenus.map(
@@ -179,20 +165,16 @@ function FollowMenu() {
               </div>
               <div>
                 {userInfo.isLoggedIn ? (
+                  // 로그인ㅇ -> 버튼 클릭 가능
                   <div style={styles.btnWrapper}>
-                    <button style={styles.button} onClick={onClickedCreateBtn}>
-                      작성
-                    </button>
-                    <button style={styles.button}>채팅</button>
+                    <style.Button onClick={onClickedCreateBtn}>작성</style.Button>
+                    <style.Button>채팅</style.Button>
                   </div>
                 ) : (
+                  // 로그인x -> 버튼 클릭 불가능
                   <div style={styles.btnWrapper}>
-                    <button style={styles.button} disabled>
-                      작성
-                    </button>
-                    <button style={styles.button} disabled>
-                      채팅
-                    </button>
+                    <style.Button disabled>작성</style.Button>
+                    <style.Button disabled>채팅</style.Button>
                   </div>
                 )}
               </div>
