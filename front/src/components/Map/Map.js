@@ -7,12 +7,20 @@ import FollowMarker from "assets/images/followMK.png";
 import SearchInput from "./SearchInput";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
+import { getOrders } from "api/order";
 
+const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
+  const [, setLocation] = useRecoilState(locationState); // (address, lat, lon)전역 useState 이용
+  const [popup, setPopup] = useState(false); // 도로명 검색창 불러오기 boolean
+  const [isClick, setIsClick] = useState(true); // 검색창에 주소 value로 입력하기 위한 useState boolean
+  const [markers, setMarker] = useState([]); // 마커(+원) 객체 배열
+  const geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체 생성
+  const searchDetailAddrFromCoords = (coords, callback) => {
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+  }; // 좌표로 법정동 상세 주소 정보 요청
 
-
-const Map = ({setClickLeaderMK, setClickFollowMK}) => {
-  const [, setLocation] = useRecoilState(locationState);
-  const location = useGeolocation();
+  //Map 지도 생성하기
+  const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
   const { kakao } = window;
   const [map, setMap] = useState();
   const container = useRef();
@@ -24,128 +32,133 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
     level: 4,
   };
   useEffect(() => {
-    setMap(new kakao.maps.Map(container.current, options));
+    setMap(new kakao.maps.Map(container.current, options)); // 지도 생성
   }, [location]);
 
-  const [popup, setPopup] = useState(false);
-  const [address, setAddress] = useState(); 
-  const [markers, setMarker] = useState([]);
+  // followMarker 서버로부터 정보 받아와 지도에 표시
+  const getOrderAndFollow = async () => {
+    const data = await getOrders();
+    console.log("???", data);
+  };
+
+  useEffect(() => {
+    getOrderAndFollow();
+  }, []);
   const [followMarkers, setFollowMarker] = useState([
     {
       id: 1,
       lat: 37.6426777370276,
       lon: 127.005734734447,
-    }
+    },
   ]);
-
   useEffect(() => {
     followMarkers.map((followMarker) => {
       displayFollowMarker(followMarker.lat, followMarker.lon);
     });
   });
 
-  const geocoder = new kakao.maps.services.Geocoder(); //주소-좌표 변환 객체 생성
-
-  const searchAndMove = () => {
-    if(markers.length > 0) {
+  // 여기서부터 함수 모음임 //
+  //  searchAndMove 함수 : 주소 인자 받으면 좌표로 변환해 지도 이동 및 마커 생성 함수 호출
+  const searchAndMove = (address) => {
+    if (markers.length > 0) {
       markers.map((marker) => {
-        marker.marker.setMap(null)
-        marker.circle.setMap(null)
-      })
+        marker.marker.setMap(null);
+        marker.circle.setMap(null);
+      });
     }
     geocoder.addressSearch(address, function (result, status) {
       //주소를 좌표로 변환
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords); //변환된 좌표를 지도 중심으로 이동
-        displayMarker(coords.Ma, coords.La )
+        displayMarker(coords.Ma, coords.La);
         console.log("주소 검색 완료되었습니다⭕");
         setLocation({
           address: address,
           latitude: coords.Ma,
           longitude: coords.La,
-        })
-      } else {
-        alert("주소가 정확하지 않습니다❌");
+        });
+        setIsClick(false);
       }
     });
   };
-   
-  // 입력 주소로 마크 표시
+
+  // displayMarker 함수 : 좌표 인자로 받아 마커 생성. (마커 반경 기능, 마커 클릭 기능, 드래그 이동 기능, 지도 클릭시 마커 이동 기능)
   const displayMarker = (lat, lon) => {
     const imageSrc = NewMarker;
     const imageSize = new kakao.maps.Size(50, 50);
-    const imageOption = { offset: new kakao.maps.Point(20, 50) };  // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
+    const imageOption = { offset: new kakao.maps.Point(20, 50) }; // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션
     const marker = new kakao.maps.Marker({
       position: new kakao.maps.LatLng(lat, lon),
       image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
       draggable: true,
     });
     const circle = new kakao.maps.Circle({
-      center: new kakao.maps.LatLng(lat, lon), 
-      radius: 200, 
-      strokeWeight: 0, 
-      fillColor: "#B1B1B1", 
+      center: new kakao.maps.LatLng(lat, lon),
+      radius: 200,
+      strokeWeight: 0,
+      fillColor: "#B1B1B1",
       fillOpacity: 0.4,
     });
 
     marker.setMap(map);
     circle.setMap(map);
+    setClickLeaderMK(true);
+    setMarker([
+      ...markers,
+      {
+        marker: marker,
+        circle: circle,
+      },
+    ]);
 
-    setMarker([...markers, {
-      marker: marker,
-      circle: circle
-    }])
-
-    kakao.maps.event.addListener(marker, 'click', function() {
+    kakao.maps.event.addListener(marker, "click", function () {
       setClickLeaderMK(true);
       setClickFollowMK(false);
     });
 
-    kakao.maps.event.addListener(marker, 'dragend', function() {
-      setClickLeaderMK(false);
+    kakao.maps.event.addListener(marker, "dragend", function () {
+      setClickLeaderMK(true);
       setClickFollowMK(false);
-      circle.setPosition(marker.getPosition())
-      searchDetailAddrFromCoords(marker.getPosition(), function(result, status){
-          if(status === kakao.maps.services.Status.OK){
-              setPopup(false)
-              setAddress(result[0].road_address.address_name)
-              setLocation({
-                address: result[0].road_address.address_name,
-                latitude: marker.getPosition().Ma,
-                longitude: marker.getPosition().La,
-              });
-            }
-        })
+      circle.setPosition(marker.getPosition());
+      searchDetailAddrFromCoords(
+        marker.getPosition(),
+        function (result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            setPopup(false);
+            setLocation({
+              address: result[0].road_address.address_name,
+              latitude: marker.getPosition().Ma,
+              longitude: marker.getPosition().La,
+            });
+            setIsClick(false);
+          }
+        }
+      );
     });
-    
+
     kakao.maps.event.addListener(map, "click", function (mouseEvent) {
-      
-      setClickLeaderMK(false);
+      setClickLeaderMK(true);
       setClickFollowMK(false);
       const latlng = mouseEvent.latLng; // 클릭한 위도, 경도 정보를 가져옵니다
       marker.setPosition(latlng); // 마커 위치를 클릭한 위치로 옮깁니다
       circle.setPosition(latlng);
-      searchDetailAddrFromCoords(latlng, function (result, status) {//클릭 끝난 마커 좌표로 도로명 주소 가져오기
+      searchDetailAddrFromCoords(latlng, function (result, status) {
+        //클릭 끝난 마커 좌표로 도로명 주소 가져오기
         if (status === kakao.maps.services.Status.OK) {
           setPopup(false); // 도로명주소 팝업 false로 변경 -> 주소검색창 재사용하도록
-          setAddress(result[0].road_address.address_name); // 가져온 도로명주소로 address 업데이트
           setLocation({
             address: result[0].road_address.address_name,
             latitude: latlng.Ma,
             longitude: latlng.La,
-          })
+          });
+          setIsClick(false);
         }
       });
     });
-
-    
   };
-  
-  function searchDetailAddrFromCoords(coords, callback) { // 좌표로 법정동 상세 주소 정보를 요청합니다
-    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-  }
 
+  // displayFollowMarker 함수 : 좌표 인자로 받아 마커 생성 및 info 창 생성.
   const displayFollowMarker = (lat, lon) => {
     const imageSrc = FollowMarker;
     const imageSize = new kakao.maps.Size(50, 50);
@@ -162,7 +175,6 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
     iwContent.addEventListener("click", () => {
       infowindow.close();
       setClickFollowMK(false);
-      
     });
 
     let storeName = document.createElement("div");
@@ -192,21 +204,22 @@ const Map = ({setClickLeaderMK, setClickFollowMK}) => {
       // 마커 위에 인포윈도우를 표시합니다
       setClickLeaderMK(false);
       setClickFollowMK(true);
-      infowindow.open(map,marker);
+      infowindow.open(map, marker);
     });
   };
+
   return (
     <>
-        <style.Container>
-            <SearchInput 
-              popup={popup} 
-              setPopup={setPopup} 
-              address={address} 
-              setAddress={setAddress} 
-              searchAndMove={searchAndMove}
-            />
-            <style.MapContainer ref={container}></style.MapContainer>
-        </style.Container>
+      <style.Container>
+        <SearchInput
+          popup={popup}
+          setPopup={setPopup}
+          searchAndMove={searchAndMove}
+          isClick={isClick}
+          setIsClick={setIsClick}
+        />
+        <style.MapContainer ref={container}></style.MapContainer>
+      </style.Container>
     </>
   );
 };

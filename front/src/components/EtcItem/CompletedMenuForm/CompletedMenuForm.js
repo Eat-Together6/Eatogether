@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import styles from "./styles";
+import NewMenu from "../NewMenu";
+import Box from "@mui/material/Box";
 
 const Background = styled.div`
   background-color: #f3f3f3;
@@ -9,23 +11,21 @@ const Background = styled.div`
   float: right;
   width: 700px;
   margin-right: 30px;
-  height: 200px;
 `;
 
-const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-`;
+// const Box = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100%;
+// `;
 
 const Header = styled.div`
   font-family: BMHANNAPro;
   display: flex;
   alignitems: center;
   justify-content: center;
-  margin-top: 70px;
 `;
 
 const DelBtn = styled.div`
@@ -46,27 +46,29 @@ const menuLabel = styled.div`
   font-size: 30px;
 `;
 
-const onClickedEditBtn = () => {
-  // setCreateBtnState(!createBtnState);
-};
-
-export const CompletedMenuForm = ({ setCreateBtnState }) => {
+export const CompletedMenuForm = ({ setCreateBtnState, newmenus, sumPrice }) => {
+  console.log("dd", newmenus);
+  console.log("price", sumPrice);
   return (
     <Background>
-      <Box>
-        <Header>
+      <Box style={styles.Contents_one}>
+        <div style={styles.headerStyle}>
           <h2>나의 주문 내역</h2>
-        </Header>
+        </div>
         <Link to="/">
           <DelBtn>
             <Del>x</Del>
           </DelBtn>
         </Link>
+        {/* 나의 주문 메뉴 (메뉴, 가격) */}
         <div style={styles.menu}>
-          <div style={styles.menuLabel}>김치찌개</div>
-          <div style={styles.menuPrice}>5000원</div>
-          <div style={styles.menuLabel}>순두부찌개</div>
-          <div style={styles.menuPrice}>15000원</div>
+          {newmenus.map((newmenu) => (
+            <NewMenu menu={newmenu} />
+          ))}
+        </div>
+        <div style={styles.sumStyle}>
+          <div style={styles.sumLabel}>총 금액</div>
+          <div style={styles.sumPrice}>{sumPrice}원</div>
         </div>
         <div style={styles.btnWrapper}>
           <button
