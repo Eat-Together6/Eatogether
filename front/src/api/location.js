@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "./config";
+import tokenConfig from "./tokenConfig";
 
 const getLocations = () => new Promise(resolve => {
     resolve(axios
@@ -7,12 +8,8 @@ const getLocations = () => new Promise(resolve => {
         );
 });
 
-const addLocation = async (name, latitude, longitude) => {
-    return await axios.post('http://localhost:8000/locations/', {
-        name,
-        latitude,
-        longitude,
-    });
+const addLocation =  (data) => {
+    return axios.post('locations/', data, tokenConfig());
 };
 
 export { getLocations, addLocation }

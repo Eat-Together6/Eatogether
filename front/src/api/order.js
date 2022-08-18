@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "./config";
+import tokenConfig from "./tokenConfig";
 
 const getOrders = (latitude, longitude) => new Promise((resolve) => {
   if (latitude && longitude) {
@@ -13,13 +14,8 @@ const getOrders = (latitude, longitude) => new Promise((resolve) => {
   }
 });
 
-const createOrder = async (brand, time, latitude, longitude) => { 
-  return await axios.post('http://localhost:8000/orders/', {
-    brand,
-    time,
-    latitude,
-    longitude,
-  });
+const createOrder = (data) => { 
+  return axios.post('orders/', data, tokenConfig());
 };
 
 
