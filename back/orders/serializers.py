@@ -8,7 +8,7 @@ class OrderSerializer(serializers.ModelSerializer):
     location_obj = LocationSimpleSerializer(source = 'location',read_only =True)
     class Meta:
         model = Order
-        fields = ['id','brand', 'time',  'location_obj']
+        fields = ['id','store', 'time',  'location_obj']
 
 class UserOrderListSerializer(serializers.ModelSerializer):
     leadOrder = OrderSerializer(source='order', read_only=True)

@@ -1,3 +1,4 @@
+from ast import Store
 from django.db import models
 from accounts.models import User
 from locations.models import Location
@@ -5,7 +6,7 @@ from locations.models import Location
 # order는 leader, follower 가 주문을 하고 이를 저장하기 위한 모델임
 class Order(models.Model):
     leader = models.ForeignKey(User, related_name='order_lead_user', on_delete=models.CASCADE)
-    brand = models.CharField(max_length=40)
+    store = models.CharField(max_length=40)
     time = models.DateTimeField()
     description = models.TextField()
     

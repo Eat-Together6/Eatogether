@@ -72,4 +72,23 @@ export default {
     fontSize: "1.3rem",
     color: "#38726C",
   },
+
+  descriptionDiv: {
+    margin: "10px 0",
+    fontSize: "1.2rem",
+    fontWeight: "100",
+    display: "flex",
+    width: "470px",
+  },
+
+  descriptionLabel: {
+    float: "left",
+    width: "350px",
+    fontSize: "1.2rem",
+  },
+
+  descriptionContent: {
+    float: "right",
+    fontSize: "1.2rem",
+  },
 };

@@ -18,9 +18,7 @@ function onRegister() {
   alert("등록완료! 채팅으로 연결해드릴게요");
 }
 
-export const CompletedMenuForm = ({ newmenus, sumPrice }) => {
-  console.log("dd", newmenus);
-  console.log("price", sumPrice);
+export const CompletedMenuForm = ({ newmenus, sumPrice, description }) => {
   return (
     <Background>
       <Box style={styles.Contents_one}>
@@ -36,6 +34,10 @@ export const CompletedMenuForm = ({ newmenus, sumPrice }) => {
         <div style={styles.sumStyle}>
           <div style={styles.sumLabel}>총 금액</div>
           <div style={styles.sumPrice}>{sumPrice}원</div>
+        </div>
+        <div style={styles.descriptionDiv}>
+          <div style={styles.descriptionLabel}>전달사항</div>
+          <div style={styles.descriptionContent}>{description}</div>
         </div>
         <div style={styles.btnWrapper}>
           {/* 등록 완료버튼 클릭-> 서버로 주문 폼 보냄, 채팅연결 */}
