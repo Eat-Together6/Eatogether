@@ -10,6 +10,7 @@ import locationState from "state/locationState";
 import { getOrders } from "api/order";
 
 const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
+  const { kakao } = window;
   const [, setLocation] = useRecoilState(locationState); // (address, lat, lon)전역 useState 이용
   const [popup, setPopup] = useState(false); // 도로명 검색창 불러오기 boolean
   const [isClick, setIsClick] = useState(true); // 검색창에 주소 value로 입력하기 위한 useState boolean
@@ -21,7 +22,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   //Map 지도 생성하기
   const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
-  const { kakao } = window;
+
   const [map, setMap] = useState();
   const container = useRef();
   const options = {
