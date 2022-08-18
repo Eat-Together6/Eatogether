@@ -1,8 +1,19 @@
 export default {
-  menu: {
-    width: "80%",
-    marginBottom: "10px",
-    marginTop: "20px",
+  Contents_one: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  headerStyle: {
+    fontFamily: "BMHANNAPro",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "50px",
+    marginTop: "15px",
+    marginBottom: "25px",
   },
 
   menuLabel: {
@@ -37,5 +48,25 @@ export default {
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "40px",
+  },
+
+  sumStyle: {
+    display: "flex",
+  },
+
+  sumLabel: {
+    marginLeft: "300px",
+    marginTop: "5px",
+    marginBottom: "10px",
+    fontSize: "1.3rem",
+    color: "#38726C",
+  },
+
+  sumPrice: {
+    marginLeft: "30px",
+    marginTop: "5px",
+    marginBottom: "0px",
+    fontSize: "1.3rem",
+    color: "#38726C",
   },
 };

@@ -100,7 +100,7 @@ export default {
   },
 
   sumLabel: {
-    marginLeft: "440px",
+    marginLeft: "430px",
     marginTop: "5px",
     marginBottom: "10px",
     fontSize: "1.3rem",
