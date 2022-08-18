@@ -7,8 +7,12 @@ const getOrders = () => {
   return axios.get("orders/");
 };
 
-const getOrderAndJoinOrders = () => {
-  return axios.get("orders/user/");
+const getOrder = (pk) => {
+  return axios.get(`orders/${pk}`);
+};
+
+const getOrderAndJoinOrders = (data) => {
+  return axios.post("orders/user/", data, tokenConfig());
 };
 
 const createOrder = (data) => {
@@ -26,5 +30,6 @@ const createJoinOrder = (data) => {
 // const getOrderByFollower = () => {
 //   return axios.get("joinorders?follower=???", tokenConfig());
 // };
+  
 
-export { getOrders, getOrderAndJoinOrders, createOrder, createJoinOrder };
+export  {getOrders,getOrder, getOrderAndJoinOrders, createOrder, createJoinOrder};
