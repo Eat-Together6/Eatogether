@@ -4,11 +4,11 @@ from joinorders.models import JoinOrder
 from locations.serializers import LocationSimpleSerializer,LocationSerializer
 from joinorders.serializers import JoinOrderSerializer
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer): #location 필드의 pk만 전달하는게 아니라, location 데이터를 모두 전달하는 시리얼라이저로 변경.
     location_obj = LocationSimpleSerializer(source = 'location',read_only =True)
     class Meta:
         model = Order
-        fields = ['id','store', 'time',  'location_obj']
+        fields = ['id','store', 'time', 'description', 'location_obj']
 
 class UserOrderListSerializer(serializers.ModelSerializer):
     leadOrder = OrderSerializer(source='order', read_only=True)
