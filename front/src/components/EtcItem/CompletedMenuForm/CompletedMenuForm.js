@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import * as style from "./styles";
 import styles from "./styles";
 import NewMenu from "../NewMenu";
 import Box from "@mui/material/Box";
@@ -13,40 +14,11 @@ const Background = styled.div`
   margin-right: 30px;
 `;
 
-// const Box = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   height: 100%;
-// `;
+function onRegister() {
+  alert("등록완료! 채팅으로 연결해드릴게요");
+}
 
-const Header = styled.div`
-  font-family: BMHANNAPro;
-  display: flex;
-  alignitems: center;
-  justify-content: center;
-`;
-
-const DelBtn = styled.div`
-  margin-left: 730px;
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-  border-radius: 50px;
-  background-color: #fa4444;
-  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
-`;
-
-const Del = styled.div`
-  margin-left: 4px;
-`;
-
-const menuLabel = styled.div`
-  font-size: 30px;
-`;
-
-export const CompletedMenuForm = ({ setCreateBtnState, newmenus, sumPrice }) => {
+export const CompletedMenuForm = ({ newmenus, sumPrice }) => {
   console.log("dd", newmenus);
   console.log("price", sumPrice);
   return (
@@ -55,11 +27,6 @@ export const CompletedMenuForm = ({ setCreateBtnState, newmenus, sumPrice }) => 
         <div style={styles.headerStyle}>
           <h2>나의 주문 내역</h2>
         </div>
-        <Link to="/">
-          <DelBtn>
-            <Del>x</Del>
-          </DelBtn>
-        </Link>
         {/* 나의 주문 메뉴 (메뉴, 가격) */}
         <div style={styles.menu}>
           {newmenus.map((newmenu) => (
@@ -71,15 +38,13 @@ export const CompletedMenuForm = ({ setCreateBtnState, newmenus, sumPrice }) => 
           <div style={styles.sumPrice}>{sumPrice}원</div>
         </div>
         <div style={styles.btnWrapper}>
-          <button
-            style={styles.button}
-            onClick={() => {
-              setCreateBtnState(false);
-            }}
-          >
-            수정
-          </button>
-          <button style={styles.button}>채팅</button>
+          {/* 등록 완료버튼 클릭-> 서버로 주문 폼 보냄, 채팅연결 */}
+          <Link to="">
+            <style.Button onClick={onRegister}>등록 완료</style.Button>
+          </Link>
+          <Link to="/">
+            <style.Button>등록 취소</style.Button>
+          </Link>
         </div>
       </Box>
     </Background>
