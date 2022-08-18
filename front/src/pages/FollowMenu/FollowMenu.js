@@ -3,7 +3,9 @@ import { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 import { useRecoilValue } from "recoil";
 import { authState } from "state";
-import CompletedMenuForm from "components/EtcItem/completedMenuForm.js";
+import CompletedMenuForm from "components/EtcItem/CompletedMenuForm/CompletedMenuForm.js";
+import { useRecoilState } from "recoil";
+import locationState from "state/locationState";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -22,6 +24,7 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
 };
 
 function FollowMenu() {
+  const address = useRecoilState(locationState);
   const userInfo = useRecoilValue(authState);
   const [createBtnState, setCreateBtnState] = useState(false); // 작성 버튼 useState
   const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
@@ -83,7 +86,7 @@ function FollowMenu() {
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
-                <input style={styles.input} placeholder="주소 데이터" />
+                <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>

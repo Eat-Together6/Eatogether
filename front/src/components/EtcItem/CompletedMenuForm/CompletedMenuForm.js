@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styles from "./styles";
 
 const Background = styled.div`
   background-color: #f3f3f3;
@@ -42,6 +43,10 @@ const Del = styled.div`
   margin-left: 4px;
 `;
 
+const menuLabel = styled.div`
+  font-size: 30px;
+`;
+
 export const CompletedMenuForm = () => {
   return (
     <Background>
@@ -49,11 +54,17 @@ export const CompletedMenuForm = () => {
         <Header>
           <h2>나의 주문 내역</h2>
         </Header>
-        <Link to="/createMenu">
+        <Link to="/">
           <DelBtn>
             <Del>x</Del>
           </DelBtn>
         </Link>
+        <div style={styles.menu}>
+          <div style={styles.menuLabel}>김치찌개</div>
+          <div style={styles.menuPrice}>5000원</div>
+          <div style={styles.menuLabel}>순두부찌개</div>
+          <div style={styles.menuPrice}>15000원</div>
+        </div>
       </Box>
     </Background>
   );

@@ -1,8 +1,4 @@
 export default {
-  // background: {
-  //   backgroundColor: "#ececec",
-  // },
-
   headerStyle: {
     fontFamily: "BMHANNAPro",
     marginTop: "10px",
