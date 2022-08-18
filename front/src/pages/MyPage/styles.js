@@ -36,8 +36,12 @@ export const Title = styled.h1`
 `;
 
 export const FaceLogo = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
+  box-shadow: 3px 3px 7px #d3d3d3, -3px -3px 7px #ffffff;
+  border-radius: 50%;
+  border: 8px solid #ececec;
+  outline: none;
 `;
 
 export const InfoWrap = styled.div`
@@ -46,19 +50,20 @@ export const InfoWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 30px;
 `;
 
 export const InfoLabel = styled.span`
   font-family: "BMHANNAAir";
   font-size: 18px;
   font-weight: 800;
-  margin: 10px;
+  margin: 20px;
 `;
 
 export const InfoText = styled.span`
   background-color: #ececec;
   font-family: "BMHANNAAir";
-  height: 38px;
+  height: 45px;
   padding: 0px 20px;
   border-radius: 0.55rem;
   box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
@@ -71,10 +76,10 @@ export const LinkStyle = {
   width: "100%",
   display: "flex",
   justifyContent: "center",
+  marginTop: "40px",
 };
 
 export const HistoryCard = styled.div`
-    border: 1px solid black;
     width: 600px;
     height: 700px;
     display: flex;
