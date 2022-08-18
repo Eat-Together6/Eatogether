@@ -46,10 +46,8 @@ export default {
 
   btnWrapper: {
     display: "flex",
-    float: "right",
     alignItems: "center",
     justifyContent: "center",
-    marginRight: "170px",
   },
 
   buttonBox: {},

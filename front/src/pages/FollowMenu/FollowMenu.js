@@ -105,7 +105,7 @@ function FollowMenu() {
         </div>
         {createBtnState ? (
           <>
-            <CompletedMenuForm />
+            <CompletedMenuForm setCreateBtnState={setCreateBtnState} />
           </>
         ) : (
           <div style={styles.divRight} id="divRight">
@@ -164,32 +164,28 @@ function FollowMenu() {
                   <div style={styles.sumPrice}>{sumPrice}원</div>
                 </div>
               </div>
+              <div>
+                {userInfo.isLoggedIn ? (
+                  <div style={styles.btnWrapper}>
+                    <button style={styles.button} onClick={onClickedCreateBtn}>
+                      작성
+                    </button>
+                    <button style={styles.button}>채팅</button>
+                  </div>
+                ) : (
+                  <div style={styles.btnWrapper}>
+                    <button style={styles.button} disabled>
+                      작성
+                    </button>
+                    <button style={styles.button} disabled>
+                      채팅
+                    </button>
+                  </div>
+                )}
+              </div>
             </Box>
           </div>
         )}
-        <div>
-          {userInfo.isLoggedIn ? (
-            <div style={styles.btnWrapper}>
-              <button style={styles.button} onClick={onClickedCreateBtn}>
-                작성
-              </button>
-              <button style={styles.button}>수정</button>
-              <button style={styles.button}>채팅</button>
-            </div>
-          ) : (
-            <div style={styles.btnWrapper}>
-              <button style={styles.button} disabled>
-                작성
-              </button>
-              <button style={styles.button} disabled>
-                수정
-              </button>
-              <button style={styles.button} disabled>
-                채팅
-              </button>
-            </div>
-          )}
-        </div>
       </div>
     </>
   );

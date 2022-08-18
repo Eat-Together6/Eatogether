@@ -17,6 +17,7 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
 `;
 
 const Header = styled.div`
@@ -24,9 +25,7 @@ const Header = styled.div`
   display: flex;
   alignitems: center;
   justify-content: center;
-  height: 50px;
-  margin-top: 15px;
-  margin-bottom: 25px;
+  margin-top: 70px;
 `;
 
 const DelBtn = styled.div`
@@ -47,7 +46,11 @@ const menuLabel = styled.div`
   font-size: 30px;
 `;
 
-export const CompletedMenuForm = () => {
+const onClickedEditBtn = () => {
+  // setCreateBtnState(!createBtnState);
+};
+
+export const CompletedMenuForm = ({ setCreateBtnState }) => {
   return (
     <Background>
       <Box>
@@ -64,6 +67,17 @@ export const CompletedMenuForm = () => {
           <div style={styles.menuPrice}>5000원</div>
           <div style={styles.menuLabel}>순두부찌개</div>
           <div style={styles.menuPrice}>15000원</div>
+        </div>
+        <div style={styles.btnWrapper}>
+          <button
+            style={styles.button}
+            onClick={() => {
+              setCreateBtnState(false);
+            }}
+          >
+            수정
+          </button>
+          <button style={styles.button}>채팅</button>
         </div>
       </Box>
     </Background>
