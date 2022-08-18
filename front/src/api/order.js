@@ -11,10 +11,10 @@ export default {
     return axios.post("/orders/user/", data, tokenConfig());
   },
   createOrder(data) { // Leader의 order 등록하기
-    return axios.post("/orders/", data, tokenConfig);
+    return axios.post("/orders/", data, tokenConfig());
   },
   createJoinOrder(data) { // Follower의 joinorder 등록하기
-    return axios.post("/joinorders/", data, tokenConfig);
+    return axios.post("/joinorders/", data, tokenConfig());
   },
   getOrderByLeader(data) { // Leader의 특정 order 가져오기 <수정필요>
     return axios.get("orders?leader=???", data, tokenConfig());
