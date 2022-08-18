@@ -26,10 +26,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   const [map, setMap] = useState();
   const container = useRef();
   const options = {
-    center: new kakao.maps.LatLng(
-      location.coordinates.lat,
-      location.coordinates.lng
-    ),
+    center: new kakao.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
     level: 4,
   };
   useEffect(() => {
@@ -122,20 +119,17 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
       setClickLeaderMK(true);
       setClickFollowMK(false);
       circle.setPosition(marker.getPosition());
-      searchDetailAddrFromCoords(
-        marker.getPosition(),
-        function (result, status) {
-          if (status === kakao.maps.services.Status.OK) {
-            setPopup(false);
-            setLocation({
-              address: result[0].road_address.address_name,
-              latitude: marker.getPosition().Ma,
-              longitude: marker.getPosition().La,
-            });
-            setIsClick(false);
-          }
+      searchDetailAddrFromCoords(marker.getPosition(), function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          setPopup(false);
+          setLocation({
+            address: result[0].road_address.address_name,
+            latitude: marker.getPosition().Ma,
+            longitude: marker.getPosition().La,
+          });
+          setIsClick(false);
         }
-      );
+      });
     });
 
     kakao.maps.event.addListener(map, "click", function (mouseEvent) {
@@ -212,13 +206,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   return (
     <>
       <style.Container>
-        <SearchInput
-          popup={popup}
-          setPopup={setPopup}
-          searchAndMove={searchAndMove}
-          isClick={isClick}
-          setIsClick={setIsClick}
-        />
+        <SearchInput popup={popup} setPopup={setPopup} searchAndMove={searchAndMove} isClick={isClick} setIsClick={setIsClick} />
         <style.MapContainer ref={container}></style.MapContainer>
       </style.Container>
     </>
