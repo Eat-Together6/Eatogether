@@ -95,23 +95,43 @@ function FollowMenu() {
             <div style={styles.Contents_two}>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>음식점명</label>
-                <input style={styles.input} placeholder="음식명 데이터" readOnly />
+                <input
+                  style={styles.input}
+                  placeholder="음식명 데이터"
+                  readOnly
+                />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
-                <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
+                <input
+                  style={styles.input}
+                  placeholder={address[0].address}
+                  defaultValue={address[0].address}
+                />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>
-                <input style={styles.input} placeholder="주문 희망 날짜 데이터" readOnly />
+                <input
+                  style={styles.input}
+                  placeholder="주문 희망 날짜 데이터"
+                  readOnly
+                />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 시간</label>
-                <input style={styles.input} placeholder="주문 희망 시간 데이터" readOnly />
+                <input
+                  style={styles.input}
+                  placeholder="주문 희망 시간 데이터"
+                  readOnly
+                />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>전달사항</label>
-                <input style={styles.input} placeholder="전달사항 데이터" readOnly />
+                <input
+                  style={styles.input}
+                  placeholder="전달사항 데이터"
+                  readOnly
+                />
               </div>
             </div>
           </Box>
@@ -119,7 +139,11 @@ function FollowMenu() {
         {createBtnState ? (
           // 작성버튼 클릭-> 주문서 작성 완료된 폼
           <>
-            <CompletedMenuForm newmenus={newmenus} sumPrice={sumPrice} description={description.description} />
+            <CompletedMenuForm
+              newmenus={newmenus}
+              sumPrice={sumPrice}
+              description={description.description}
+            />
           </>
         ) : (
           // 작성버튼 클릭x-> 기본 따라가기 폼
@@ -135,23 +159,51 @@ function FollowMenu() {
                       <label style={styles.menuLabel} htmlFor="menu">
                         주문 희망 메뉴
                       </label>
-                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
+                      <input
+                        style={styles.menuInput}
+                        ref={menu}
+                        id="menu"
+                        type="text"
+                        placeholder="메뉴를 입력하세요"
+                      />
                       <label style={styles.menuLabel} htmlFor="price">
                         가격
                       </label>
-                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
-                      <style.menuButton onClick={onAddMenu}>추가</style.menuButton>
+                      <input
+                        style={styles.menuInput}
+                        ref={price}
+                        id="price"
+                        type="text"
+                        placeholder="가격을 입력하세요"
+                      />
+                      <style.menuButton onClick={onAddMenu}>
+                        추가
+                      </style.menuButton>
                     </div>
                   ) : (
                     <div style={styles.menuDiv}>
                       <label style={styles.menuLabel} htmlFor="menu">
                         주문 희망 메뉴
                       </label>
-                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" disabled />
+                      <input
+                        style={styles.menuInput}
+                        ref={menu}
+                        id="menu"
+                        type="text"
+                        placeholder="메뉴를 입력하세요"
+                        disabled
+                      />
                       <label style={styles.menuLabel} htmlFor="price">
                         가격
                       </label>
-                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
+                      <input
+                        style={styles.menuInput}
+                        ref={price}
+                        id="price"
+                        type="text"
+                        placeholder="가격을 입력하세요"
+                        disabled
+                      />
                       <style.menuButton onClick={onAddMenu} disabled>
                         추가
                       </style.menuButton>
@@ -171,14 +223,22 @@ function FollowMenu() {
                 </div>
                 <div style={styles.menuDiv}>
                   <label style={styles.label}>전달사항</label>
-                  <input style={styles.input} name="description" placeholder="전달사항을 입력해주세요" value={description.value} onChange={onChange} />
+                  <input
+                    style={styles.input}
+                    name="description"
+                    placeholder="전달사항을 입력해주세요"
+                    value={description.value}
+                    onChange={onChange}
+                  />
                 </div>
               </div>
               <div>
                 {userInfo.isLoggedIn ? (
                   // 로그인ㅇ -> 버튼 클릭 가능
                   <div style={styles.btnWrapper}>
-                    <style.Button onClick={onClickedCreateBtn}>작성</style.Button>
+                    <style.Button onClick={onClickedCreateBtn}>
+                      작성
+                    </style.Button>
                     <style.Button>채팅</style.Button>
                   </div>
                 ) : (
