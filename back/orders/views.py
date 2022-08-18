@@ -72,18 +72,12 @@ class OrderDetail(APIView):
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class OrdersAndJoinOrders(APIView):
+class OrderListByUser(APIView):
     def get(self, request):
-        # order history를 가져온다는 것은 order, joinorder가 모두 이뤄졌다는 것을 의미
-        # 따라서 follower를 기준으로 JoinOrder를 가져와서
-        # OrderSerializer로 직렬화
+        # 해당 유저가 오더, 조인 오더한 리스트 Get
         joinOrders = JoinOrder.objects.filter(follower=self.request.user)
         serializer = UserOrderListSerializer(joinOrders, many=True)
         return Response(serializer.data)
-
-
-    
-    
 
         
 
