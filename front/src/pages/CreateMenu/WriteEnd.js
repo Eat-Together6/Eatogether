@@ -20,7 +20,7 @@ const WriteEnd = ({ setEnd, data }) => {
           max_joined_user: data.maxJoiner,
           description: data.description,
           time: data.date + "T" + data.time,
-          brand: data.brand,
+          store: data.store,
         }).then((res) => {
           alert("성공");
         });
@@ -28,7 +28,7 @@ const WriteEnd = ({ setEnd, data }) => {
       .catch((e) => alert("실패", e));
   };
   const check = () => {
-    if (!!data.brand && !!data.date && !!data.time && !!data.maxJoiner) {
+    if (!!data.store && !!data.date && !!data.time && !!data.maxJoiner) {
       postOrder();
     } else {
       alert("전달사항 외 모든 정보를 입력해주세요");
@@ -45,7 +45,7 @@ const WriteEnd = ({ setEnd, data }) => {
           </tr>
           <tr>
             <td>음식점명 :</td>
-            <td>{data.brand}</td>
+            <td>{data.store}</td>
           </tr>
           <tr>
             <td>주문 희망 날짜 :</td>
