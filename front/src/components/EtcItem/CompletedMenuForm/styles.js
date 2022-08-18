@@ -1,3 +1,22 @@
+import styled from "styled-components";
+
+export const Button = styled.button`
+    background-color: white;
+    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: 0.55rem;
+    margin: 25;
+    margin-top: 10px;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3;
+    border: none;
+    font-weight: bold;
+    margin-right: 40px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3;
+    },
+`;
+
 export default {
   Contents_one: {
     display: "flex",
@@ -25,22 +44,6 @@ export default {
   menuPrice: {
     float: "right",
     fontSize: "1.2rem",
-  },
-
-  button: {
-    backgroundColor: "white",
-    fontSize: "0.9rem",
-    padding: "12px 24px",
-    borderRadius: "0.55rem",
-    margin: 25,
-    boxShadow: "3px 3px 6px #b8b9be, -3px -3px 6px #f3f3f3",
-    border: "none",
-    marginRight: "40px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    hover: {
-      boxShadow: "inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #f3f3f3",
-    },
   },
 
   btnWrapper: {

@@ -7,7 +7,7 @@ from orders import serializers
 
 from orders.models import Order
 from joinorders.models import JoinOrder
-from orders.serializers import OrderSerializer, UserOrderListSerializer
+from orders.serializers import OrderSerializer, UserOrderListSerializer,OrderDetailSerializer
 
 from locations.models import Location
 
@@ -50,13 +50,14 @@ class OrderList(APIView):
 class OrderDetail(APIView): 
     def get_object(self, pk): 
         try:
-            return Order.objects.filter(pk=pk)
+            return Order.objects.get(pk=pk)
         except Order.DoesNotExist:
             raise Http404
 
     def get(self, request, pk): # POSTMAN TEST 완료
         order = self.get_object(pk)
-        serializer = OrderSerializer(order)
+        print("뭐야",order)
+        serializer = OrderDetailSerializer(order)
         return Response(serializer.data)
 
     def put(self, request, pk): # POSTMAN TEST 완료
