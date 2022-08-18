@@ -1,6 +1,25 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 import styled from "styled-components";
 
+export const MenuInput = styled.input`
+    width: 350px;
+    font-size: 0.875rem;
+    margin-left: 160px;
+    margin-bottom: 18px;
+    background-color: #ececec;
+    font-family: BMHANNAPro;
+    height: 38px;
+    padding: 0px 20px;
+    border-radius: 0.55rem;
+    box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
+`;
+
+export const MenuWrap = styled.div`
+    margin: 10px 0;
+    margin-left: 40px;
+    font-size: 20px;
+`;
+
 export const Button = styled.button`
     background-color: white;
     font-size: 0.9rem;
@@ -33,11 +52,19 @@ export const Table = styled.table`
     line-height: 30px;
     & > tr > td:first-child {
       padding-right: 50px;
+      text-align: left;
     }
     & > tr > td:last-child {
       font-family: 'BMHANNAAir';
       font-weight: bold;
+      text-align: right;
     }
+`;
+
+export const Div = styled.div`
+    margin: auto;
+    width: 600px;
+    text-align: center;
 `;
 
 export default {
