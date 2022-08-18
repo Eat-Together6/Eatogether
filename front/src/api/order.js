@@ -8,6 +8,10 @@ const getOrders = () => {
   return axios.get("orders/");
 };
 
+const getOrder = (pk) => {
+  return axios.get(`orders/${pk}`);
+};
+
 const getOrderAndJoinOrders = (data) => {
   return axios.post("orders/user/", data, tokenConfig());
 };
@@ -29,4 +33,4 @@ const createJoinOrder = (data) => {
 // };
   
 
-export  {getOrders, getOrderAndJoinOrders, createOrder, createJoinOrder};
+export  {getOrders,getOrder, getOrderAndJoinOrders, createOrder, createJoinOrder};

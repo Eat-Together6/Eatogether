@@ -1,8 +1,23 @@
 import React, { useRef, useEffect, useState } from "react";
 import sidebar from "./sidebar.module.css";
 import axios from "axios";
+import { getLocations } from "api/location";
 
 const SideBar = () => {
+  // const [coordinates, setCoordinates] =useState([])
+  // const retreiveLocations = async() => {
+  //   await getLocations()
+  //   .then((res) => {
+  //     setCoordinates(res.data.map(item =>(
+  //       {lat:item.latitude, long:item.logitude}
+  //       )))
+  //     console.log(res.data)
+  //     }
+  //       )
+        
+  // }
+  // console.log(coordinates)
+
   // 사이드바 나타내기 및 숨기기
   const [arrow, setArrow] = useState({
     active: true,
@@ -18,6 +33,7 @@ const SideBar = () => {
   async function getOrders() {
     const orders = await axios.get("http://127.0.0.1:8000/orders/").then((response) => response.data);
     setResult(orders);
+    console.log("??",orders)
   }
 
   // 주문 state
@@ -26,6 +42,7 @@ const SideBar = () => {
   // 주문 effect
   useEffect(() => {
     getOrders();
+    // retreiveLocations()
   }, []);
 
   return (
@@ -54,6 +71,6 @@ const SideBar = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SideBar;

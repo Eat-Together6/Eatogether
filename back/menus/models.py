@@ -4,7 +4,7 @@ from joinorders.models import JoinOrder
 
 
 class Menu(models.Model):
-    join_order = models.ForeignKey(JoinOrder, on_delete=models.CASCADE)
+    join_order = models.ForeignKey(JoinOrder, on_delete=models.CASCADE, related_name= 'menus')
     menu_name = models.CharField(max_length=50)
     menu_price = models.PositiveIntegerField()
     menu_quantity = models.PositiveIntegerField()
