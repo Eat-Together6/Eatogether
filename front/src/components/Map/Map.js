@@ -22,7 +22,13 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   //Map 지도 생성하기
   const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
-
+  const [followMarkers, setFollowMarker] = useState([
+    {
+      id: 999,
+      lat: 37.6426777370276,
+      lon: 127.005734734447,
+    },
+  ]);
   const [map, setMap] = useState();
   const container = useRef();
   const options = {
@@ -38,23 +44,34 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   // followMarker 서버로부터 정보 받아와 지도에 표시
   const getOrderAndFollow = async () => {
-    const data = await getOrders();
-    console.log("???", data);
+    await getOrders()
+      .then((res) => {
+        // for (let order of res.data) {
+        //   const id = order.id;
+        //   const lat = order.location_obj.latitude;
+        //   const lon = order.location_obj.longitude;
+        //   displayFollowMarker(id, lat, lon);
+        // }
+        console.log(res.data);
+        const orderList = res.data.map((order) => {
+          return {
+            id: order.id,
+            lat: order.location_obj.latitude,
+            lon: order.location_obj.longitude,
+          };
+        });
+        setFollowMarker(orderList);
+      })
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
     getOrderAndFollow();
   }, []);
-  const [followMarkers, setFollowMarker] = useState([
-    {
-      id: 1,
-      lat: 37.6426777370276,
-      lon: 127.005734734447,
-    },
-  ]);
+
   useEffect(() => {
     followMarkers.map((followMarker) => {
-      displayFollowMarker(followMarker.lat, followMarker.lon);
+      displayFollowMarker(followMarker.id, followMarker.lat, followMarker.lon);
     });
   });
 
@@ -160,7 +177,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   };
 
   // displayFollowMarker 함수 : 좌표 인자로 받아 마커 생성 및 info 창 생성.
-  const displayFollowMarker = (lat, lon) => {
+  const displayFollowMarker = (id, lat, lon) => {
     const imageSrc = FollowMarker;
     const imageSize = new kakao.maps.Size(50, 50);
     const imageOption = { offset: new kakao.maps.Point(20, 50) };
@@ -169,6 +186,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
       position: new kakao.maps.LatLng(lat, lon),
       image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
     });
+    console.log("마커", marker);
     marker.setMap(map); // 마커 지도에 표시
 
     let iwContent = document.createElement("div");
