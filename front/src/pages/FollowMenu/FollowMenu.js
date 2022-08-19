@@ -115,10 +115,10 @@ function FollowMenu() {
 
   return (
     <>
-      <div style={styles.background}>
+      <div>
         <Box>
           <div style={styles.headerStyle}>
-            <h1>주문 상세 페이지</h1>
+            <h1>참여하기</h1>
           </div>
         </Box>
         <div style={styles.divLeft}>
