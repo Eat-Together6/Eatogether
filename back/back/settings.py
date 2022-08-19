@@ -3,7 +3,8 @@ import sys,os
 from dotenv import load_dotenv
 load_dotenv()
 
-
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".cloudtype.app"]
+CSRF_TRUSTED_ORIGINS = ['https://*.cloudtype.app']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Path(__file__).resolve().parent.parent -> EATOGETHER_2.0/back
@@ -24,9 +25,6 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
