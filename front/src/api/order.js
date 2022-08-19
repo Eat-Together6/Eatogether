@@ -12,7 +12,7 @@ const getOrder = (pk) => {
 };
 
 const getOrderAndJoinOrders = (data) => {
-  return axios.post("orders/user/", data, tokenConfig());
+  return axios.get("orders/user/", data, tokenConfig());
 };
 
 const createOrder = (data) => {
@@ -30,6 +30,11 @@ const createJoinOrder = (data) => {
 // const getOrderByFollower = () => {
 //   return axios.get("joinorders?follower=???", tokenConfig());
 // };
-  
 
-export  {getOrders,getOrder, getOrderAndJoinOrders, createOrder, createJoinOrder};
+export {
+  getOrders,
+  getOrder,
+  getOrderAndJoinOrders,
+  createOrder,
+  createJoinOrder,
+};
