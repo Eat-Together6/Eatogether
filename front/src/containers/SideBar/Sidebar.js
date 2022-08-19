@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import sidebar from "./sidebar.module.css";
-import axios from "axios";
+import axios from "../../api/config";
 import { getLocations } from "api/location";
 
 const SideBar = () => {
@@ -31,7 +31,7 @@ const SideBar = () => {
 
   //
   async function getOrders() {
-    const orders = await axios.get("http://127.0.0.1:8000/orders/").then((response) => response.data);
+    const orders = await axios.get("orders/").then((response) => response.data);
     setResult(orders);
     console.log("??",orders)
   }
@@ -56,10 +56,11 @@ const SideBar = () => {
               return (
                 <div className={sidebar.myorder}>
                   <div>
-                    {i.brand}
+                    {i.store}
                     <br></br>
                     {i.time}
                     <br></br>
+                    가 기다리고 있어요!
                     <br></br>
                   </div>
                 </div>
