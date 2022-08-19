@@ -125,4 +125,14 @@ export default {
     fontSize: "1.3rem",
     color: "#38726C",
   },
+
+  buttons: {
+    marginTop: "10px",
+    display: "flex",
+  },
+
+  orderBtn: {
+    display: "flex",
+    marginRight: "40px",
+  },
 };

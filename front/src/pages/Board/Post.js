@@ -3,6 +3,9 @@ import * as style from "./styles";
 import Box from "@mui/material/Box";
 import styles from "./styles.js";
 import FollowForm from "pages/Board/FollowForm/FollowForm";
+import styled from "styled-components";
+import OrderButton from "components/EtcItem/OrderButton";
+import CancelOrderButton from "components/EtcItem/CancelOrderButton";
 
 const Post = () => {
   return (
@@ -10,7 +13,6 @@ const Post = () => {
       <div style={styles.headerStyle}>
         <h1>주문 상세 내역</h1>
       </div>
-
       <div style={styles.Contents_two}>
         <style.OrderDiv>
           <div style={styles.header}>주문1</div>
@@ -26,7 +28,14 @@ const Post = () => {
           <div style={styles.data}> 데이터</div>
           {/*//// 팔로워 1명의 폼 ////*/}
           <FollowForm></FollowForm>
+          {/* ////////////////////// */}
         </style.OrderDiv>
+        <div style={styles.buttons}>
+          <div style={styles.orderBtn}>
+            <OrderButton />
+          </div>
+          <CancelOrderButton />
+        </div>
       </div>
     </Box>
   );
