@@ -65,13 +65,13 @@ function CreateMenu() {
                 onChange={onChange}
                 type="time"
               />
-              <OrderInput
+              {/* <OrderInput
                 name="maxJoiner"
                 label="인원수"
                 onChange={onChange}
                 type="number"
                 placeholder="받을 최대 인원 수를 입력해주세요"
-              />
+              /> */}
               <OrderInput
                 name="description"
                 label="전달사항"

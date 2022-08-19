@@ -16,7 +16,7 @@ const WriteEnd = ({ setEnd, data }) => {
       .then((res) => {
         createOrder({
           location: res.data.id,
-          max_joined_user: data.maxJoiner,
+          max_joined_user: 3,
           description: data.description,
           time: data.date + "T" + data.time,
           store: data.store,
@@ -27,7 +27,8 @@ const WriteEnd = ({ setEnd, data }) => {
       .catch((e) => alert("실패", e));
   };
   const check = () => {
-    if (!!data.store && !!data.date && !!data.time && !!data.maxJoiner) {
+    if (!!data.store && !!data.date && !!data.time) {
+      //&& !!data.maxJoiner
       postOrder();
     } else {
       alert("전달사항 외 모든 정보를 입력해주세요");
@@ -54,10 +55,10 @@ const WriteEnd = ({ setEnd, data }) => {
             <td>주문 희망 시간 :</td>
             <td>{data.time}</td>
           </tr>
-          <tr>
+          {/* <tr>
             <td>최대 인원 수 :</td>
             <td>{data.maxJoiner}</td>
-          </tr>
+          </tr> */}
           <tr>
             <td>전달 사항 :</td>
             <td>{data.description}</td>

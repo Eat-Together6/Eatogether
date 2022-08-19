@@ -33,7 +33,10 @@ export const Span = styled.span`
 `;
 
 export const Logo = styled.img`
+  position: absolute;
   margin-top: 0;
+  width: 170px;
+  transform: translate(-20px, -20px);
 `;
 
 export const Button = styled.button`
