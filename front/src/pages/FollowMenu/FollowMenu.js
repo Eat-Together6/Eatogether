@@ -137,11 +137,11 @@ function FollowMenu() {
                 />
               </div>
               <div style={styles.menuDiv}>
-                <label style={styles.label}>주문 희망 날짜</label>
+                <label style={styles.label}>주문 날짜</label>
                 <input style={styles.input} value={orderData.date} readOnly />
               </div>
               <div style={styles.menuDiv}>
-                <label style={styles.label}>주문 희망 시간</label>
+                <label style={styles.label}>주문 시간</label>
                 <input style={styles.input} value={orderData.time} readOnly />
               </div>
               <div style={styles.menuDiv}>
@@ -192,7 +192,9 @@ function FollowMenu() {
                         style={styles.menuInput}
                         ref={price}
                         id="price"
-                        type="text"
+                        type="number"
+                        step="100"
+                        // oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                         placeholder="가격을 입력하세요"
                       />
                       <style.menuButton onClick={onAddMenu}>
@@ -219,7 +221,8 @@ function FollowMenu() {
                         style={styles.menuInput}
                         ref={price}
                         id="price"
-                        type="text"
+                        type="number"
+                        step="100"
                         placeholder="가격을 입력하세요"
                         disabled
                       />
