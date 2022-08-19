@@ -114,6 +114,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   // displayMarker 함수 : 좌표 인자로 받아 마커 생성. (마커 반경 기능, 마커 클릭 기능, 드래그 이동 기능, 지도 클릭시 마커 이동 기능)
   const displayMarker = (lat, lon) => {
+    setClickFollowMK(false);
     const imageSrc = NewMarker;
     const imageSize = new kakao.maps.Size(50, 50);
     const imageOption = { offset: new kakao.maps.Point(20, 50) }; // 마커 이미지 파일 경로, 사이즈, 주소 좌표 일치시킬 이미지 좌표 옵션

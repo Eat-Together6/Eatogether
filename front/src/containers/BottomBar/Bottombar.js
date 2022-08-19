@@ -14,18 +14,14 @@ const Bottombar = ({ isClickLeaderMK, isClickFollowMK }) => {
             <Link to="/createMenu">새 메뉴 만들기</Link>
           </style.Span2>
         ) : (
-          <style.Span1>
-            <Link to="/createMenu">새 메뉴 만들기</Link>
-          </style.Span1>
+          <style.Span1>새 메뉴 만들기</style.Span1>
         )}
         {isClickFollowMK ? (
           <style.Span2>
             <Link to="/followMenu">참여하기</Link>
           </style.Span2>
         ) : (
-          <style.Span1>
-            <Link to="/followMenu">참여하기</Link>
-          </style.Span1>
+          <style.Span1>참여하기</style.Span1>
         )}
 
         {userInfo.isLoggedIn ? (
@@ -33,13 +29,15 @@ const Bottombar = ({ isClickLeaderMK, isClickFollowMK }) => {
             <Link to="/board">채팅하기</Link>
           </style.Span2>
         ) : (
-          <style.Span1>
-            <Link to="/board">채팅하기</Link>
-          </style.Span1>
+          <style.Span1>채팅하기</style.Span1>
         )}
-        <style.Span1>
-          <Link to="/board">확인하기</Link>
-        </style.Span1>
+        {userInfo.isLoggedIn ? (
+          <style.Span2>
+            <Link to="/board">확인하기</Link>
+          </style.Span2>
+        ) : (
+          <style.Span1>확인하기</style.Span1>
+        )}
       </style.Wrapper>
     </div>
   );
