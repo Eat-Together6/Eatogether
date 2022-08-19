@@ -75,8 +75,8 @@ class OrderDetail(APIView):
 
 class OrderListByUser(APIView):
     def get(self, request):
-        orders = Order.objects.filter(leader=self.request.user)
-        joinOrders = JoinOrder.objects.filter(follower=self.request.user)
+        orders = Order.objects.filter(leader=request.user)
+        joinOrders = JoinOrder.objects.filter(follower=request.user)
         
         order_list = []
 
