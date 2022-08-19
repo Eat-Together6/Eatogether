@@ -5,7 +5,7 @@ import auth from "api/auth";
 import { useResetRecoilState } from "recoil";
 import { authState } from "state";
 import { deleteCookie, getCookie } from "cookies-next";
-import Logo from "assets/images/logo.png"
+import Logo from "assets/images/logo3.png";
 
 export default function NavigationBar({ user }) {
   const resetUser = useResetRecoilState(authState);
@@ -27,7 +27,9 @@ export default function NavigationBar({ user }) {
       <style.Wrapper>
         <style.Nav>
           <style.Span>
-            <Link to="/"><style.Logo src={Logo}/></Link>
+            <Link to="/">
+              <style.Logo src={Logo} />
+            </Link>
           </style.Span>
           {user.isLoggedIn ? (
             <>
@@ -41,8 +43,6 @@ export default function NavigationBar({ user }) {
                 <Link to="/mypage"> 마이페이지 </Link>
                 {/* {user.name} */}
               </style.Span>
-              
-
             </>
           ) : (
             <style.Span>

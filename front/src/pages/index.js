@@ -7,3 +7,4 @@ export { default as WriteEnd } from "pages/CreateMenu/WriteEnd";
 export { default as OrderInput } from "pages/CreateMenu/OrderInput";
 export { default as FollowMenu } from "pages/FollowMenu/FollowMenu";
 export { default as Register } from "pages/Register/Register";
+export { default as Board } from "pages/Board/Board";
