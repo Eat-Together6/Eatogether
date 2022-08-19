@@ -11,6 +11,8 @@ import orderState from "state/orderState";
 import useInput from "hooks/useInput.js";
 import { useLocation } from "react-router-dom";
 import { getOrder, getOrders } from "api/order.js";
+import { addJoinOrder } from "api/joinorder.js";
+import { addMenu } from "api/menu.js";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -30,6 +32,7 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
 
 function FollowMenu() {
   const [orderData, setOrderData] = useState({
+    id: "",
     store: "",
     address: "",
     date: "",
@@ -42,6 +45,7 @@ function FollowMenu() {
       .then((res) => {
         console.log("SSS", res.data);
         setOrderData({
+          id: res.data.id,
           store: res.data.store,
           address: res.data.location_obj.location_nickname,
           date: res.data.time.substring(0, 10),
@@ -50,6 +54,34 @@ function FollowMenu() {
         });
       })
       .catch((e) => console.log(e));
+  };
+  const uploadFollower = async () => {
+    console.log("보내야될 데이터", newmenus, price, description);
+    if (newmenus.length === 0) {
+      alert("메뉴를 작성하셔야 합니다");
+    }
+    let data = {
+      order: orderData.id,
+      description: description.description,
+    };
+    console.log("joinOrder", data, "menus", newmenus);
+    await addJoinOrder(data)
+      .then((res) => {
+        newmenus.forEach(async (menu_item) => {
+          addMenu({
+            join_order: res.data.id,
+            menu_name: menu_item.menu,
+            menu_price: menu_item.price,
+            menu_quantity: 1,
+          })
+            .then((response) => {
+              console.log("성공!");
+            })
+            .catch((err) => console.log("joinOrder Error", err));
+        });
+        alert("팔로우했습니다!");
+      })
+      .catch((err) => console.log("joinOrder Error", err));
   };
   // 주문 데이터를 받아서 사용
   useEffect(() => {
@@ -61,7 +93,6 @@ function FollowMenu() {
   }, [orderData]);
   const address = useRecoilState(locationState);
   const markerId = useRecoilState(orderState)[0].id;
-  console.log("참여하기id", markerId);
   const userInfo = useRecoilValue(authState);
   const [createBtnState, setCreateBtnState] = useState(false);
   const [description, onChange, reset] = useInput({
@@ -74,11 +105,11 @@ function FollowMenu() {
   // 가격 input 값 가져오기 위한 ref
   const price = useRef();
   let sumPrice = 0;
-  const location = useLocation();
 
   // 작성버튼 클릭 상태
   const onClickedCreateBtn = () => {
-    setCreateBtnState(!createBtnState);
+    // setCreateBtnState(!createBtnState);
+    uploadFollower();
   };
 
   const onAddMenu = (e) => {
