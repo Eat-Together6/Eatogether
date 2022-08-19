@@ -27,10 +27,6 @@ export const NewMenu = ({ menu, sumPrice }) => {
         <MenuLabel>{menu.menu}</MenuLabel>
         <MenuPrice>{menu.price}원</MenuPrice>
       </MenuDiv>
-      {/* <div style={styles.sumStyle}>
-        <div style={styles.sumLabel}>총 금액</div>
-        <div style={styles.sumPrice}>{sumPrice}원</div>
-      </div> */}
     </div>
   );
 };
