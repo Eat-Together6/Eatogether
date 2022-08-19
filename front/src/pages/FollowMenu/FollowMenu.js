@@ -28,21 +28,37 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
   );
 };
 
-// 주문 데이터를 받아옴
-const getOrderAndShow = async (id) => {
-  await getOrders(id)
-    .then((res) => {
-      console.log(res.data);
-      console.log(console.data[id]);
-    })
-    .catch((e) => console.log(e));
-};
-
 function FollowMenu() {
+  const [orderData, setOrderData] = useState({
+    store: "",
+    address: "",
+    date: "",
+    time: "",
+    description: "",
+  });
+  // 주문 데이터를 받아옴
+  const getOrderAndShow = async (markerId) => {
+    await getOrder(markerId)
+      .then((res) => {
+        console.log("SSS", res.data);
+        setOrderData({
+          store: res.data.store,
+          address: res.data.location_obj.location_nickname,
+          date: res.data.time.substring(0, 10),
+          time: res.data.time.substring(11, 19),
+          description: res.data.description,
+        });
+      })
+      .catch((e) => console.log(e));
+  };
   // 주문 데이터를 받아서 사용
   useEffect(() => {
-    getOrderAndShow(id);
+    getOrderAndShow(markerId);
   }, []);
+
+  useEffect(() => {
+    console.log("set", orderData);
+  }, [orderData]);
   const address = useRecoilState(locationState);
   const markerId = useRecoilState(orderState)[0].id;
   console.log("참여하기id", markerId);
@@ -56,11 +72,11 @@ function FollowMenu() {
   // 메뉴 input 값 가져오기 위한 ref
   const menu = useRef();
   // 가격 input 값 가져오기 위한 ref
-  const price = useRef(); 
-  let sumPrice = 0; 
+  const price = useRef();
+  let sumPrice = 0;
   const location = useLocation();
 
-  // 작성버튼 클릭 상태 
+  // 작성버튼 클릭 상태
   const onClickedCreateBtn = () => {
     setCreateBtnState(!createBtnState);
   };
@@ -82,15 +98,15 @@ function FollowMenu() {
       alert("메뉴와 가격을 입력해주세요");
     }
   };
-  
+
   // 메뉴추가 후 삭제
   const onRemoveMenu = (id) => {
-    setNewmenus(newmenus.filter((menu) => menu.id !== id)); 
+    setNewmenus(newmenus.filter((menu) => menu.id !== id));
   };
 
-  // 서버에서 받아온 time 날짜와 시간 분리
-  const date = res.data.time.subString(0, 9);
-  const time = res.data.time.subString(11, 18)
+  // // 서버에서 받아온 time 날짜와 시간 분리
+  // const date = res.data.time.subString(0, 9);
+  // const time = res.data.time.subString(11, 18);
 
   // 메뉴의 총 가격 계산
   newmenus.map((newmenu) => {
@@ -110,23 +126,23 @@ function FollowMenu() {
             <div style={styles.Contents_two}>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>음식점명</label>
-                <input style={styles.input} placeholder="음식명 데이터" value={.store}readOnly />
+                <input style={styles.input} value={orderData.store} readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
-                <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
+                <input style={styles.input} value={orderData.address} defaultValue={address[0].address} />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>
-                <input style={styles.input} placeholder="주문 희망 날짜 데이터" value={.time} readOnly />
+                <input style={styles.input} value={orderData.date} readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 시간</label>
-                <input style={styles.input} placeholder="주문 희망 시간 데이터" value={.time} readOnly />
+                <input style={styles.input} value={orderData.time} readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>전달사항</label>
-                <input style={styles.input} placeholder="전달사항 데이터" value={.description}readOnly />
+                <input style={styles.input} value={orderData.description} readOnly />
               </div>
             </div>
           </Box>
@@ -174,10 +190,10 @@ function FollowMenu() {
                   )}
                   {newmenus.map(
                     (
-                       //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                      //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
                       newmenu
                     ) => (
-                       // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                      // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
                       <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} />
                     )
                   )}
