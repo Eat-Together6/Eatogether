@@ -17,6 +17,7 @@ class UserOrderListSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class OrderDetailSerializer(serializers.ModelSerializer):
+    location_obj = LocationSimpleSerializer(source = 'location',read_only =True)
     join_order_list = JoinOrderSerializer(source = 'joinOrders',many =True, read_only = True)
     class Meta:
         model = Order
