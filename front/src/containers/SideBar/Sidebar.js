@@ -1,7 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import sidebar from "./sidebar.module.css";
-import axios from "axios";
+import axios from "../../api/config";
 import { getLocations } from "api/location";
+import { format } from "date-fns";
+
+function formatDate(date) {
+  return format(date, "HH:mm");
+}
 
 const SideBar = () => {
   // const [coordinates, setCoordinates] =useState([])
@@ -31,7 +36,7 @@ const SideBar = () => {
 
   //
   async function getOrders() {
-    const orders = await axios.get("http://127.0.0.1:8000/orders/").then((response) => response.data);
+    const orders = await axios.get("orders/").then((response) => response.data);
     setResult(orders);
     console.log("??",orders)
   }
@@ -56,11 +61,10 @@ const SideBar = () => {
               return (
                 <div className={sidebar.myorder}>
                   <div>
-                    {i.brand}
                     <br></br>
-                    {i.time}
+                    {i.store} {formatDate(new Date(i.time))}
                     <br></br>
-                    <br></br>
+                    주문을 기다리는 중 ! !
                   </div>
                 </div>
               );

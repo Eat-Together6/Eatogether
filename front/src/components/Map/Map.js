@@ -7,11 +7,13 @@ import FollowMarker from "assets/images/followMK.png";
 import SearchInput from "./SearchInput";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
+import orderState from "state/orderState";
 import { getOrders } from "api/order";
 
 const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   const { kakao } = window;
   const [, setLocation] = useRecoilState(locationState); // (address, lat, lon)전역 useState 이용
+  const [, setOrderState] = useRecoilState(orderState);
   const [popup, setPopup] = useState(false); // 도로명 검색창 불러오기 boolean
   const [isClick, setIsClick] = useState(true); // 검색창에 주소 value로 입력하기 위한 useState boolean
   const [markers, setMarker] = useState([]); // 마커(+원) 객체 배열
@@ -212,9 +214,9 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
     time.textContent = `${ordertime}주문예정`;
     time.classList.add("time");
 
-    // let joinNum = document.createElement("div");
-    // joinNum.textContent = " 2 / 4 참여 중";
-    // joinNum.classList.add("joinNum");
+    let joinNum = document.createElement("div");
+    joinNum.textContent = " 2 / 4 참여 중";
+    joinNum.classList.add("joinNum");
 
     let orderState = document.createElement("div");
     orderState.textContent = "주문 중";
@@ -232,6 +234,11 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
       setClickLeaderMK(false);
       setClickFollowMK(true);
       infowindow.open(map, marker);
+      console.log("마커아이디", id);
+      setOrderState({
+        id: id,
+        availableOrders: [],
+      });
     });
   };
 

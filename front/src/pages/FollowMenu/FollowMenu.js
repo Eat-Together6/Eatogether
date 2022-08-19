@@ -7,6 +7,7 @@ import { authState } from "state";
 import CompletedMenuForm from "components/EtcItem/CompletedMenuForm/CompletedMenuForm.js";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
+import orderState from "state/orderState";
 import useInput from "hooks/useInput.js";
 import { useLocation } from "react-router-dom";
 import { getOrder, getOrders } from "api/order.js";
@@ -43,6 +44,8 @@ function FollowMenu() {
     getOrderAndShow(id);
   }, []);
   const address = useRecoilState(locationState);
+  const markerId = useRecoilState(orderState)[0].id;
+  console.log("참여하기id", markerId);
   const userInfo = useRecoilValue(authState);
   const [createBtnState, setCreateBtnState] = useState(false);
   const [description, onChange, reset] = useInput({
