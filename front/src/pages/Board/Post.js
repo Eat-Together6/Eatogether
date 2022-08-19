@@ -3,6 +3,9 @@ import * as style from "./styles";
 import Box from "@mui/material/Box";
 import styles from "./styles.js";
 import FollowForm from "pages/Board/FollowForm/FollowForm";
+import OrderButton from "components/EtcItem/OrderButton";
+import CancelOrderButton from "components/EtcItem/CancelOrderButton";
+
 // { store, address, date, time, description }
 const Post = ({ store, address, date, time, description, num, join }) => {
   console.log("join", join);
@@ -11,7 +14,6 @@ const Post = ({ store, address, date, time, description, num, join }) => {
       <div style={styles.headerStyle}>
         <h1>주문 상세 내역</h1>
       </div>
-
       <div style={styles.Contents_two}>
         <style.OrderDiv>
           <div style={styles.header}>주문{num}</div>
@@ -27,7 +29,14 @@ const Post = ({ store, address, date, time, description, num, join }) => {
           <div style={styles.data}> {description}</div>
           {/*//// 팔로워 1명의 폼 ////*/}
           <FollowForm></FollowForm>
+          {/* ////////////////////// */}
         </style.OrderDiv>
+        <div style={styles.buttons}>
+          <div style={styles.orderBtn}>
+            <OrderButton />
+          </div>
+          <CancelOrderButton />
+        </div>
       </div>
     </Box>
   );
