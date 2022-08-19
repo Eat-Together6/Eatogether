@@ -21,7 +21,6 @@ export default {
     fontSize: "30px",
     width: "100%",
     display: "flex",
-    marginRight: "60px",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -29,10 +28,12 @@ export default {
   },
 
   header: {
-    fontSize: "1.2rem",
+    fontSize: "1.4rem",
     marginLeft: "20px",
-    marginTop: "50px",
+    marginTop: "20px",
     marginBottom: "50px",
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
     display: "flex",
   },
@@ -40,8 +41,60 @@ export default {
   label: {
     marginLeft: "20px",
     float: "left",
-    width: "400px",
+    width: "350px",
     fontSize: "1.2rem",
     marginBottom: "20px",
+  },
+
+  data: {
+    float: "right",
+    fontSize: "1.2rem",
+    marginBottom: "20px",
+    marginRight: "20px",
+  },
+
+  followData: {
+    float: "left",
+    marginLeft: "20px",
+    marginBottom: "40px",
+  },
+
+  followMenu: {
+    float: "left",
+    marginLeft: "70px",
+    width: "400px",
+    fontSize: "1.2rem",
+  },
+
+  followPrice: {
+    float: "right",
+    fontSize: "1.2rem",
+  },
+
+  followContent: {
+    margin: "10px 0",
+    fontSize: "1.2rem",
+    fontWeight: "100",
+    display: "flex",
+  },
+
+  sumStyle: {
+    display: "flex",
+  },
+
+  sumLabel: {
+    marginLeft: "400px",
+    marginTop: "5px",
+    marginBottom: "10px",
+    fontSize: "1.3rem",
+    color: "#38726C",
+  },
+
+  sumPrice: {
+    marginLeft: "30px",
+    marginTop: "5px",
+    marginBottom: "0px",
+    fontSize: "1.3rem",
+    color: "#38726C",
   },
 };
