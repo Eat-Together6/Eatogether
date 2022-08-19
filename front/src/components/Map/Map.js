@@ -10,7 +10,7 @@ import locationState from "state/locationState";
 import orderState from "state/orderState";
 import { getOrders } from "api/order";
 
-const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
+const Map = ({ setClickLeaderMK, setClickFollowMK, focus }) => {
   const { kakao } = window;
   const [, setLocation] = useRecoilState(locationState); // (address, lat, lon)전역 useState 이용
   const [, setOrderState] = useRecoilState(orderState);
@@ -21,6 +21,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   const searchDetailAddrFromCoords = (coords, callback) => {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
   }; // 좌표로 법정동 상세 주소 정보 요청
+
   const [followMarkers, setFollowMarker] = useState([
     {
       id: 999,
@@ -34,6 +35,15 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   //Map 지도 생성하기
   const location = useGeolocation(); // 첫 화면, 대강적인 나의 위치 가져옴
   const [map, setMap] = useState();
+
+  useEffect(() => {
+    if (focus && map) {
+      const coords = new kakao.maps.LatLng(focus.latitude, focus.longitude);
+      map.setCenter(coords);
+      // displayMarker(coords.Ma, coords.La);
+    }
+  }, [focus]);
+
   const container = useRef();
   const options = {
     center: new kakao.maps.LatLng(
@@ -48,7 +58,8 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   // followMarker 서버로부터 정보 받아와 지도에 표시
   const getOrderAndFollow = async () => {
-    await getOrders()
+    let position = map.getCenter();
+    await getOrders(position.getLat(), position.getLng())
       .then((res) => {
         // for (let order of res.data) {
         //   const id = order.id;
@@ -72,7 +83,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
 
   useEffect(() => {
     getOrderAndFollow();
-  }, []);
+  }, [, focus]);
 
   useEffect(() => {
     followMarkers.map((followMarker) => {

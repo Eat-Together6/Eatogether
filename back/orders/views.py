@@ -19,20 +19,18 @@ class OrderList(APIView):
     def get(self, request): # POSTMAN TEST 완료
         latitude = request.GET.get('latitude', None) # 쿼리 스트링으로 요청할 것
         longitude = request.GET.get('longitude', None)
-        order_status = request.GET.get('order_status', None)
-
+        # order_status = request.GET.get('order_status', None)
+        # print("??????????????",request.GET['latitude'],request.GET['longitude'])
         orders = Order.objects.all()
-        
-        if order_status == 'ING':
-            if latitude and longitude:
-                order_list = []
-                for order in orders:
-                    current_location = (latitude, longitude,)
-                    order_location = (order.location.latitude, order.location.longitude)
-                    if distance(current_location, order_location).m < 150:
-                        order_list.append(order)
-                serializer = OrderSerializer(order_list, many=True)
-                return Response(serializer.data)
+        if latitude and longitude:
+            order_list = []
+            for order in orders:
+                current_location = (latitude, longitude,)
+                order_location = (order.location.latitude, order.location.longitude)
+                if distance(current_location, order_location).m < 150:
+                    order_list.append(order)
+            serializer = OrderSerializer(order_list, many=True)
+            return Response(serializer.data)
         else:
             serializer = OrderSerializer(orders, many=True)
             return Response(serializer.data)
