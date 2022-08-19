@@ -146,6 +146,7 @@ function FollowMenu() {
               newmenus={newmenus}
               sumPrice={sumPrice}
               description={description.description}
+              markerId={markerId}
             />
           </>
         ) : (

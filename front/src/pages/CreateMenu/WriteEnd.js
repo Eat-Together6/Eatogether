@@ -4,6 +4,7 @@ import { createOrder } from "api/order";
 import { addLocation } from "api/location";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
+import { Link } from "react-router-dom";
 
 const WriteEnd = ({ setEnd, data }) => {
   const address = useRecoilState(locationState);
@@ -24,7 +25,9 @@ const WriteEnd = ({ setEnd, data }) => {
           alert("성공");
         });
       })
-      .catch((e) => alert("실패", e));
+      .catch((e) => {
+        alert("실패", e);
+      });
   };
   const check = () => {
     if (!!data.store && !!data.date && !!data.time) {

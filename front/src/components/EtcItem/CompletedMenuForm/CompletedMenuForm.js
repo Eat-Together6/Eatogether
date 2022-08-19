@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import * as style from "./styles";
@@ -18,7 +18,16 @@ function onRegister() {
   alert("등록완료! 채팅으로 연결해드릴게요");
 }
 
-export const CompletedMenuForm = ({ newmenus, sumPrice, description }) => {
+export const CompletedMenuForm = ({
+  newmenus,
+  sumPrice,
+  description,
+  markerId,
+}) => {
+  useEffect(() => {
+    console.log("order Id", markerId);
+  }, []);
+
   return (
     <Background>
       <Box style={styles.Contents_one}>
