@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import UserImage from "assets/images/user.png";
 import LoginButton from "components/EtcItem/LoginButton";
 import auth from "api/auth";
-import { ThemeConsumer } from "styled-components";
 
 const MyPage = () => {
   const [userdata, setUserData] = useState({
