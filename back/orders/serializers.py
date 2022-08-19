@@ -9,15 +9,15 @@ class OrderSerializer(serializers.ModelSerializer): #location 필드의 pk만 �
     class Meta:
         model = Order
         fields = ['id','store', 'time', 'description', 'location_obj']
-
-class UserOrderListSerializer(serializers.ModelSerializer):
-    leadOrder = OrderSerializer(source='order', read_only=True)
-    class Meta:
-        model = JoinOrder
-        fields = '__all__'
         
 class OrderDetailSerializer(serializers.ModelSerializer):
     location_obj = LocationSimpleSerializer(source = 'location',read_only =True)
+    join_order_list = JoinOrderSerializer(source = 'joinOrders',many =True, read_only = True)
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+class OrderTotalDataSerializer(serializers.ModelSerializer):
     join_order_list = JoinOrderSerializer(source = 'joinOrders',many =True, read_only = True)
     class Meta:
         model = Order
