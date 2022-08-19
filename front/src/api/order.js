@@ -11,8 +11,8 @@ const getOrder = (pk) => {
   return axios.get(`orders/${pk}`);
 };
 
-const getOrderAndJoinOrders = (data) => {
-  return axios.get("orders/user/", data, tokenConfig());
+const getOrderAndJoinOrders = () => {
+  return axios.get("orders/user/", tokenConfig());
 };
 
 const createOrder = (data) => {
