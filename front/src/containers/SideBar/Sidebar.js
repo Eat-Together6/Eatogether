@@ -3,12 +3,13 @@ import sidebar from "./sidebar.module.css";
 import axios from "../../api/config";
 import { getLocations } from "api/location";
 import { format } from "date-fns";
+import { getOrder } from "api/order.js";
 
 function formatDate(date) {
   return format(date, "HH:mm");
 }
 
-const SideBar = () => {
+const SideBar = ({ orders }) => {
   // const [coordinates, setCoordinates] =useState([])
   // const retreiveLocations = async() => {
   //   await getLocations()
@@ -19,7 +20,7 @@ const SideBar = () => {
   //     console.log(res.data)
   //     }
   //       )
-        
+
   // }
   // console.log(coordinates)
 
@@ -34,30 +35,28 @@ const SideBar = () => {
     });
   };
 
-  //
-  async function getOrders() {
-    const orders = await axios.get("orders/").then((response) => response.data);
-    setResult(orders);
-    console.log("??",orders)
-  }
-
-  // 주문 state
-  const [Result, setResult] = useState(null);
-
-  // 주문 effect
-  useEffect(() => {
-    getOrders();
-    // retreiveLocations()
-  }, []);
-
   return (
     <div className={sidebar.wrapper}>
-      <input type="button" className={arrow.active ? sidebar.arrow : `${sidebar.arrow} ${sidebar.arrowActive}`} onClick={isActive} />
-      <div className={arrow.active ? sidebar.sidebar : `${sidebar.sidebar} ${sidebar.sidebarActive}`}>
+      <input
+        type="button"
+        className={
+          arrow.active
+            ? sidebar.arrow
+            : `${sidebar.arrow} ${sidebar.arrowActive}`
+        }
+        onClick={isActive}
+      />
+      <div
+        className={
+          arrow.active
+            ? sidebar.sidebar
+            : `${sidebar.sidebar} ${sidebar.sidebarActive}`
+        }
+      >
         <div className={sidebar.title}>Order List</div>
         <div className={sidebar.content}>
-          {Result &&
-            Result.map((i) => {
+          {orders &&
+            orders.map((i) => {
               return (
                 <div className={sidebar.myorder}>
                   <div>
@@ -75,6 +74,6 @@ const SideBar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SideBar;

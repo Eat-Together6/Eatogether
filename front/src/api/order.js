@@ -3,16 +3,20 @@ import tokenConfig from "./tokenConfig";
 
 // 백엔드에서 views, urls 수정해서 쿼리문으로 데이터 접근할 수 있어야 함
 
-const getOrders = () => {
-  return axios.get("orders/");
+const getOrders = (lat = null, lng = null) => {
+  if (lat & lng) {
+    return axios.get(`orders/?latitude=${lat}&longitude=${lng}`);
+  } else {
+    return axios.get(`orders/`);
+  }
 };
 
 const getOrder = (pk) => {
   return axios.get(`orders/${pk}`);
 };
 
-const getOrderAndJoinOrders = (data) => {
-  return axios.get("orders/user/", data, tokenConfig());
+const getOrderAndJoinOrders = () => {
+  return axios.get("orders/user/", tokenConfig());
 };
 
 const createOrder = (data) => {

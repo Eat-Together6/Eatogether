@@ -4,9 +4,10 @@ import { createOrder } from "api/order";
 import { addLocation } from "api/location";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const WriteEnd = ({ setEnd, data }) => {
+  const navigate = useNavigate();
   const address = useRecoilState(locationState);
   const postOrder = async () => {
     await addLocation({
@@ -22,7 +23,13 @@ const WriteEnd = ({ setEnd, data }) => {
           time: data.date + "T" + data.time,
           store: data.store,
         }).then((res) => {
-          alert("성공");
+          alert("주문 생성!");
+          navigate("/", {
+            state: {
+              latitude: address[0].latitude,
+              longitude: address[0].longitude,
+            },
+          });
         });
       })
       .catch((e) => {
