@@ -1,14 +1,15 @@
+from ast import Return
 from django.http import Http404
 from geopy.distance import distance
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from orders import serializers
 
 from orders.models import Order
 from joinorders.models import JoinOrder
 from orders.serializers import OrderSerializer, UserOrderListSerializer,OrderDetailSerializer
-
 from locations.models import Location
 
 
@@ -41,7 +42,6 @@ class OrderList(APIView):
                                      store=request.data['store'],
                                      time=request.data['time'],
                                      description=request.data['description'],
-                                     max_joined_user=request.data['max_joined_user'], 
                                      location=location)
         serializer = OrderSerializer(order)
         return Response(serializer.data)
@@ -56,7 +56,6 @@ class OrderDetail(APIView):
 
     def get(self, request, pk): # POSTMAN TEST 완료
         order = self.get_object(pk)
-        print("뭐야",order)
         serializer = OrderDetailSerializer(order)
         return Response(serializer.data)
 
@@ -80,6 +79,17 @@ class OrderListByUser(APIView):
         serializer = UserOrderListSerializer(joinOrders, many=True)
         return Response(serializer.data)
 
-        
-
-        
+@api_view(['POST']) 
+def convert_order_status(request,pk):
+    user = request.user
+    order = Order.objects.get(id=pk)
+    if order.leader == user:
+        if order.status == 'FIN':
+            order.status = 'FIN'
+            order.save(update_fields=['status'])
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response({'message':'already Done'}, status=status.HTTP_208_ALREADY_REPORTED)
+    else:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+          

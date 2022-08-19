@@ -9,9 +9,10 @@ import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
 import orderState from "state/orderState";
 import useInput from "hooks/useInput.js";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getOrder } from "api/order.js";
-
+import { addJoinOrder } from "api/joinorder";
+import { addMenu } from "api/menu.js";
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
   // 추가 버튼 클릭 시, 입력된 메뉴와 가격 나타내는 컴포넌트
@@ -31,32 +32,72 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
 function FollowMenu() {
   const address = useRecoilState(locationState);
   const markerId = useRecoilState(orderState)[0].id;
-  console.log("참여하기id", markerId);
   const userInfo = useRecoilValue(authState);
   const [createBtnState, setCreateBtnState] = useState(false); // 작성 버튼 useState
   const [description, onChange, reset] = useInput({
     description: "",
   });
-  console.log(">>", description);
   const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
   const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
   const price = useRef(); // 가격 input 값 가져오기 위한 ref
   let sumPrice = 0; // 총 가격 구할 변수 선언
-  const location = useLocation();
+  const params = useParams();
+  const [orderInfo, setOrderInfo] = useState({
+    description: "",
+    id: "",
+    join_order_list: [],
+    leader: "",
+    location: "",
+    location_obj: {
+      location_nickname: "",
+      latitude: 0,
+      longitude: 0,
+    },
+    max_joined_user: 0,
+    order_status: "ING",
+    store: "교촌",
+    time: "2022-08-16T19:38:00",
+  });
 
   useEffect(() => {
-    getOrderInfo(2);
+    getOrderInfo(params.order_id);
   }, []);
 
   const onClickedCreateBtn = () => {
-    setCreateBtnState(!createBtnState);
+    // setCreateBtnState(!createBtnState);
+    uploadFollower();
   };
   const getOrderInfo = async (id) => {
     await getOrder(id)
       .then((res) => {
         console.log(res.data);
+        setOrderInfo(res.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  const uploadFollower = async () => {
+    console.log("보내야될 데이터", newmenus, price, description);
+    let data = {
+      order: orderInfo.id,
+      description: description.description,
+    };
+    await addJoinOrder(data)
+      .then((res) => {
+        newmenus.forEach(async (menu_item) => {
+          addMenu({
+            join_order: res.data.id,
+            menu_name: menu_item.menu,
+            menu_price: menu_item.price,
+            menu_quantity: 1,
+          })
+            .then((response) => {
+              console.log("성공!");
+            })
+            .catch((err) => console.log("joinOrder Error", err));
+        });
+      })
+      .catch((err) => console.log("joinOrder Error", err));
   };
 
   const onAddMenu = (e) => {
@@ -84,7 +125,6 @@ function FollowMenu() {
   newmenus.map((newmenu) => {
     sumPrice += parseInt(newmenu.price);
   });
-  console.log("전달사항", description);
   return (
     <>
       <div style={styles.background}>
@@ -102,6 +142,7 @@ function FollowMenu() {
                   style={styles.input}
                   placeholder="음식명 데이터"
                   readOnly
+                  value={orderInfo.store}
                 />
               </div>
               <div style={styles.menuDiv}>
@@ -110,6 +151,7 @@ function FollowMenu() {
                   style={styles.input}
                   placeholder={address[0].address}
                   defaultValue={address[0].address}
+                  value={orderInfo.location_obj.location_nickname}
                 />
               </div>
               <div style={styles.menuDiv}>
@@ -118,6 +160,7 @@ function FollowMenu() {
                   style={styles.input}
                   placeholder="주문 희망 날짜 데이터"
                   readOnly
+                  value={orderInfo.time.split("T")[0]}
                 />
               </div>
               <div style={styles.menuDiv}>
@@ -126,6 +169,7 @@ function FollowMenu() {
                   style={styles.input}
                   placeholder="주문 희망 시간 데이터"
                   readOnly
+                  value={orderInfo.time.split("T")[1]}
                 />
               </div>
               <div style={styles.menuDiv}>
@@ -134,6 +178,7 @@ function FollowMenu() {
                   style={styles.input}
                   placeholder="전달사항 데이터"
                   readOnly
+                  value={orderInfo.description}
                 />
               </div>
             </div>
