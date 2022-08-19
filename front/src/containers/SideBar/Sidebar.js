@@ -9,7 +9,7 @@ function formatDate(date) {
   return format(date, "HH:mm");
 }
 
-const SideBar = ({ orders }) => {
+const SideBar = ({ page, pageMax }) => {
   // const [coordinates, setCoordinates] =useState([])
   // const retreiveLocations = async() => {
   //   await getLocations()
@@ -23,6 +23,7 @@ const SideBar = ({ orders }) => {
 
   // }
   // console.log(coordinates)
+  const [pageNum, setPageNum] = useState(1);
 
   // 사이드바 나타내기 및 숨기기
   const [arrow, setArrow] = useState({
@@ -55,8 +56,8 @@ const SideBar = ({ orders }) => {
       >
         <div className={sidebar.title}>Order List</div>
         <div className={sidebar.content}>
-          {orders &&
-            orders.map((i) => {
+          {page &&
+            page[pageNum].map((i) => {
               return (
                 <div className={sidebar.myorder}>
                   <div>
@@ -68,7 +69,20 @@ const SideBar = ({ orders }) => {
                 </div>
               );
             })}
-
+          <button
+            onClick={() =>
+              pageNum > 1 ? setPageNum(pageNum - 1) : setPageNum(1)
+            }
+          >
+            이전
+          </button>
+          <button
+            onClick={() =>
+              pageNum < pageMax ? setPageNum(pageNum + 1) : setPageNum(pageMax)
+            }
+          >
+            다음
+          </button>
           <div className={sidebar.otherorder}></div>
         </div>
       </div>

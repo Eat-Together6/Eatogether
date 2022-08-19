@@ -10,6 +10,7 @@ import { authState } from "state";
 
 function App() {
   const [userInfo, setUserInfo] = useRecoilState(authState);
+  console.log("userid", userInfo);
   const setUserInformation = async () => {
     const access = getCookie("access_token");
     const refresh = getCookie("refresh_token");
