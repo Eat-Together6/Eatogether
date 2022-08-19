@@ -1,5 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { MyPage, OrderHistory, CreateMenu, FollowMenu, Home } from "pages";
+import {
+  MyPage,
+  OrderHistory,
+  CreateMenu,
+  FollowMenu,
+  Home,
+  Board,
+} from "pages";
 
 export default function Authorized() {
   return (
@@ -9,6 +16,7 @@ export default function Authorized() {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/orderhistory" element={<OrderHistory />} />
       <Route path="/createMenu" element={<CreateMenu />} />
+      <Route path="/board" element={<Board />} />
     </Routes>
   );
 }
