@@ -9,7 +9,8 @@ from orders import serializers
 
 from orders.models import Order
 from joinorders.models import JoinOrder
-from orders.serializers import OrderSerializer, UserOrderListSerializer,OrderDetailSerializer
+from orders.serializers import OrderSerializer,OrderDetailSerializer,OrderTotalDataSerializer
+
 from locations.models import Location
 
 
@@ -42,6 +43,7 @@ class OrderList(APIView):
                                      store=request.data['store'],
                                      time=request.data['time'],
                                      description=request.data['description'],
+                                     max_joined_user=request.data['max_joined_user'], 
                                      location=location)
         serializer = OrderSerializer(order)
         return Response(serializer.data)
@@ -74,9 +76,20 @@ class OrderDetail(APIView):
 
 class OrderListByUser(APIView):
     def get(self, request):
-        # 해당 유저가 오더, 조인 오더한 리스트 Get
+        orders = Order.objects.filter(leader=self.request.user)
         joinOrders = JoinOrder.objects.filter(follower=self.request.user)
-        serializer = UserOrderListSerializer(joinOrders, many=True)
+        
+        order_list = []
+
+        for order in orders:
+            if order.order_status =='ING':
+                order_list.append(order)
+
+        for joinOrder in joinOrders:
+            if joinOrder.order.order_status == 'ING':
+                order_list.append(joinOrder.order)
+
+        serializer = OrderTotalDataSerializer(order_list, many=True)
         return Response(serializer.data)
 
 @api_view(['POST']) 

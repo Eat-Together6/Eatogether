@@ -12,7 +12,7 @@ export default function Authorized() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/followMenu/:order_id" element={<FollowMenu />} />
+      <Route path="/followMenu" element={<FollowMenu />} />
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/orderhistory" element={<OrderHistory />} />
       <Route path="/createMenu" element={<CreateMenu />} />
