@@ -5,7 +5,7 @@ import auth from "api/auth";
 import { useResetRecoilState } from "recoil";
 import { authState } from "state";
 import { deleteCookie, getCookie } from "cookies-next";
-import Logo from "assets/images/logo.png";
+import Logo from "assets/images/logo3.png";
 
 export default function NavigationBar({ user }) {
   const resetUser = useResetRecoilState(authState);
