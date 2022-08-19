@@ -5,6 +5,7 @@ import * as style from "./styles";
 import styles from "./styles";
 import NewMenu from "../NewMenu";
 import Box from "@mui/material/Box";
+import { useState } from "react";
 
 const Background = styled.div`
   background-color: #f3f3f3;
@@ -14,11 +15,18 @@ const Background = styled.div`
   margin-right: 30px;
 `;
 
-function onRegister() {
-  alert("등록완료! 채팅으로 연결해드릴게요");
-}
-
 export const CompletedMenuForm = ({ newmenus, sumPrice, description }) => {
+  function onClickedRegister() {
+    alert("등록완료! 채팅으로 연결해드릴게요");
+    // const [inputs, setInputs] = useState({
+    //   address: address[0].address,
+    //   store: "",
+    //   date: "",
+    //   time: "",
+    //   maxJoiner: "",
+    //   description: "",
+    // });
+  }
   return (
     <Background>
       <Box style={styles.Contents_one}>
@@ -42,7 +50,7 @@ export const CompletedMenuForm = ({ newmenus, sumPrice, description }) => {
         <div style={styles.btnWrapper}>
           {/* 등록 완료버튼 클릭-> 서버로 주문 폼 보냄, 채팅연결 */}
           <Link to="">
-            <style.Button onClick={onRegister}>등록 완료</style.Button>
+            <style.Button onClick={onClickedRegister}>등록 완료</style.Button>
           </Link>
           <Link to="/">
             <style.Button>등록 취소</style.Button>

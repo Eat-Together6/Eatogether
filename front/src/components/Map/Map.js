@@ -245,6 +245,7 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
   return (
     <>
       <style.Container>
+        <style.MapContainer ref={container}></style.MapContainer>
         <SearchInput
           popup={popup}
           setPopup={setPopup}
@@ -252,7 +253,6 @@ const Map = ({ setClickLeaderMK, setClickFollowMK }) => {
           isClick={isClick}
           setIsClick={setIsClick}
         />
-        <style.MapContainer ref={container}></style.MapContainer>
       </style.Container>
     </>
   );
