@@ -4,6 +4,7 @@ import { createOrder } from "api/order";
 import { addLocation } from "api/location";
 import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
+import { Link } from "react-router-dom";
 
 const WriteEnd = ({ setEnd, data }) => {
   const address = useRecoilState(locationState);
@@ -72,13 +73,15 @@ const WriteEnd = ({ setEnd, data }) => {
       >
         수정
       </style.Button>
-      <style.Button
-        onClick={() => {
-          check();
-        }}
-      >
-        등록
-      </style.Button>
+      <Link to="/">
+        <style.Button
+          onClick={() => {
+            check();
+          }}
+        >
+          등록
+        </style.Button>
+      </Link>
     </style.Div>
   );
 };
