@@ -75,13 +75,15 @@ const WriteEnd = ({ setEnd, data }) => {
       >
         수정
       </style.Button>
-      <style.Button
-        onClick={() => {
-          check();
-        }}
-      >
-        등록
-      </style.Button>
+      <Link to="/">
+        <style.Button
+          onClick={() => {
+            check();
+          }}
+        >
+          등록
+        </style.Button>
+      </Link>
     </style.Div>
   );
 };
