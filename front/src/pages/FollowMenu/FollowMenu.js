@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./styles.js";
 import * as style from "./styles";
 import { useRecoilValue } from "recoil";
@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import locationState from "state/locationState";
 import useInput from "hooks/useInput.js";
 import { useLocation } from "react-router-dom";
-import { getOrder } from "api/order.js";
+import { getOrder, getOrders } from "api/order.js";
 
 // 메뉴 추가 버튼
 const NewMenu = ({ menu, onRemoveMenu }) => {
@@ -27,33 +27,39 @@ const NewMenu = ({ menu, onRemoveMenu }) => {
   );
 };
 
+// 주문 데이터를 받아옴
+const getOrderAndShow = async (id) => {
+  await getOrders(id)
+    .then((res) => {
+      console.log(res.data);
+      console.log(console.data[id]);
+    })
+    .catch((e) => console.log(e));
+};
+
 function FollowMenu() {
+  // 주문 데이터를 받아서 사용
+  useEffect(() => {
+    getOrderAndShow(id);
+  }, []);
   const address = useRecoilState(locationState);
   const userInfo = useRecoilValue(authState);
-  const [createBtnState, setCreateBtnState] = useState(false); // 작성 버튼 useState
+  const [createBtnState, setCreateBtnState] = useState(false);
   const [description, onChange, reset] = useInput({
     description: "",
   });
-  console.log(">>", description);
-  const [newmenus, setNewmenus] = useState([]); //사용자가 입력한 메뉴들 배열
-  const menu = useRef(); // 메뉴 input 값 가져오기 위한 ref
-  const price = useRef(); // 가격 input 값 가져오기 위한 ref
-  let sumPrice = 0; // 총 가격 구할 변수 선언
+  //사용자가 입력한 메뉴들 배열
+  const [newmenus, setNewmenus] = useState([]);
+  // 메뉴 input 값 가져오기 위한 ref
+  const menu = useRef();
+  // 가격 input 값 가져오기 위한 ref
+  const price = useRef(); 
+  let sumPrice = 0; 
   const location = useLocation();
 
-  useEffect(() => {
-    getOrderInfo(2);
-  }, []);
-
+  // 작성버튼 클릭 상태 
   const onClickedCreateBtn = () => {
     setCreateBtnState(!createBtnState);
-  };
-  const getOrderInfo = async (id) => {
-    await getOrder(id)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
   };
 
   const onAddMenu = (e) => {
@@ -70,18 +76,24 @@ function FollowMenu() {
       menu.current.value = "";
       price.current.value = "";
     } else {
-      console.log("메뉴와 가격을 입력해주세요"); // input 값이 비어있는데 추가 버튼 누를 시 배열 추가 안됨. 경고메세지
+      alert("메뉴와 가격을 입력해주세요");
     }
   };
+  
+  // 메뉴추가 후 삭제
   const onRemoveMenu = (id) => {
-    // 삭제하고자 하는 배열 내 객체 id와 일치하면 배열에서 삭제
-    setNewmenus(newmenus.filter((menu) => menu.id !== id)); // filter : 일치하지 않는 id로 새로운 배열 만듦. (즉, id일치하면 배열에서 삭제)
+    setNewmenus(newmenus.filter((menu) => menu.id !== id)); 
   };
 
+  // 서버에서 받아온 time 날짜와 시간 분리
+  const date = res.data.time.subString(0, 9);
+  const time = res.data.time.subString(11, 18)
+
+  // 메뉴의 총 가격 계산
   newmenus.map((newmenu) => {
     sumPrice += parseInt(newmenu.price);
   });
-  console.log("전달사항", description);
+
   return (
     <>
       <div style={styles.background}>
@@ -95,43 +107,23 @@ function FollowMenu() {
             <div style={styles.Contents_two}>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>음식점명</label>
-                <input
-                  style={styles.input}
-                  placeholder="음식명 데이터"
-                  readOnly
-                />
+                <input style={styles.input} placeholder="음식명 데이터" value={.store}readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>픽업 주소</label>
-                <input
-                  style={styles.input}
-                  placeholder={address[0].address}
-                  defaultValue={address[0].address}
-                />
+                <input style={styles.input} placeholder={address[0].address} defaultValue={address[0].address} />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 날짜</label>
-                <input
-                  style={styles.input}
-                  placeholder="주문 희망 날짜 데이터"
-                  readOnly
-                />
+                <input style={styles.input} placeholder="주문 희망 날짜 데이터" value={.time} readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>주문 희망 시간</label>
-                <input
-                  style={styles.input}
-                  placeholder="주문 희망 시간 데이터"
-                  readOnly
-                />
+                <input style={styles.input} placeholder="주문 희망 시간 데이터" value={.time} readOnly />
               </div>
               <div style={styles.menuDiv}>
                 <label style={styles.label}>전달사항</label>
-                <input
-                  style={styles.input}
-                  placeholder="전달사항 데이터"
-                  readOnly
-                />
+                <input style={styles.input} placeholder="전달사항 데이터" value={.description}readOnly />
               </div>
             </div>
           </Box>
@@ -139,11 +131,7 @@ function FollowMenu() {
         {createBtnState ? (
           // 작성버튼 클릭-> 주문서 작성 완료된 폼
           <>
-            <CompletedMenuForm
-              newmenus={newmenus}
-              sumPrice={sumPrice}
-              description={description.description}
-            />
+            <CompletedMenuForm newmenus={newmenus} sumPrice={sumPrice} description={description.description} />
           </>
         ) : (
           // 작성버튼 클릭x-> 기본 따라가기 폼
@@ -159,51 +147,23 @@ function FollowMenu() {
                       <label style={styles.menuLabel} htmlFor="menu">
                         주문 희망 메뉴
                       </label>
-                      <input
-                        style={styles.menuInput}
-                        ref={menu}
-                        id="menu"
-                        type="text"
-                        placeholder="메뉴를 입력하세요"
-                      />
+                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" />
                       <label style={styles.menuLabel} htmlFor="price">
                         가격
                       </label>
-                      <input
-                        style={styles.menuInput}
-                        ref={price}
-                        id="price"
-                        type="text"
-                        placeholder="가격을 입력하세요"
-                      />
-                      <style.menuButton onClick={onAddMenu}>
-                        추가
-                      </style.menuButton>
+                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" />
+                      <style.menuButton onClick={onAddMenu}>추가</style.menuButton>
                     </div>
                   ) : (
                     <div style={styles.menuDiv}>
                       <label style={styles.menuLabel} htmlFor="menu">
                         주문 희망 메뉴
                       </label>
-                      <input
-                        style={styles.menuInput}
-                        ref={menu}
-                        id="menu"
-                        type="text"
-                        placeholder="메뉴를 입력하세요"
-                        disabled
-                      />
+                      <input style={styles.menuInput} ref={menu} id="menu" type="text" placeholder="메뉴를 입력하세요" disabled />
                       <label style={styles.menuLabel} htmlFor="price">
                         가격
                       </label>
-                      <input
-                        style={styles.menuInput}
-                        ref={price}
-                        id="price"
-                        type="text"
-                        placeholder="가격을 입력하세요"
-                        disabled
-                      />
+                      <input style={styles.menuInput} ref={price} id="price" type="text" placeholder="가격을 입력하세요" disabled />
                       <style.menuButton onClick={onAddMenu} disabled>
                         추가
                       </style.menuButton>
@@ -211,9 +171,11 @@ function FollowMenu() {
                   )}
                   {newmenus.map(
                     (
-                      newmenu //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                       //배열에 들어있는 값들 map을 통해 하나씩 꺼내서 NewMenu 컴포넌트로 html 생성 , newmenu는 newmenus 배열 내 객체 하나를 뜻함.
+                      newmenu
                     ) => (
-                      <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} /> // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                       // menu와 onRemove 보라색은 컴포넌트로 넘겨주는 인자 표시,{onRemove} 함수 넘겨줌.
+                      <NewMenu menu={newmenu} onRemoveMenu={onRemoveMenu} />
                     )
                   )}
                 </div>
@@ -223,22 +185,14 @@ function FollowMenu() {
                 </div>
                 <div style={styles.menuDiv}>
                   <label style={styles.label}>전달사항</label>
-                  <input
-                    style={styles.input}
-                    name="description"
-                    placeholder="전달사항을 입력해주세요"
-                    value={description.value}
-                    onChange={onChange}
-                  />
+                  <input style={styles.input} name="description" placeholder="전달사항을 입력해주세요" value={description.value} onChange={onChange} />
                 </div>
               </div>
               <div>
                 {userInfo.isLoggedIn ? (
                   // 로그인ㅇ -> 버튼 클릭 가능
                   <div style={styles.btnWrapper}>
-                    <style.Button onClick={onClickedCreateBtn}>
-                      작성
-                    </style.Button>
+                    <style.Button onClick={onClickedCreateBtn}>작성</style.Button>
                     <style.Button>채팅</style.Button>
                   </div>
                 ) : (
