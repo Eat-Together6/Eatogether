@@ -9,10 +9,7 @@ class Order(models.Model):
     store = models.CharField(max_length=40)
     time = models.DateTimeField()
     description = models.TextField()
-    
-    max_joined_user = models.PositiveIntegerField(default=0)
-    
+    max_joined_user = models.PositiveIntegerField(default=0)   
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null = True)
-    
     ORDER_STATUS_CHOICE=(('ING', 'Collecting'), ('FIN', 'Finished'))
     order_status = models.CharField(max_length=3, choices=ORDER_STATUS_CHOICE, default='ING')
