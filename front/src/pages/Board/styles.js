@@ -1,5 +1,33 @@
 import styled from "styled-components";
 
+export const OrderDiv = styled.div`
+  width: 800px;
+  font-size: 1.2rem;
+  background-color: #ececec;
+  font-family: BMHANNAPro;
+  padding: 0px 20px;
+  border-radius: 0.55rem;
+  box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
+`;
+
+export const FollowOrderDiv = styled.div`
+  width: 700px;
+  font-size: 1.2rem;
+  background-color: white;
+  font-family: BMHANNAPro;
+  padding: 15px 20px;
+  border-radius: 0.55rem;
+  box-shadow: inset 3px 3px 7px #d3d3d3, inset -3px -3px 7px #ffffff;
+  > * {
+    & {
+      margin-top: 10px;
+    }
+    &: first-child {
+      margin: 0;
+    }
+  }
+`;
+
 export default {
   background: {
     backgroundColor: "#f3f3f3",
