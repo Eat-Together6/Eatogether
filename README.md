@@ -13,7 +13,7 @@
 쉽게 모여 함께 시키는 배달 서비스, 더치배달입니다!  
 배달 주문을 함께 넣으면 배달비를 아낄 수 있어요!
 
-[eatogether](https://github.com/rkdtmddnjs97/eatogether) 프로젝트 팀원들이 서비스를 사랑하는 마음으로 다시 뭉쳤습니다.  
+[EATOGETHER_1.0](https://github.com/rkdtmddnjs97/eatogether) 프로젝트 팀원들이 서비스를 사랑하는 마음으로 다시 뭉쳤습니다.  
 훨씬 깔끔한 디자인과, 유용한 기능으로 다시 기획된 더치배달 2.0의 배포를 기대해주세요!
 
 ## 개발 진행중!
