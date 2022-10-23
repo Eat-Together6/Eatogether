@@ -16,10 +16,6 @@
 **[EATOGETHER_1.0](https://github.com/rkdtmddnjs97/eatogether) 프로젝트 팀원들이 서비스를 사랑하는 마음으로 다시 뭉쳤습니다.**  
 훨씬 깔끔한 디자인과, 유용한 기능으로 다시 기획된 더치배달 2.0의 배포를 기대해주세요!
 
-## 개발 진행중!
-올해 겨울 방학에 완성하고, 배포까지 하는 걸 목표로 두고 있답니다.
-
-배포되면 이 레포지토리에 가장 먼저 알려드릴게요~~!
 
 ## 팀원
 |Frontend|Frontend|Frontend|Backend|Frontend|Backend|
