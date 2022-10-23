@@ -82,11 +82,4 @@
 ![image](https://user-images.githubusercontent.com/76809524/194354702-9b64309b-43a2-44eb-b91a-696dc0350f5d.png)
 
 
-## TO DO LIST
-1. 채팅방 기능 : 게시판으로 채팅방 비슷하게 구현하기
-2. API 명세서 : back - API명세서 써서 공유해주기
-3. 연결 끝내기 : front-back 연결 안된 곳 채우기
-4. 리팩토링
-
-
 <br>
