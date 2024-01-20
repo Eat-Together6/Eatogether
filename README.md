@@ -18,7 +18,7 @@
 
 
 ## 팀원
-|Frontend|Frontend|Frontend|Backend|Frontend|Backend|
+|Frontend|FullStack|Frontend|Backend|Frontend|Backend|
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |김건혜|강승원|강채연|김찬진|이채현|이현호|
 |[@qndn3tp](https://github.com/qndn3tp)|[@rkdtmddnjs97](https://github.com/rkdtmddnjs97)|[@rkdcodus](https://github.com/rkdcodus)|[@KimChanJin97](https://github.com/KimChanJin97)|[@ChaeHyun-Lee](https://github.com/ChaeHyun-Lee)|[@charlesuu](https://github.com/charlesuu)|
